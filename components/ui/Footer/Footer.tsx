@@ -19,8 +19,8 @@ export default function Footer() {
         </div>
         <div className="flex">
           <div>
-            <Link href="/privacy-policy" className='mr-5'>
-              <a>Privacy Policy</a>
+            <Link href="/privacy-policy">
+              <a className='mr-5'>Privacy Policy</a>
             </Link>
             <Link href="/terms-and-conditions">
               <a>Terms and conditions</a>
