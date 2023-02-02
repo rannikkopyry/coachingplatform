@@ -12,7 +12,18 @@ export default function Homepage() {
         </div>
         <div className='flex-shrink-0 w-full items-center justify-center min-h-[615px] hidden md:flex'>
         <div className='min-h-[500px] flex items-center'>
+            <div>
             <p className='text-black text-3xl mb-4 font-medium'>More leads</p>
+            <ul className='text-black text-xl'>
+                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
+                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
+                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
+                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
+                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
+
+                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
+            </ul>
+            </div>
         </div>
         </div>
         </div> 
