@@ -46,6 +46,74 @@ export default function Homepage() {
                 </div>
             </div>
         </div>
+        <div id='features'>
+            <div className="w-full max-w-6xl px-4 md:px-8 m-auto py-[40px] md:py-[60px]">
+                <div className='grid grid-cols-1 gap-8 md:grid-cols-2 min-h-[300px]'>
+                    <div className='flex items-center'>
+                        <div>
+                            <h2 className='text-black text-3xl md:text-6xl font-bold font-grotesk_bold text-center md:text-left'>Moi</h2>
+                            <p className='text-black text-2xl mt-8 text-center md:text-left font-light'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur repellat laudantium eos modi excepturi laboriosam molestias placeat veritatis, consequuntur voluptate rerum reprehenderit maiores sequi eveniet, accusamus provident culpa. Obcaecati, nihil.</p>
+                        </div>
+                    </div>
+                    <div className='flex items-center justify-center md:justify-end'>
+                        <div className='w-full max-w-[350px] m-auto'>
+                            <div className='w-full max-w-[350px]'>
+                                <p className=' text-stone-500 mb-4 text-center'>Other link tools</p>
+                                <div className='bg-white rounded-full p-1 text-center w-full font-medium flex items-center shadow-lg'>
+                                    <div className='flex-shrink-0 rounded-full w-8 h-8 overflow-hidden'></div>
+                                    <div className='text-black px-2 text-center w-full -ml-4'>Audi A6 avant 3.0</div>
+                                </div>
+                            </div>
+                            <div className='w-full max-w-[350px] mt-8'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="w-full max-w-6xl px-4 md:px-8 m-auto py-[40px] md:py-[60px]">
+            <div className='grid grid-cols-1 gap-8 md:grid-cols-2 min-h-[300px]'>
+                    <div className='flex items-center justify-center md:justify-end'>
+                        <div className='w-full max-w-[350px] m-auto'>
+                            <div className='w-full max-w-[350px]'>
+                                <p className=' text-stone-500 mb-4 text-center'>Other link tools</p>
+                                <div className='bg-white rounded-full p-1 text-center w-full font-medium flex items-center shadow-lg'>
+                                    <div className='flex-shrink-0 rounded-full w-8 h-8 overflow-hidden'></div>
+                                    <div className='text-black px-2 text-center w-full -ml-4'>Audi A6 avant 3.0</div>
+                                </div>
+                            </div>
+                            <div className='w-full max-w-[350px] mt-8'></div>
+                        </div>
+                    </div>
+                    <div className='flex items-center'>
+                        <div>
+                            <h2 className='text-black text-3xl md:text-6xl font-bold font-grotesk_bold text-center md:text-left'>Moi</h2>
+                            <p className='text-black text-2xl mt-8 text-center md:text-left font-light'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur repellat laudantium eos modi excepturi laboriosam molestias placeat veritatis, consequuntur voluptate rerum reprehenderit maiores sequi eveniet, accusamus provident culpa. Obcaecati, nihil.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="w-full max-w-6xl px-4 md:px-8 m-auto py-[40px] md:py-[60px]">
+            <div className='grid grid-cols-1 gap-8 md:grid-cols-2 min-h-[300px]'>
+                    <div className='flex items-center'>
+                        <div>
+                            <h2 className='text-black text-3xl md:text-6xl font-bold font-grotesk_bold text-center md:text-left'>Moi</h2>
+                            <p className='text-black text-2xl mt-8 text-center md:text-left font-light'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur repellat laudantium eos modi excepturi laboriosam molestias placeat veritatis, consequuntur voluptate rerum reprehenderit maiores sequi eveniet, accusamus provident culpa. Obcaecati, nihil.</p>
+                        </div>
+                    </div>
+                    <div className='flex items-center justify-center md:justify-end'>
+                        <div className='w-full max-w-[350px] m-auto'>
+                            <div className='w-full max-w-[350px]'>
+                                <p className=' text-stone-500 mb-4 text-center'>Other link tools</p>
+                                <div className='bg-white rounded-full p-1 text-center w-full font-medium flex items-center shadow-lg'>
+                                    <div className='flex-shrink-0 rounded-full w-8 h-8 overflow-hidden'></div>
+                                    <div className='text-black px-2 text-center w-full -ml-4'>Audi A6 avant 3.0</div>
+                                </div>
+                            </div>
+                            <div className='w-full max-w-[350px] mt-8'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
   )
 }
