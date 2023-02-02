@@ -42,7 +42,6 @@ const SignUpForm = () => {
 
   return (
     <>
-      <div className="text-center align-middle">
         <Formik
           initialValues={{ email: '' }}
           validationSchema={SignupSchema}
@@ -52,26 +51,25 @@ const SignUpForm = () => {
             <Form
               data-netlify-recaptcha="true"
               data-netlify="true"
-              className="h-screen align-middle text-center"
+              className="sm:flex max-w-[500px] w-full"
             >
               <Field
                 name="email"
                 placeholder="Your email address"
                 label="Email"
-                className="bg-white border border-gray-300 text-gray-900 w-100 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block m-auto w-4/5 p-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="w-full rounded-md border-black border px-5 py-3 placeholder-gray-500"
               />
               <ErrorMessage name="email" className="error" />
               <button
                 disabled={!formik.isValid || !formik.dirty}
                 type="submit"
-                className="text-white bg-primary-100 p-6 rounded-xl text-xl m-10 bold hover: opacity0.9"
+                className="mt-3 flex w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
               >
                 Subscribe
               </button>
             </Form>
           )}
         </Formik>
-      </div>
     </>
   );
 };

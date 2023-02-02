@@ -1,4 +1,5 @@
 import React from 'react'
+import SignupForm from './form/SignupForm'
 
 import Saka from "./images/saka.png"
 
@@ -11,6 +12,9 @@ export default function Homepage() {
                 Tool to make your social bio a powerful lead generator
             </h1>
             <p className='text-black text-2xl mt-8 font-light'>Motorlinks.io allows car sales professionals and amateurs generate leads through their Instagram or Twitter bio. Get started for free. No credit card required!</p>
+            <div className='mt-8'>
+                <SignupForm />
+            </div>
         </div>
         <div className='flex-shrink-0 w-full items-center justify-center min-h-[615px] hidden md:flex'>
         <div className='min-h-[500px] flex items-center'>
