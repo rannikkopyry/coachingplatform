@@ -10,7 +10,7 @@ export default function Homepage() {
             <h1 className='text-black text-5xl md:text-8xl font-bold font-grotesk_bold'>
                 Tool to make your social bio a powerful lead generator
             </h1>
-            <p className='text-black text-2xl mt-8 font-light'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto nemo error cupiditate ratione laudantium quia numquam incidunt deleniti maxime doloremque culpa, eius mollitia dolorum, dignissimos ab fugit est animi voluptas.</p>
+            <p className='text-black text-2xl mt-8 font-light'>Motorlinks.io allows car sales professionals and amateurs generate leads through their Instagram or Twitter bio. Get started for free. No credit card required!</p>
         </div>
         <div className='flex-shrink-0 w-full items-center justify-center min-h-[615px] hidden md:flex'>
         <div className='min-h-[500px] flex items-center'>
@@ -18,12 +18,10 @@ export default function Homepage() {
             <p className='text-black text-3xl mb-4 font-medium'>More leads</p>
             <ul className='text-black text-xl'>
                 <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
-                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
-                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
-                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
-                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
-
-                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
+                <li className='flex gap-2 items-center mb-2'>Professional look</li>
+                <li className='flex gap-2 items-center mb-2'>Collect email adresses</li>
+                <li className='flex gap-2 items-center mb-2'>Highly customizable</li>
+                <li className='flex gap-2 items-center mb-2'>Many integration possibilities</li>
             </ul>
             </div>
         </div>
