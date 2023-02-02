@@ -145,6 +145,7 @@ export default function Homepage() {
                     <div className='relative flex flex-col rounded-md bg-white p-4'>
                         <div className='flex-1'>
                             <h3 className='text-xl font-semibold text-gray-900'>Moi</h3>
+                            <p className='absolute top-3 right-3 transform rounded-full bg-black py-1.5 px-4 text-sm font-semibold text-white'>Recommended</p>
                             <p className='mt-4 flex items-baseline text-gray-900'>
                                 <span className='text-5xl font-bold tracking-tight'>0e</span>
                                 <span className='ml-1 text-xl font-semibold'>/month</span>
