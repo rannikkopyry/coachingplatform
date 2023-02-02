@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Saka from "./images/saka.png"
+
 export default function Homepage() {
   return (
     <div className='min-h-screen bg-white'>
@@ -27,6 +29,23 @@ export default function Homepage() {
         </div>
         </div>
         </div> 
+        <div className='mx-auto max-w-7xl pt-4 pb-12 px-4 sm:px-6 lg:px-8 opacity-50'>
+            <p className='text-black'>Trusted by:</p>
+            <div className='grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5'>
+                <div className='col-span-1 flex justify-center md:col-span-2 lg:col-span-1'>
+                    <img className='h-12 object-contain' src="./images/autolle.png" alt="" />
+                </div>
+                <div className='col-span-1 flex justify-center md:col-span-2 lg:col-span-1'>
+                    <img className='h-12 object-contain' src="./images/kamux.png" alt="" />
+                </div>
+                <div className='col-span-1 flex justify-center md:col-span-2 lg:col-span-1 text-black'>
+                    <img className='h-12 object-contain' src="./images/saka.png" alt="" />
+                </div>
+                <div className='col-span-1 flex justify-center md:col-span-2 lg:col-span-1'>
+                    <img className='h-12 object-contain' src="./images/lc.png" alt="" />
+                </div>
+            </div>
+        </div>
     </div>
   )
 }
