@@ -56,7 +56,7 @@ export default function Homepage() {
                 <div className='grid grid-cols-1 gap-8 md:grid-cols-2 min-h-[300px]'>
                     <div className='flex items-center'>
                         <div>
-                            <h2 className='text-black text-3xl md:text-6xl font-bold font-grotesk_bold text-center md:text-left'>Moi</h2>
+                            <h2 className='text-black text-3xl md:text-6xl font-bold font-grotesk_bold text-center md:text-left'>Made for leads</h2>
                             <p className='text-black text-2xl mt-8 text-center md:text-left font-light'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur repellat laudantium eos modi excepturi laboriosam molestias placeat veritatis, consequuntur voluptate rerum reprehenderit maiores sequi eveniet, accusamus provident culpa. Obcaecati, nihil.</p>
                         </div>
                     </div>
@@ -90,8 +90,8 @@ export default function Homepage() {
                     </div>
                     <div className='flex items-center'>
                         <div>
-                            <h2 className='text-black text-3xl md:text-6xl font-bold font-grotesk_bold text-center md:text-left'>Moi</h2>
-                            <p className='text-black text-2xl mt-8 text-center md:text-left font-light'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur repellat laudantium eos modi excepturi laboriosam molestias placeat veritatis, consequuntur voluptate rerum reprehenderit maiores sequi eveniet, accusamus provident culpa. Obcaecati, nihil.</p>
+                            <h2 className='text-black text-3xl md:text-6xl font-bold font-grotesk_bold text-center md:text-left'>No coding required</h2>
+                            <p className='text-black text-2xl mt-8 text-center md:text-left font-light'>A car salesperson has most likely no interest in coding. That's why we handle the technology side and let you focus on your expertise with cars.</p>
                         </div>
                     </div>
                 </div>
@@ -100,8 +100,8 @@ export default function Homepage() {
             <div className='grid grid-cols-1 gap-8 md:grid-cols-2 min-h-[300px]'>
                     <div className='flex items-center'>
                         <div>
-                            <h2 className='text-black text-3xl md:text-6xl font-bold font-grotesk_bold text-center md:text-left'>Moi</h2>
-                            <p className='text-black text-2xl mt-8 text-center md:text-left font-light'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur repellat laudantium eos modi excepturi laboriosam molestias placeat veritatis, consequuntur voluptate rerum reprehenderit maiores sequi eveniet, accusamus provident culpa. Obcaecati, nihil.</p>
+                            <h2 className='text-black text-3xl md:text-6xl font-bold font-grotesk_bold text-center md:text-left'>Fast setup</h2>
+                            <p className='text-black text-2xl mt-8 text-center md:text-left font-light'>Not only you can create great looking pages and capture leads. You can do this in minutes. Build and publish in as low as 5 minutes.</p>
                         </div>
                     </div>
                     <div className='flex items-center justify-center md:justify-end'>
