@@ -10,7 +10,7 @@ export default function Homepage() {
             <h1 className='text-black text-5xl md:text-8xl font-bold font-grotesk_bold'>
                 Tool to make your social bio a powerful lead generator
             </h1>
-            <p className='text-black text-2xl mt-8 font-light'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto nemo error cupiditate ratione laudantium quia numquam incidunt deleniti maxime doloremque culpa, eius mollitia dolorum, dignissimos ab fugit est animi voluptas.</p>
+            <p className='text-black text-2xl mt-8 font-light'>Motorlinks.io allows car sales professionals and amateurs generate leads through their Instagram or Twitter bio. Get started for free. No credit card required!</p>
         </div>
         <div className='flex-shrink-0 w-full items-center justify-center min-h-[615px] hidden md:flex'>
         <div className='min-h-[500px] flex items-center'>
@@ -18,12 +18,10 @@ export default function Homepage() {
             <p className='text-black text-3xl mb-4 font-medium'>More leads</p>
             <ul className='text-black text-xl'>
                 <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
-                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
-                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
-                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
-                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
-
-                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
+                <li className='flex gap-2 items-center mb-2'>Professional look</li>
+                <li className='flex gap-2 items-center mb-2'>Collect email adresses</li>
+                <li className='flex gap-2 items-center mb-2'>Highly customizable</li>
+                <li className='flex gap-2 items-center mb-2'>Many integration possibilities</li>
             </ul>
             </div>
         </div>
@@ -113,6 +111,81 @@ export default function Homepage() {
                             </div>
                             <div className='w-full max-w-[350px] mt-8'></div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id='pricing' className='w-full bg-[rgba(0,0,0,0.05)] mt-20'>
+            <div className='w-full max-w-6xl px-4 md:px-8 m-auto py-[40px] md:py-[60px]'>
+                <h2 className='text-3xl md:text-6xl text-center font-bold font-grotesk_bold mb-8'>Pricing</h2>
+                <p className='text-2xl text-center font-light'>Get started for free.</p>
+                <div className='mt-8 md:mt-16 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0'>
+                    <div className='relative flex flex-col rounded-md bg-white p-4'>
+                        <div className='flex-1'>
+                            <h3 className='text-xl font-semibold text-gray-900'>Moi</h3>
+                            <p className='mt-4 flex items-baseline text-gray-900'>
+                                <span className='text-5xl font-bold tracking-tight'>0e</span>
+                                <span className='ml-1 text-xl font-semibold'>/month</span>
+                            </p>
+                                <p className='mt-6 text-gray-500'>Kakkakkakaka</p>
+                                <ul className='text-black'>
+                                    <li>
+                                        <span>Esimerkki 1</span>
+                                    </li>
+                                    <li>
+                                        <span>Esimerkki 2</span>
+                                    </li>
+                                    <li>
+                                        <span>Esimerkki 3</span>
+                                    </li>
+                                </ul>
+                        </div>
+                        <a className='bg-white border-black border text-black mt-8 block w-full py-3 px-6 rounded-md text-center font-medium' href="">Coming soon</a>
+                    </div>
+                    <div className='relative flex flex-col rounded-md bg-white p-4'>
+                        <div className='flex-1'>
+                            <h3 className='text-xl font-semibold text-gray-900'>Moi</h3>
+                            <p className='absolute top-3 right-3 transform rounded-full bg-black py-1.5 px-4 text-sm font-semibold text-white'>Recommended</p>
+                            <p className='mt-4 flex items-baseline text-gray-900'>
+                                <span className='text-5xl font-bold tracking-tight'>0e</span>
+                                <span className='ml-1 text-xl font-semibold'>/month</span>
+                            </p>
+                                <p className='mt-6 text-gray-500'>Kakkakkakaka</p>
+                                <ul className='text-black'>
+                                    <li>
+                                        <span>Esimerkki 1</span>
+                                    </li>
+                                    <li>
+                                        <span>Esimerkki 2</span>
+                                    </li>
+                                    <li>
+                                        <span>Esimerkki 3</span>
+                                    </li>
+                                </ul>
+                        </div>
+                        <a className='bg-white border-black border text-black mt-8 block w-full py-3 px-6 rounded-md text-center font-medium' href="">Coming soon</a>
+                    </div>
+                    <div className='relative flex flex-col rounded-md bg-white p-4'>
+                        <div className='flex-1'>
+                            <h3 className='text-xl font-semibold text-gray-900'>Moi</h3>
+                            <p className='mt-4 flex items-baseline text-gray-900'>
+                                <span className='text-5xl font-bold tracking-tight'>0e</span>
+                                <span className='ml-1 text-xl font-semibold'>/month</span>
+                            </p>
+                                <p className='mt-6 text-gray-500'>Kakkakkakaka</p>
+                                <ul className='text-black'>
+                                    <li>
+                                        <span>Esimerkki 1</span>
+                                    </li>
+                                    <li>
+                                        <span>Esimerkki 2</span>
+                                    </li>
+                                    <li>
+                                        <span>Esimerkki 3</span>
+                                    </li>
+                                </ul>
+                        </div>
+                        <a className='bg-white border-black border text-black mt-8 block w-full py-3 px-6 rounded-md text-center font-medium' href="">Coming soon</a>
                     </div>
                 </div>
             </div>
