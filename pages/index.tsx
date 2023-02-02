@@ -7,8 +7,8 @@ interface Props {
   products: Product[];
 }
 
-export default function HomePage({ products }: Props) {
-  return <Homepage products={products} />;
+export default function HomePage() {
+  return <Homepage />;
 }
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
