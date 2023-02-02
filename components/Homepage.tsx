@@ -28,7 +28,7 @@ export default function Homepage() {
         </div>
         </div> 
         <div className='mx-auto max-w-7xl pt-4 pb-12 px-4 sm:px-6 lg:px-8 opacity-50 text-center'>
-            <p className='text-black mb-8'>Our clients:</p>
+            <p className='text-black mb-8'>In collaboration with:</p>
             <div className='grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5'>
                 <div className='col-span-1 flex justify-center md:col-span-2 lg:col-span-1'>
                     <img className='h-12 object-contain' src="./autolle.png" alt="" />
@@ -118,7 +118,7 @@ export default function Homepage() {
         <div id='pricing' className='w-full bg-[rgba(0,0,0,0.05)] mt-20'>
             <div className='w-full max-w-6xl px-4 md:px-8 m-auto py-[40px] md:py-[60px]'>
                 <h2 className='text-black text-3xl md:text-6xl text-center font-bold font-grotesk_bold mb-8'>Pricing</h2>
-                <p className='text-stone-500 text-2xl text-center font-light'>Get started for free.</p>
+                <p className='text-stone-500 text-2xl text-center font-light'>Get started for free. No credit card required. Upgrade anytime.</p>
                 <div className='mt-8 md:mt-16 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0'>
                     <div className='relative flex flex-col rounded-md bg-white p-4'>
                         <div className='flex-1'>
@@ -130,16 +130,16 @@ export default function Homepage() {
                                 <p className='mt-6 text-gray-500'>All you need for a clean build. Free forever.</p>
                                 <ul className='text-black mt-6 space-y-4'>
                                     <li className='flex'>
-                                    <svg className='h-6 w-6 flex-shrink-0 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
-                                        <span>Esimerkki 1</span>
+                                    <svg className='h-6 w-6 flex-shrink-0 mr-2 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+                                        <span>One project</span>
                                     </li>
                                     <li className='flex'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
-                                        <span>Esimerkki 2</span>
+                                    <svg className='h-6 w-6 flex-shrink-0 mr-2 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+                                        <span>Custom colors</span>
                                     </li>
                                     <li className='flex'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
-                                        <span>Esimerkki 3</span>
+                                    <svg className='h-6 w-6 flex-shrink-0 mr-2 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+                                        <span>Basic themes</span>
                                     </li>
                                 </ul>
                         </div>
@@ -156,20 +156,24 @@ export default function Homepage() {
                                 <p className='mt-6 text-gray-500'>Recommended for professionals. High value for mediocre price.</p>
                                 <ul className='text-black mt-6 space-y-4'>
                                     <li className='flex'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
-                                        <span>Esimerkki 1</span>
+                                    <svg className='h-6 w-6 flex-shrink-0 mr-2 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+                                        <span>3 projects</span>
                                     </li>
                                     <li className='flex'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
-                                        <span>Esimerkki 2</span>
+                                    <svg className='h-6 w-6 flex-shrink-0 mr-2 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+                                        <span>Video embed</span>
                                     </li>
                                     <li className='flex'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
-                                        <span>Esimerkki 3</span>
+                                    <svg className='h-6 w-6 flex-shrink-0 mr-2 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+                                        <span>Remove our motorlinks.io branding</span>
+                                    </li>
+                                    <li className='flex'>
+                                    <svg className='h-6 w-6 flex-shrink-0 mr-2 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+                                        <span>Special quick-contact options</span>
                                     </li>
                                 </ul>
                         </div>
-                        <a className='bg-white border-black border text-black mt-8 block w-full py-3 px-6 rounded-md text-center font-medium' href="">Coming soon</a>
+                        <a className='bg-black border-black border text-white mt-8 block w-full py-3 px-6 rounded-md text-center font-medium' href="">Coming soon</a>
                     </div>
                     <div className='relative flex flex-col rounded-md bg-white p-4'>
                         <div className='flex-1'>
@@ -181,16 +185,32 @@ export default function Homepage() {
                                 <p className='mt-6 text-gray-500'>Access everything we provide. For people who want the best.</p>
                                 <ul className='text-black mt-6 space-y-4'>
                                     <li className='flex'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
-                                        <span>Esimerkki 1</span>
+                                    <svg className='h-6 w-6 flex-shrink-0 mr-2 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+                                        <span>All premium and free features</span>
                                     </li>
                                     <li className='flex'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
-                                        <span>Esimerkki 2</span>
+                                    <svg className='h-6 w-6 flex-shrink-0 mr-2 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+                                        <span>10 projects</span>
                                     </li>
                                     <li className='flex'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
-                                        <span>Esimerkki 3</span>
+                                    <svg className='h-6 w-6 flex-shrink-0 mr-2 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+                                        <span>Dedicated support</span>
+                                    </li>
+                                    <li className='flex'>
+                                    <svg className='h-6 w-6 flex-shrink-0 mr-2 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+                                        <span>Pro integrations( Zapier, Mailchimp, Monday.com... )</span>
+                                    </li>
+                                    <li className='flex'>
+                                    <svg className='h-6 w-6 flex-shrink-0 mr-2 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+                                        <span>Custom domains</span>
+                                    </li>
+                                    <li className='flex'>
+                                    <svg className='h-6 w-6 flex-shrink-0 mr-2 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+                                        <span>Custom wallpaper</span>
+                                    </li>
+                                    <li className='flex'>
+                                    <svg className='h-6 w-6 flex-shrink-0 mr-2 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+                                        <span>Analytics</span>
                                     </li>
                                 </ul>
                         </div>
