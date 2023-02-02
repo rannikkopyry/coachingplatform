@@ -117,8 +117,8 @@ export default function Homepage() {
         </div>
         <div id='pricing' className='w-full bg-[rgba(0,0,0,0.05)] mt-20'>
             <div className='w-full max-w-6xl px-4 md:px-8 m-auto py-[40px] md:py-[60px]'>
-                <h2 className='text-3xl md:text-6xl text-center font-bold font-grotesk_bold mb-8'>Pricing</h2>
-                <p className='text-2xl text-center font-light'>Get started for free.</p>
+                <h2 className='text-black text-3xl md:text-6xl text-center font-bold font-grotesk_bold mb-8'>Pricing</h2>
+                <p className='text-stone-500 text-2xl text-center font-light'>Get started for free.</p>
                 <div className='mt-8 md:mt-16 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0'>
                     <div className='relative flex flex-col rounded-md bg-white p-4'>
                         <div className='flex-1'>
@@ -128,14 +128,17 @@ export default function Homepage() {
                                 <span className='ml-1 text-xl font-semibold'>/month</span>
                             </p>
                                 <p className='mt-6 text-gray-500'>Kakkakkakaka</p>
-                                <ul className='text-black'>
-                                    <li>
+                                <ul className='text-black mt-6 space-y-4'>
+                                    <li className='flex'>
+                                    <svg className='h-6 w-6 flex-shrink-0 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
                                         <span>Esimerkki 1</span>
                                     </li>
-                                    <li>
+                                    <li className='flex'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
                                         <span>Esimerkki 2</span>
                                     </li>
-                                    <li>
+                                    <li className='flex'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
                                         <span>Esimerkki 3</span>
                                     </li>
                                 </ul>
@@ -151,14 +154,17 @@ export default function Homepage() {
                                 <span className='ml-1 text-xl font-semibold'>/month</span>
                             </p>
                                 <p className='mt-6 text-gray-500'>Kakkakkakaka</p>
-                                <ul className='text-black'>
-                                    <li>
+                                <ul className='text-black mt-6 space-y-4'>
+                                    <li className='flex'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
                                         <span>Esimerkki 1</span>
                                     </li>
-                                    <li>
+                                    <li className='flex'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
                                         <span>Esimerkki 2</span>
                                     </li>
-                                    <li>
+                                    <li className='flex'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
                                         <span>Esimerkki 3</span>
                                     </li>
                                 </ul>
@@ -173,14 +179,17 @@ export default function Homepage() {
                                 <span className='ml-1 text-xl font-semibold'>/month</span>
                             </p>
                                 <p className='mt-6 text-gray-500'>Kakkakkakaka</p>
-                                <ul className='text-black'>
-                                    <li>
+                                <ul className='text-black mt-6 space-y-4'>
+                                    <li className='flex'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
                                         <span>Esimerkki 1</span>
                                     </li>
-                                    <li>
+                                    <li className='flex'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
                                         <span>Esimerkki 2</span>
                                     </li>
-                                    <li>
+                                    <li className='flex'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
                                         <span>Esimerkki 3</span>
                                     </li>
                                 </ul>
