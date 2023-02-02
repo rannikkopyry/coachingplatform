@@ -122,12 +122,12 @@ export default function Homepage() {
                 <div className='mt-8 md:mt-16 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0'>
                     <div className='relative flex flex-col rounded-md bg-white p-4'>
                         <div className='flex-1'>
-                            <h3 className='text-xl font-semibold text-gray-900'>Moi</h3>
+                            <h3 className='text-xl font-semibold text-gray-900'>Free</h3>
                             <p className='mt-4 flex items-baseline text-gray-900'>
                                 <span className='text-5xl font-bold tracking-tight'>0e</span>
                                 <span className='ml-1 text-xl font-semibold'>/month</span>
                             </p>
-                                <p className='mt-6 text-gray-500'>Kakkakkakaka</p>
+                                <p className='mt-6 text-gray-500'>All you need for a clean build. Free forever.</p>
                                 <ul className='text-black mt-6 space-y-4'>
                                     <li className='flex'>
                                     <svg className='h-6 w-6 flex-shrink-0 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
@@ -147,13 +147,13 @@ export default function Homepage() {
                     </div>
                     <div className='relative flex flex-col rounded-md bg-white p-4'>
                         <div className='flex-1'>
-                            <h3 className='text-xl font-semibold text-gray-900'>Moi</h3>
+                            <h3 className='text-xl font-semibold text-gray-900'>Premium</h3>
                             <p className='absolute top-3 right-3 transform rounded-full bg-black py-1.5 px-4 text-sm font-semibold text-white'>Recommended</p>
                             <p className='mt-4 flex items-baseline text-gray-900'>
                                 <span className='text-5xl font-bold tracking-tight'>0e</span>
                                 <span className='ml-1 text-xl font-semibold'>/month</span>
                             </p>
-                                <p className='mt-6 text-gray-500'>Kakkakkakaka</p>
+                                <p className='mt-6 text-gray-500'>Recommended for professionals. High value for mediocre price.</p>
                                 <ul className='text-black mt-6 space-y-4'>
                                     <li className='flex'>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
@@ -173,12 +173,12 @@ export default function Homepage() {
                     </div>
                     <div className='relative flex flex-col rounded-md bg-white p-4'>
                         <div className='flex-1'>
-                            <h3 className='text-xl font-semibold text-gray-900'>Moi</h3>
+                            <h3 className='text-xl font-semibold text-gray-900'>Professional</h3>
                             <p className='mt-4 flex items-baseline text-gray-900'>
                                 <span className='text-5xl font-bold tracking-tight'>0e</span>
                                 <span className='ml-1 text-xl font-semibold'>/month</span>
                             </p>
-                                <p className='mt-6 text-gray-500'>Kakkakkakaka</p>
+                                <p className='mt-6 text-gray-500'>Access everything we provide. For people who want the best.</p>
                                 <ul className='text-black mt-6 space-y-4'>
                                     <li className='flex'>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
