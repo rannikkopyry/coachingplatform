@@ -128,7 +128,7 @@ export default function Homepage() {
                         <div className='flex-1'>
                             <h3 className='text-xl font-semibold text-gray-900'>Free</h3>
                             <p className='mt-4 flex items-baseline text-gray-900'>
-                                <span className='text-5xl font-bold tracking-tight'>0e</span>
+                                <span className='text-5xl font-bold tracking-tight'>0€</span>
                                 <span className='ml-1 text-xl font-semibold'>/month</span>
                             </p>
                                 <p className='mt-6 text-gray-500'>All you need for a clean build. Free forever.</p>
@@ -154,7 +154,7 @@ export default function Homepage() {
                             <h3 className='text-xl font-semibold text-gray-900'>Premium</h3>
                             <p className='absolute top-3 right-3 transform rounded-full bg-black py-1.5 px-4 text-sm font-semibold text-white'>Recommended</p>
                             <p className='mt-4 flex items-baseline text-gray-900'>
-                                <span className='text-5xl font-bold tracking-tight'>0e</span>
+                                <span className='text-5xl font-bold tracking-tight'>13€</span>
                                 <span className='ml-1 text-xl font-semibold'>/month</span>
                             </p>
                                 <p className='mt-6 text-gray-500'>Recommended for professionals. High value for mediocre price.</p>
@@ -183,7 +183,7 @@ export default function Homepage() {
                         <div className='flex-1'>
                             <h3 className='text-xl font-semibold text-gray-900'>Professional</h3>
                             <p className='mt-4 flex items-baseline text-gray-900'>
-                                <span className='text-5xl font-bold tracking-tight'>0e</span>
+                                <span className='text-5xl font-bold tracking-tight'>25€</span>
                                 <span className='ml-1 text-xl font-semibold'>/month</span>
                             </p>
                                 <p className='mt-6 text-gray-500'>Access everything we provide. For people who want the best.</p>
