@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import s from './Footer.module.css';
 
-import Logo from 'components/icons/Logo';
+import LogoWhite from 'components/icons/LogoWhite';
 import GitHub from 'components/icons/GitHub';
 
 export default function Footer() {
@@ -12,7 +12,7 @@ export default function Footer() {
         <Link href="/">
             <a className="flex flex-initial items-center font-bold md:mr-24">
               <span className="mr-2">
-                <Logo />
+                <LogoWhite />
               </span>
             </a>
           </Link>
