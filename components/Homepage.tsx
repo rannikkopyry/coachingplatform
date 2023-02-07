@@ -5,7 +5,7 @@ import Saka from "./images/saka.png"
 
 export default function Homepage() {
   return (
-    <div className='min-h-screen bg-white'>
+    <div className='min-h-screen bg-white w-full'>
         <div className='w-full grid grid-cols-1 md:grid-cols-[2fr_1fr] min-h-[500px] items-center max-w-7xl px-4 m-auto py-[60px] z-10'>
         <div className='md: pr-10'>
             <h1 className='text-black text-5xl md:text-8xl font-bold font-grotesk_bold'>
