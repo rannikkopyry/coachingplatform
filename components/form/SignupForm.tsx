@@ -57,9 +57,9 @@ const SignUpForm = () => {
                 name="email"
                 placeholder="Your email address"
                 label="Email"
-                className="w-full rounded-md border-black border px-5 py-3 placeholder-gray-500"
+                className="w-full rounded-md border-black border px-5 py-3 placeholder-gray-500 text-black"
               />
-              <ErrorMessage name="email" className="error" />
+              <ErrorMessage name="email" className="text-black" />
               <button
                 disabled={!formik.isValid || !formik.dirty}
                 type="submit"
