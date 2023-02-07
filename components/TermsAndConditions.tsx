@@ -2,6 +2,7 @@ import React from 'react'
 
 export default function TermsAndConditions() {
   return (
-    <div>TermsAndConditions</div>
+    <div>TermsAndConditions
+    </div>
   )
 }
