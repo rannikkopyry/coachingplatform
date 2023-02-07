@@ -1,8 +1,6 @@
 import React from 'react'
 import SignupForm from './form/SignupForm'
 
-import Saka from "./images/saka.png"
-
 export default function Homepage() {
   return (
     <div className='min-h-screen bg-white w-full'>
