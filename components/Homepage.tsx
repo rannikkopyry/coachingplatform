@@ -58,7 +58,7 @@ export default function Homepage() {
                     <div className='flex items-center'>
                         <div>
                             <h2 className='text-black text-3xl md:text-6xl font-bold font-grotesk_bold text-center md:text-left'>Made for leads</h2>
-                            <p className='text-black text-2xl mt-8 text-center md:text-left font-light'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur repellat laudantium eos modi excepturi laboriosam molestias placeat veritatis, consequuntur voluptate rerum reprehenderit maiores sequi eveniet, accusamus provident culpa. Obcaecati, nihil.</p>
+                            <p className='text-black text-2xl mt-8 text-center md:text-left font-light'>While there is other solutions for displaying links in your bio, motorlinks.io is made for boosting car sales and catching possible car buyers. Special tools optimized for automotive professionals and getting leads.</p>
                         </div>
                     </div>
                     <div className='flex items-center justify-center md:justify-end'>
