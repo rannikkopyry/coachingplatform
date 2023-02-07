@@ -70,7 +70,23 @@ export default function Homepage() {
                                     <div className='text-black px-2 text-center w-full -ml-4'>Audi A6 avant 3.0</div>
                                 </div>
                             </div>
-                            <div className='w-full max-w-[350px] mt-8'></div>
+                            <div className='w-full max-w-[350px] mt-8'>
+                                <p className='text-stone-500 text-center mb-4'>With Motorlinks.io</p>
+                                <div className='shadow-lg'>
+                                    <div className='h-[150px] overflow-hidden rounded-t-md relative'>
+                                        <img src="/volvo.jpeg" alt="" />
+                                        <span className='absolute py-1 px-2 top-2 left-2 rounded-full bg-stone-800 text-white text-xs z-10'>12121e</span>
+                                    </div>
+                                    <div className='h-full p-2 rounded-b-md bg-white'>
+                                        <p className='text-md font-bold leading-none text-black'>Volvo XC60</p>
+                                        <p className='text-xs text-stone-400 mt-1'>T8 AWD Long Range High Performance Plus Bright Edition aut</p>
+                                        <p className='jsx-902cb4503c8a7a8 text-[10px] text-stone-500 mt-2 flex gap-2'>
+                                            <span className='jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center'>3 wheels</span>
+                                            <span className='jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center'>3 seats</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -104,11 +120,11 @@ export default function Homepage() {
                     <div className='flex items-center justify-center md:justify-end'>
                         <div className='w-full max-w-[350px] m-auto'>
                             <div className='w-full max-w-[350px]'>
-                                <p className=' text-stone-500 mb-4 text-center'>Other link tools</p>
+                                {/* <p className=' text-stone-500 mb-4 text-center'>Other link tools</p>
                                 <div className='bg-white rounded-full p-1 text-center w-full font-medium flex items-center shadow-lg'>
                                     <div className='flex-shrink-0 rounded-full w-8 h-8 overflow-hidden'></div>
                                     <div className='text-black px-2 text-center w-full -ml-4'>Audi A6 avant 3.0</div>
-                                </div>
+                                </div> */}
                             </div>
                             <div className='w-full max-w-[350px] mt-8'></div>
                         </div>
