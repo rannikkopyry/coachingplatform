@@ -25,17 +25,18 @@ const Navbar = () => {
               </a>
             </Link>
             <nav className="space-x-2 ml-6 hidden lg:block">
-              <Link href="/pricing">
+              <Link href="#pricing">
                 <a className={s.link}>Pricing</a>
               </Link>
-              <Link href="/account">
+             {/*  <Link href="/account">
                 <a className={s.link}>Account</a>
-              </Link>
+              </Link> */}
             </nav>
           </div>
 
           <div className="flex flex-1 justify-end space-x-8">
-            {user ? (
+            <button className='max-h-[50px] mt-6 bg-black text-white py-3 px-6 rounded-full'>Coming soon</button>
+{/*             {user ? (
               <span
                 className={s.link}
                 onClick={async () => {
@@ -49,7 +50,7 @@ const Navbar = () => {
               <Link href="/signin">
                 <a className={s.link}>Sign in</a>
               </Link>
-            )}
+            )} */}
           </div>
         </div>
       </div>
