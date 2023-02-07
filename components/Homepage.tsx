@@ -80,11 +80,7 @@ export default function Homepage() {
                     <div className='flex items-center justify-center md:justify-end'>
                         <div className='w-full max-w-[350px] m-auto'>
                             <div className='w-full max-w-[350px]'>
-                                <p className=' text-stone-500 mb-4 text-center'>Other link tools</p>
-                                <div className='bg-white rounded-full p-1 text-center w-full font-medium flex items-center shadow-lg'>
-                                    <div className='flex-shrink-0 rounded-full w-8 h-8 overflow-hidden'></div>
-                                    <div className='text-black px-2 text-center w-full -ml-4'>Audi A6 avant 3.0</div>
-                                </div>
+                                <img src="/nocode.svg" alt="No coding required" />
                             </div>
                             <div className='w-full max-w-[350px] mt-8'></div>
                         </div>
