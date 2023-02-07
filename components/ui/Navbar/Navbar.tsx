@@ -35,7 +35,7 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex flex-1 justify-end space-x-8">
-            <button className='invisible lg:visible md:visible max-h-[50px] mt-6 bg-black text-white py-3 px-6 rounded-full'>Coming soon</button>
+            <button className='invisible lg:visible md:visible max-h-[50px] mt-6 bg-black text-white font-semibold py-3 px-6 rounded-full'>Coming soon</button>
 {/*             {user ? (
               <span
                 className={s.link}
