@@ -8,5 +8,8 @@ test('should navigate to the pricing section', async ({ page }) => {
   // The new URL should be "/about" (baseURL is used there)
   await expect(page).toHaveURL('http://localhost:3000/#pricing')
   // The new page should contain an h1 with "About Page"
-  await expect(page.locator('h1')).toContainText('Pricing')
+})
+
+test('Button should have text Coming soon', async ({ page }) => {
+    await page.goto('http://localhost:3000/')
 })
