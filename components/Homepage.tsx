@@ -73,14 +73,15 @@ export default function Homepage() {
                                 <div className='shadow-lg'>
                                     <div className='h-[150px] overflow-hidden rounded-t-md relative'>
                                         <img src="/volvo.jpeg" alt="" />
-                                        <span className='absolute py-1 px-2 top-2 left-2 rounded-full bg-stone-800 text-white text-xs z-10'>12121e</span>
+                                        <span className='absolute py-1 px-2 top-2 left-2 rounded-full bg-stone-800 text-white text-xs z-10'>58 725€</span>
                                     </div>
                                     <div className='h-full p-2 rounded-b-md bg-white'>
                                         <p className='text-md font-bold leading-none text-black'>Volvo XC60</p>
                                         <p className='text-xs text-stone-400 mt-1'>T8 AWD Long Range High Performance Plus Bright Edition aut</p>
                                         <p className='jsx-902cb4503c8a7a8 text-[10px] text-stone-500 mt-2 flex gap-2'>
-                                            <span className='jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center'>3 wheels</span>
-                                            <span className='jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center'>3 seats</span>
+                                            <span className='jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center'>Hybrid</span>
+                                            <span className='jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center'>Family</span>
+                                            <span className='jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center'>4WD</span>
                                         </p>
                                     </div>
                                 </div>
