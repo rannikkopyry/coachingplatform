@@ -93,7 +93,7 @@ export default function Homepage() {
             <div className='grid grid-cols-1 gap-8 md:grid-cols-2 min-h-[300px]'>
                     <div className='flex items-center justify-center md:justify-end'>
                         <div className='w-full max-w-[350px] m-auto'>
-                            <div className='w-full max-w-[350px]'>
+                            <div className='w-full max-w-[350px] shadow-lg'>
                                 <img src="/nocode.svg" alt="No coding required" />
                             </div>
                             <div className='w-full max-w-[350px] mt-8'></div>
