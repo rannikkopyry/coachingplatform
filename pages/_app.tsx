@@ -3,6 +3,9 @@ import 'styles/chrome-bug.css';
 import { useEffect, useState } from 'react';
 import React from 'react';
 
+import * as gtag from '../utils/gtag';
+
+import { useRouter } from 'next/router';
 import Layout from 'components/Layout';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
@@ -18,8 +21,20 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     document.body.classList?.remove('loading');
   }, []);
 
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = (url: URL) => {
+      gtag.pageview(url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
+
   return (
-    <div className="bg-black">
+    <div className="bg-white">
       <SessionContextProvider supabaseClient={supabaseClient}>
         <MyUserContextProvider>
           <Layout>
