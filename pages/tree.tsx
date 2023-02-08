@@ -43,12 +43,13 @@ export default function Tree({ user }: { user: User }) {
   // Create a link
   const addNewLink = async () => {
     try {
-        if (title && url && userDetails?.id) {
+        if (title && url) {
             const { data, error } = await supabase.from("links").insert({
                 title: title,
                 url: url,
                 user_id: userDetails?.id,
-            });
+            })
+            .select();
             if (error) throw error;
             console.log("data", data)
         }
