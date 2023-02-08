@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "stripe:listen": "stripe listen --forward-to=localhost:3000/api/webhooks --project-name=saas-starter",
-    "test:e2e": "playright test"
+    "test": "playwright test"
   },
   "dependencies": {
     "@stripe/stripe-js": "1.22.0",
