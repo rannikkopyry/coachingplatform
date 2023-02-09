@@ -13,6 +13,7 @@ import { supabase } from '@/utils/supabase-client';
 
 import { User } from '@supabase/supabase-js';
 import { withPageAuth } from '@supabase/auth-helpers-nextjs';
+import { profile } from 'console';
 
 interface Props {
   title: string;
@@ -37,6 +38,8 @@ export default function Tree({ user }: { user: User }) {
   const [userId, setUserId] = useState<string |undefined>();
   const [links, setLinks] = useState<Link[]>();
   const [images, setImages] = useState<ImageListType>([]);
+  const [profilePictureUrl, setProfilePictureUrl] = useState<string | undefined>();
+
   const onChange = (imageList: ImageListType) => {
     setImages(imageList);
   }
@@ -59,6 +62,24 @@ export default function Tree({ user }: { user: User }) {
     };
     if (userId) {
         getLinks()
+    }
+  }, [userId])
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+          const {data, error } = await supabase.from("users").select("profile_picture_url")
+          .eq("id", userId)
+          if (error) throw error;
+          const profilePictureUrl = data[0]["profile_picture_url"]
+          setProfilePictureUrl(profilePictureUrl);
+      } catch (error) {
+        console.log(error)
+      }
+    };
+
+    if (userId) {
+      getUser()
     }
   }, [userId])
 
@@ -114,6 +135,13 @@ export default function Tree({ user }: { user: User }) {
     <section className="bg-white mb-32">
       <div className="max-w-6xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:flex-col sm:align-center">
+          {profilePictureUrl && <Image
+          src={profilePictureUrl}
+          alt="Profile picture"
+          height={100}
+          width={100}
+          className="rounded-full"
+          />}
         {links?.map((link: Link, index: number) => (
             <div 
             className='text-black border-8 text-center shadow-lg p-8' 
