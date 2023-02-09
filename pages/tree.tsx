@@ -25,29 +25,17 @@ export default function Tree({ user }: { user: User }) {
   const { isLoading, subscription, userDetails } = useUser();
   const [title, setTitle] = useState<string |undefined>();
   const [url, setUrl] = useState<string |undefined>();
-
-
-  const redirectToCustomerPortal = async () => {
-    setLoading(true);
-    try {
-      const { url, error } = await postData({
-        url: '/api/create-portal-link'
-      });
-      window.location.assign(url);
-    } catch (error) {
-      if (error) return alert((error as Error).message);
-    }
-    setLoading(false);
-  };
+  const [userId, setUserId] = useState<string |undefined>();
 
   // Create a link
   const addNewLink = async () => {
+    setUserId(user.id)
     try {
-        if (title && url) {
+        if (title && url && userId) {
             const { data, error } = await supabase.from("links").insert({
                 title: title,
                 url: url,
-                user_id: userDetails?.id,
+                user_id: userId
             })
             .select();
             if (error) throw error;
