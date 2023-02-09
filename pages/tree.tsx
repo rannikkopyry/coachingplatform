@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { useState, ReactNode, useEffect } from 'react';
 
 import { ImageListType } from 'react-images-uploading';
+import ImageUploading from 'react-images-uploading';
+import Image from 'next/image';
 import LoadingDots from 'components/ui/LoadingDots';
 import Button from 'components/ui/Button';
 import { useUser } from 'utils/useUser';
@@ -35,6 +37,9 @@ export default function Tree({ user }: { user: User }) {
   const [userId, setUserId] = useState<string |undefined>();
   const [links, setLinks] = useState<Link[]>();
   const [images, setImages] = useState<ImageListType>([]);
+  const onChange = (imageList: ImageListType) => {
+    setImages(imageList);
+  }
 
   useEffect(() => {
     setUserId(user.id)
@@ -79,6 +84,22 @@ export default function Tree({ user }: { user: User }) {
     }
   }
 
+  const uploadProfilePicture = async () => {
+    try {
+        if (images.lenght > 0) {
+            const image = images[0]
+            if (image.file && userId) {
+                const { data, error } = await supabase.storage
+                .from("public")
+                .upload(`${userId}/${image.file.name}`, image.file, {upsert: true})
+                if (error) throw error;
+            }
+        }
+    } catch (error) {
+        console.log(error)
+    }
+  }
+
 
   return (
     <section className="bg-white mb-32">
@@ -118,6 +139,45 @@ export default function Tree({ user }: { user: User }) {
           />
           <button onClick={addNewLink} type='button' className='text-black border-2 '>Create a link</button>
         </div>
+      <ImageUploading
+        multiple
+        value={images}
+        onChange={onChange}
+        dataURLKey="data_url"
+      >
+        {({
+          imageList,
+          onImageUpload,
+          onImageRemoveAll,
+          onImageUpdate,
+          onImageRemove,
+          isDragging,
+          dragProps,
+        }) => (
+          // write your building UI
+          <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-4 p-4">
+            <button
+              style={isDragging ? { color: 'red' } : undefined}
+              onClick={onImageUpload}
+              {...dragProps}
+            >
+              Click or Drop here
+            </button>
+            &nbsp;
+            <button onClick={onImageRemoveAll}>Remove all images</button>
+            {imageList.map((image, index) => (
+              <div key={index} className="image-item">
+                <img src={image['data_url']} alt="" width="100" />
+                <div className="image-item__btn-wrapper">
+                  <button onClick={() => onImageUpdate(index)}>Update</button>
+                  <button onClick={() => onImageRemove(index)}>Remove</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </ImageUploading>
+      <button onClick={uploadProfilePicture} type='button' className='text-black border-2 '>Upload profile picture</button>
       </div>
       <div className="p-4 text-black">
       </div>
