@@ -50,6 +50,7 @@ export default function Account({ user }: { user: User }) {
     setLoading(false);
   };
 
+
   const subscriptionPrice =
     subscription &&
     new Intl.NumberFormat('en-US', {
@@ -62,15 +63,16 @@ export default function Account({ user }: { user: User }) {
     <section className="bg-white mb-32">
       <div className="max-w-6xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:flex-col sm:align-center">
-          <h1 className="text-4xl font-extrabold text-white sm:text-center sm:text-6xl">
+          <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
             Account
           </h1>
-          <p className="mt-5 text-xl text-zinc-200 sm:text-center sm:text-2xl max-w-2xl m-auto">
+          <p className="mt-5 text-xl text-black sm:text-center sm:text-2xl max-w-2xl m-auto">
             We partnered with Stripe for a simplified billing.
           </p>
+          <a className='text-black border-2 '>Create a tree</a>
         </div>
       </div>
-      <div className="p-4">
+      <div className="p-4 text-black">
         <Card
           title="Your Plan"
           description={
@@ -80,7 +82,7 @@ export default function Account({ user }: { user: User }) {
           }
           footer={
             <div className="flex items-start justify-between flex-col sm:flex-row sm:items-center">
-              <p className="pb-4 sm:pb-0">
+              <p className="pb-4 sm:pb-0 text-black">
                 Manage your subscription on Stripe.
               </p>
               <Button
