@@ -61,34 +61,34 @@ const SignUp = () => {
             <Logo width="64px" height="64px" />
           </div>
           <div className="flex flex-col space-y-4">
-          <label htmlFor="email">Username:</label>
+          <label className='text-black' htmlFor="email">Username:</label>
             <input 
             name='username'
             type="username"
             id='username'
-            className='block w-ful rounded-lg border-4 text-black'
-            placeholder='you@exampe.com'
+            className='block w-ful rounded-lg border-4 text-black p-3'
+            placeholder='John Doe'
             onChange={(e) => setUsername(e.target.value)}
              />
-            <label htmlFor="email">Email:</label>
+            <label className="text-black" htmlFor="email">Email:</label>
             <input 
             name='email'
             type="email"
             id='email'
-            className='block w-ful rounded-lg border-4 text-black'
+            className='block w-ful rounded-lg border-4 text-black p-3'
             placeholder='you@exampe.com'
             onChange={(e) => setEmail(e.target.value)}
              />
-             <label htmlFor="email">Password:</label>
+             <label className='text-black' htmlFor="email">Password:</label>
             <input 
             name='password'
             type="password"
             id='password'
-            className='block w-full rounded-lg border-4 text-black'
+            className='block w-full rounded-lg border-4 text-black p-3'
             placeholder='ExamplePassword'
             onChange={(e) => setPassword(e.target.value)}
              />
-             <button className="text-black" onClick={signUpWithEmail}>Sign up</button>
+             <button className="text-black border-4 p-3" onClick={signUpWithEmail}>Sign up</button>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import LoadingDots from 'components/ui/LoadingDots';
 import Button from 'components/ui/Button';
 import { useUser } from 'utils/useUser';
 import { postData } from 'utils/helpers';
+import { useRouter } from 'next/router';
 
 import { supabase } from '@/utils/supabase-client';
 
@@ -44,6 +45,9 @@ export default function Tree({ user }: { user: User }) {
     setImages(imageList);
   }
 
+  const router = useRouter();
+  const { creatorSlug } = router.query;
+
   useEffect(() => {
     setUserId(user.id)
     const getLinks = async () => {
@@ -68,20 +72,23 @@ export default function Tree({ user }: { user: User }) {
   useEffect(() => {
     const getUser = async () => {
       try {
-          const {data, error } = await supabase.from("users").select("profile_picture_url")
-          .eq("id", userId)
+          const {data, error } = await supabase.from("users")
+          .select("id, profile_picture_url")
+          .eq("username", creatorSlug)
           if (error) throw error;
           const profilePictureUrl = data[0]["profile_picture_url"]
+          const userId = data[0]["id"]
           setProfilePictureUrl(profilePictureUrl);
+          setUserId(userId)
       } catch (error) {
         console.log(error)
       }
     };
 
-    if (userId) {
+    if (creatorSlug) {
       getUser()
     }
-  }, [userId])
+  }, [creatorSlug])
 
   // Create a link
   const addNewLink = async () => {
