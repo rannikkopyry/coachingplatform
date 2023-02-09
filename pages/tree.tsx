@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState, ReactNode } from 'react';
+import { useState, ReactNode, useEffect } from 'react';
 
 import LoadingDots from 'components/ui/LoadingDots';
 import Button from 'components/ui/Button';
@@ -18,6 +18,11 @@ interface Props {
   children: ReactNode;
 }
 
+interface Link {
+    title: String;
+    url: String;
+}
+
 export const getServerSideProps = withPageAuth({ redirectTo: '/signin' });
 
 export default function Tree({ user }: { user: User }) {
@@ -26,6 +31,28 @@ export default function Tree({ user }: { user: User }) {
   const [title, setTitle] = useState<string |undefined>();
   const [url, setUrl] = useState<string |undefined>();
   const [userId, setUserId] = useState<string |undefined>();
+  const [links, setLinks] = useState<Link[]>();
+
+  useEffect(() => {
+    setUserId(user.id)
+    const getLinks = async () => {
+        try {
+            const { data, error } = await supabase
+            .from("links")
+            .select("title, url")
+            .eq("user_id", userId)
+    
+            if (error) throw error;
+    
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    };
+    if (userId) {
+        getLinks()
+    }
+  }, [userId])
 
   // Create a link
   const addNewLink = async () => {
