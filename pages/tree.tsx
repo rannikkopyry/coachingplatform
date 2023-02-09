@@ -49,7 +49,6 @@ export default function Tree({ user }: { user: User }) {
             .from("links")
             .select("title, url")
             .eq("user_id", userId)
-    
             if (error) throw error;
             if (data) {
                 setLinks(data)
@@ -93,11 +92,13 @@ export default function Tree({ user }: { user: User }) {
             if (image.file && userId) {
                 const { data, error } = await supabase.storage
                 .from("public")
-                .upload(`${userId}/${image.file.name}`, image.file, {upsert: true})
+                .upload(`${userId}/${image.file.name}`, image.file, {
+                  upsert: true
+                })
                 if (error) throw error;
                 const resp = supabase.storage.from("public").getPublicUrl(data.path);
-                const getPublicUrl = resp.data.publicUrl;
-                const updateUserResponse = supabase
+                const publicUrl = resp.data.publicUrl;
+                const updateUserResponse = await supabase
                 .from("users")
                 .update({ profile_picture_url: publicUrl })
                 .eq("id", userId)
