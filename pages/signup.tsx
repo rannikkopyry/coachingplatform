@@ -31,7 +31,9 @@ const SignUp = () => {
         });
         if (resp.error) throw resp.error;
         const userId = resp.data.user?.id;
-        await createUser(userId)
+        if (userId) {
+            await createUser(userId)
+        }
         console.log(userId)
       }
     } catch (error) {
@@ -42,9 +44,9 @@ const SignUp = () => {
   // Create user in the manually created users table
   async function createUser(userId: string) {
     try {
-       const {error} = await supabase
+       const { error } = await supabase
        .from("users")
-       .insert({ user_id: userId })
+       .insert({ id: userId })
     } catch (error) {
       console.log(error)
     }
@@ -63,8 +65,20 @@ const SignUp = () => {
             name='email'
             type="email"
             id='email'
-            className='block w-10 rounded-lg border-4 text-black'
+            className='block w-ful rounded-lg border-4 text-black'
+            placeholder='you@exampe.com'
+            onChange={(e) => setEmail(e.target.value)}
              />
+             <label htmlFor="email">Password:</label>
+            <input 
+            name='password'
+            type="password"
+            id='password'
+            className='block w-full rounded-lg border-4 text-black'
+            placeholder='ExamplePassword'
+            onChange={(e) => setPassword(e.target.value)}
+             />
+             <button className="text-black" onClick={signUpWithEmail}>Sign up</button>
           </div>
         </div>
       </div>
@@ -77,4 +91,4 @@ const SignUp = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
