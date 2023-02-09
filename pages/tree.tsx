@@ -85,7 +85,7 @@ export default function Tree({ user }: { user: User }) {
     }
   }
 
-/*   const uploadProfilePicture = async () => {
+  const uploadProfilePicture = async () => {
     setUserId(user.id)
     try {
         if (images.length > 0) {
@@ -107,8 +107,7 @@ export default function Tree({ user }: { user: User }) {
     } catch (error) {
         console.log(error)
     }
-  } */
-
+  }
 
   return (
     <section className="bg-white mb-32">
@@ -186,7 +185,7 @@ export default function Tree({ user }: { user: User }) {
           </div>
         )}
       </ImageUploading>
-      <button /* onClick={uploadProfilePicture} */ type='button' className='text-black border-2 '>Upload profile picture</button>
+      <button onClick={uploadProfilePicture} type='button' className='text-black border-2 '>Upload profile picture</button>
       </div>
       <div className="p-4 text-black">
       </div>

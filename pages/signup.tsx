@@ -7,7 +7,7 @@ import { getURL } from '@/utils/helpers';
 import { Auth, EmailAuth, ThemeSupa } from '@supabase/auth-ui-react';
 import { supabase } from '@/utils/supabase-client';
 
-const SignIn = () => {
+const SignUp = () => {
   const router = useRouter();
   const user = useUser();
   const supabaseClient = useSupabaseClient();
@@ -58,24 +58,13 @@ const SignIn = () => {
             <Logo width="64px" height="64px" />
           </div>
           <div className="flex flex-col space-y-4">
-            <Auth
-              supabaseClient={supabaseClient}
-              providers={['github']}
-              redirectTo={getURL()}
-              magicLink={true}
-              appearance={{
-                theme: ThemeSupa,
-                variables: {
-                  default: {
-                    colors: {
-                      brand: '#404040',
-                      brandAccent: '#52525b'
-                    }
-                  }
-                }
-              }}
-              theme="dark"
-            />
+            <label htmlFor="email">Email:</label>
+            <input 
+            name='email'
+            type="email"
+            id='email'
+            className='block w-10 rounded-lg border-4 text-black'
+             />
           </div>
         </div>
       </div>
