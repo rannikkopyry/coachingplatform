@@ -51,8 +51,9 @@ export default function Tree({ user }: { user: User }) {
             .eq("user_id", userId)
     
             if (error) throw error;
-    
-            setLinks(data)
+            if (data) {
+                setLinks(data)
+            }
         } catch (error) {
             console.log(error)
         }
@@ -75,7 +76,7 @@ export default function Tree({ user }: { user: User }) {
             .select();
             if (error) throw error;
             console.log("data", data)
-            if (links) {
+            if (links && data) {
                 setLinks([...data, ...links])
             }
         }
