@@ -5,17 +5,31 @@ import LoadingDots from 'components/ui/LoadingDots';
 import Logo from 'components/icons/Logo';
 import { getURL } from '@/utils/helpers';
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
+import { supabase } from '@/utils/supabase-client';
 
 const SignIn = () => {
   const router = useRouter();
   const user = useUser();
   const supabaseClient = useSupabaseClient();
+  const userId = user?.id;
 
   useEffect(() => {
     if (user) {
       router.replace('/account');
     }
   }, [user]);
+
+  // Create user in the manually created users table
+
+ /*  async function createUser(userId: string) {
+    try {
+       const {error} = await supabase
+       .from("users")
+       .insert({ user_id: userId })
+    } catch (error) {
+      console.log(error)
+    }
+  } */
 
   if (!user)
     return (

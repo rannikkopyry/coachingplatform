@@ -84,21 +84,29 @@ export default function Tree({ user }: { user: User }) {
     }
   }
 
-  const uploadProfilePicture = async () => {
+/*   const uploadProfilePicture = async () => {
+    setUserId(user.id)
     try {
-        if (images.lenght > 0) {
+        if (images.length > 0) {
             const image = images[0]
             if (image.file && userId) {
                 const { data, error } = await supabase.storage
                 .from("public")
                 .upload(`${userId}/${image.file.name}`, image.file, {upsert: true})
                 if (error) throw error;
+                const resp = supabase.storage.from("public").getPublicUrl(data.path);
+                const getPublicUrl = resp.data.publicUrl;
+                const updateUserResponse = supabase
+                .from("users")
+                .update({ profile_picture_url: publicUrl })
+                .eq("id", userId)
+                if (updateUserResponse.error) throw error;
             }
         }
     } catch (error) {
         console.log(error)
     }
-  }
+  } */
 
 
   return (
@@ -177,7 +185,7 @@ export default function Tree({ user }: { user: User }) {
           </div>
         )}
       </ImageUploading>
-      <button onClick={uploadProfilePicture} type='button' className='text-black border-2 '>Upload profile picture</button>
+      <button /* onClick={uploadProfilePicture} */ type='button' className='text-black border-2 '>Upload profile picture</button>
       </div>
       <div className="p-4 text-black">
       </div>
