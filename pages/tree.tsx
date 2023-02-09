@@ -20,7 +20,8 @@ interface Props {
 
 interface Link {
     title: String;
-    url: String;
+    // Add right type when time
+    url: any;
 }
 
 export const getServerSideProps = withPageAuth({ redirectTo: '/signin' });
@@ -44,7 +45,7 @@ export default function Tree({ user }: { user: User }) {
     
             if (error) throw error;
     
-            console.log(data)
+            setLinks(data)
         } catch (error) {
             console.log(error)
         }
@@ -78,11 +79,21 @@ export default function Tree({ user }: { user: User }) {
     <section className="bg-white mb-32">
       <div className="max-w-6xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:flex-col sm:align-center">
+        {links?.map((link: Link, index: number) => (
+            <div 
+            className='text-black border-8 text-center' 
+            key={index}
+            onClick={(e) => {
+                e.preventDefault();
+                window.location.href = link.url;
+            }}
+            >{link.title}</div> 
+        ))}
           <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
             Create a tree
           </h1>
           <p className="mt-5 text-xl text-black sm:text-center sm:text-2xl max-w-2xl m-auto">
-            We partnered with Stripe for a simplified billing.
+            Create your linktree
           </p>
           <input 
           type="text" 
