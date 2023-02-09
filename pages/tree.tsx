@@ -20,7 +20,7 @@ interface Props {
 
 interface Link {
     title: String;
-    // Add right type when time
+    // Add right type when time 
     url: any;
 }
 
@@ -68,6 +68,9 @@ export default function Tree({ user }: { user: User }) {
             .select();
             if (error) throw error;
             console.log("data", data)
+            if (links) {
+                setLinks([...data, ...links])
+            }
         }
     } catch (error) {
         console.log("error", error)
@@ -81,7 +84,7 @@ export default function Tree({ user }: { user: User }) {
         <div className="sm:flex sm:flex-col sm:align-center">
         {links?.map((link: Link, index: number) => (
             <div 
-            className='text-black border-8 text-center' 
+            className='text-black border-8 text-center shadow-lg p-8' 
             key={index}
             onClick={(e) => {
                 e.preventDefault();
