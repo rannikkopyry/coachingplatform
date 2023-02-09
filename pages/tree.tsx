@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useState, ReactNode, useEffect } from 'react';
 
+import { ImageListType } from 'react-images-uploading';
 import LoadingDots from 'components/ui/LoadingDots';
 import Button from 'components/ui/Button';
 import { useUser } from 'utils/useUser';
@@ -33,6 +34,7 @@ export default function Tree({ user }: { user: User }) {
   const [url, setUrl] = useState<string |undefined>();
   const [userId, setUserId] = useState<string |undefined>();
   const [links, setLinks] = useState<Link[]>();
+  const [images, setImages] = useState<ImageListType>([]);
 
   useEffect(() => {
     setUserId(user.id)
