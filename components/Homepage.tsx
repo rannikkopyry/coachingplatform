@@ -1,5 +1,6 @@
 import React from 'react'
 import SignupForm from './form/SignupForm'
+import CookieConsent from './CookieConsent'
 
 export default function Homepage() {
   return (
@@ -264,6 +265,7 @@ export default function Homepage() {
                     </div>
             </div>
         </div>
+        <CookieConsent />
     </div>
   )
 }
