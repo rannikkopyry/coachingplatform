@@ -1,35 +1,22 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import LoadingDots from 'components/ui/LoadingDots';
 import Logo from 'components/icons/Logo';
 import { getURL } from '@/utils/helpers';
-import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
+import { Auth, EmailAuth, ThemeSupa } from '@supabase/auth-ui-react';
 import { supabase } from '@/utils/supabase-client';
 
 const SignIn = () => {
   const router = useRouter();
   const user = useUser();
   const supabaseClient = useSupabaseClient();
-  const userId = user?.id;
-
+  
   useEffect(() => {
     if (user) {
       router.replace('/account');
     }
   }, [user]);
-
-  // Create user in the manually created users table
-
- /*  async function createUser(userId: string) {
-    try {
-       const {error} = await supabase
-       .from("users")
-       .insert({ user_id: userId })
-    } catch (error) {
-      console.log(error)
-    }
-  } */
 
   if (!user)
     return (
