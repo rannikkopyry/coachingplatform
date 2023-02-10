@@ -40,7 +40,7 @@ export default function Tree({ user }: { user: User }) {
   const [userId, setUserId] = useState<string |undefined>();
   const [links, setLinks] = useState<Link[]>();
   const [images, setImages] = useState<ImageListType>([]);
-  const [profilePictureUrl, setProfilePictureUrl] = useState<string | undefined>();
+  const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
 
   const onChange = (imageList: ImageListType) => {
     setImages(imageList);
