@@ -19,10 +19,10 @@ export default function Footer() {
         </div>
         <div className="flex">
           <div>
-            <Link href="/privacy">
+            <Link href="https://app.termly.io/document/privacy-policy/9a4544f1-da37-4483-b15d-a9082ff46c79">
               <a className='mr-5'>Privacy Policy</a>
             </Link>
-            <Link href="/terms-and-conditions">
+            <Link href="https://app.termly.io/document/terms-of-use-for-saas/dea9b01b-5bf0-48fd-bcc2-5c4f33f33c4b">
               <a>Terms and conditions</a>
             </Link>
           </div>
