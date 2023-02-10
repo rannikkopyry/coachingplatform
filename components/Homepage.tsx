@@ -30,7 +30,7 @@ export default function Homepage() {
         </div>
         </div>
         </div> 
-        <div className='mx-auto max-w-7xl pt-4 pb-12 px-4 sm:px-6 lg:px-8 opacity-50 text-center'>
+        {/* <div className='mx-auto max-w-7xl pt-4 pb-12 px-4 sm:px-6 lg:px-8 opacity-50 text-center'>
             <p className='text-black mb-8'>In collaboration with:</p>
             <div className='grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5'>
                 <div className='col-span-1 flex justify-center md:col-span-2 lg:col-span-1'>
@@ -49,7 +49,7 @@ export default function Homepage() {
                     <img className='h-12 object-contain' src="./scc.png" alt="" />
                 </div>
             </div>
-        </div>
+        </div> */}
         <div id='features'>
             <div className="w-full max-w-6xl px-4 md:px-8 m-auto py-[40px] md:py-[60px]">
                 <div className='grid grid-cols-1 gap-8 md:grid-cols-2 min-h-[300px]'>
