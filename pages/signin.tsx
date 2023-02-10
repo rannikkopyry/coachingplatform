@@ -11,44 +11,12 @@ const SignIn = () => {
   const router = useRouter();
   const user = useUser();
   const supabaseClient = useSupabaseClient();
-  const [email, setEmail] = useState<string | undefined>();
-  const [password, setPassword] = useState<string | undefined>();
   
-  const userId = user?.id;
-
   useEffect(() => {
     if (user) {
       router.replace('/account');
     }
   }, [user]);
-
-  async function signUpWithEmail() {
-    try {
-      if (email && password) {
-        const resp = await supabase.auth.signUp({
-          email: email,
-          password: password
-        });
-        if (resp.error) throw resp.error;
-        const userId = resp.data.user?.id;
-        await createUser(userId)
-        console.log(userId)
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  // Create user in the manually created users table
-  async function createUser(userId: string) {
-    try {
-       const {error} = await supabase
-       .from("users")
-       .insert({ user_id: userId })
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
   if (!user)
     return (

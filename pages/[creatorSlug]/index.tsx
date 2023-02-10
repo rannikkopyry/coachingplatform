@@ -71,7 +71,7 @@ export default function Tree({ user }: { user: User }) {
     }
   }, [userId])
 
-  useEffect(() => {
+ /*  useEffect(() => {
     const getUser = async () => {
       try {
           const { data, error } = await supabase.from("users")
@@ -91,7 +91,7 @@ export default function Tree({ user }: { user: User }) {
       getUser();
     }
   }, [creatorSlug])
-
+ */
   // Create a link
   const addNewLink = async () => {
     setUserId(user.id)
@@ -114,7 +114,7 @@ export default function Tree({ user }: { user: User }) {
     }
   }
 
-  const uploadProfilePicture = async () => {
+/*   const uploadProfilePicture = async () => {
     setUserId(user.id)
     try {
         if (images.length > 0) {
@@ -138,7 +138,7 @@ export default function Tree({ user }: { user: User }) {
     } catch (error) {
         console.log(error)
     }
-  }
+  } */
 
  
 
@@ -209,7 +209,7 @@ onChange={(e) => setUrl(e.target.value)}
           </div>
         )}
       </ImageUploading>
-      <button onClick={uploadProfilePicture} type='button' className='text-black border-2 '>Upload profile picture</button>
+      <button /* onClick={uploadProfilePicture} */ type='button' className='text-black border-2 '>Upload profile picture</button>
 </div>
           )}
           {profilePictureUrl && <Image

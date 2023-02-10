@@ -23,7 +23,7 @@ const SignUp = () => {
     }
   }, [user]);
 
-  async function signUpWithEmail() {
+ /*  async function signUpWithEmail() {
     try {
       if (email && password) {
         const resp = await supabase.auth.signUp({
@@ -41,7 +41,7 @@ const SignUp = () => {
       console.log(error)
     }
   }
-
+ */
   // Create user in the manually created users table
   async function createUser(userId: string) {
     try {
@@ -88,7 +88,7 @@ const SignUp = () => {
             placeholder='ExamplePassword'
             onChange={(e) => setPassword(e.target.value)}
              />
-             <button className="text-black border-4 p-3" onClick={signUpWithEmail}>Sign up</button>
+             <button className="text-black border-4 p-3" /* onClick={signUpWithEmail} */>Sign up</button>
           </div>
         </div>
       </div>
