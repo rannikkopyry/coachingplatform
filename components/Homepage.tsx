@@ -153,6 +153,10 @@ export default function Homepage() {
                                     <svg className='h-6 w-6 flex-shrink-0 mr-2 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
                                         <span>Basic themes</span>
                                     </li>
+                                    <li className='flex'>
+                                    <svg className='h-6 w-6 flex-shrink-0 mr-2 text-black' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+                                        <span>SEO-optimized</span>
+                                    </li>
                                 </ul>
                         </div>
                         <a className='bg-white border-black border text-black mt-8 block w-full py-3 px-6 rounded-md text-center font-medium' href="">Coming soon</a>
