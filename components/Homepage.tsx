@@ -15,9 +15,10 @@ export default function Homepage() {
                 <SignupForm />
             </div>
         </div>
-        <div className='flex-shrink-0 w-full items-center justify-center min-h-[615px] hidden md:flex'>
+        <div className='flex-shrink-0 w-full items-center justify-center min-h-[615px] flex'>
         <div className='min-h-[500px] flex items-center'>
             <div>
+            <a className='mt-5 xs:visible' href="https://www.producthunt.com/posts/motorlinks-io?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-motorlinks&#0045;io" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=378986&theme=light" alt="Motorlinks&#0046;io - Generate&#0032;leads&#0032;through&#0032;your&#0032;social&#0032;bio | Product Hunt" width="250" height="54" /></a>
                 <img src="/demo1.png" alt="" />
             {/* <p className='text-black text-3xl mb-4 font-medium'>More leads</p>
             <ul className='text-black text-xl'>
