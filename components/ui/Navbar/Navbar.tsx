@@ -35,7 +35,6 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex flex-1 justify-end space-x-8">
-          <a className='mt-5' href="https://www.producthunt.com/posts/motorlinks-io?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-motorlinks&#0045;io" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=378986&theme=light" alt="Motorlinks&#0046;io - Generate&#0032;leads&#0032;through&#0032;your&#0032;social&#0032;bio | Product Hunt" width="250" height="54" /></a>
             <button className='invisible lg:visible md:visible max-h-[50px] mt-6 bg-black text-white text-base font-medium py-3 px-6 rounded-full cursor-pointer'>Coming soon</button>
             {/* {user ? (
               <span
