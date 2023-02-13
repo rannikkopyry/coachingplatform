@@ -15,7 +15,7 @@ import type { Database } from 'types_db';
 import type { NextPage } from 'next'
 
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps }: AppProps): any {
   const [supabaseClient] = useState(() =>
     createBrowserSupabaseClient<Database>()
   );

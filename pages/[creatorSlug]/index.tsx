@@ -80,8 +80,8 @@ export default function Tree() {
           .select("id, profile_picture_url")
           .eq("username", creatorSlug)
           if (error) throw error;
-          const profilePictureUrl = data[0]["profile_picture_url"]
-          const userId = data[0]["id"]
+          const profilePictureUrl = data![0]["profile_picture_url"]
+          const userId = data![0]["id"]
           setProfilePictureUrl(profilePictureUrl);
           setUserId(userId)
         } catch (error) {
@@ -126,7 +126,7 @@ export default function Tree() {
                   upsert: true
                 })
                 if (error) throw error;
-                const resp = supabase.storage.from("public").getPublicUrl(data.path);
+                const resp = supabase.storage.from("public").getPublicUrl(data!.path);
                 const publicUrl = resp.data.publicUrl;
                 const updateUserResponse = await supabase
                 .from("users")
