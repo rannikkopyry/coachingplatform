@@ -8,14 +8,13 @@ import Image from 'next/image';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useEffect } from 'react';
 import { supabase } from '@/utils/supabase-client';
-import LogoWhite from '@/components/icons/LogoWhite';
+import Logo from '@/components/icons/Logo';
 
 const AdminNavbar = () => {
   const router = useRouter();
   const supabaseClient = useSupabaseClient();
 /*   const { user } = useUser();
  */
-
 
   return (
     <nav className={s.root}>
@@ -27,22 +26,22 @@ const AdminNavbar = () => {
           <div className="flex flex-1 items-center">
             <Link href="/">
               <a className={s.logo} aria-label="Logo">
-                <LogoWhite />
+                <Logo />
               </a>
             </Link>
             <nav className="space-x-2 ml-6 hidden lg:block">
               <Link href="#pricing">
-                <a className={s.link}>Pricing</a>
+                <a className={s.link}>My tree</a>
               </Link>
-             {/*  <Link href="/account">
+              <Link href="/account">
                 <a className={s.link}>Account</a>
-              </Link> */}
+              </Link>
             </nav>
           </div>
 
           <div className="hidden md:flex flex-1 justify-end space-x-8">
-            <button className='invisible lg:visible md:visible max-h-[50px] mt-6 bg-black text-white text-base font-medium py-3 px-6 rounded-full cursor-pointer'>Coming soon</button>
-            <button className='invisible lg:visible md:visible max-h-[50px] mt-6 bg-black text-white text-base font-medium py-3 px-6 rounded-full cursor-pointer'>Coming soon</button>
+            <button className='invisible lg:visible md:visible max-h-[50px] mt-6 bg-black text-white text-base font-medium py-3 px-6 rounded-full cursor-pointer'>Upgrade</button>
+            <button className='invisible lg:visible md:visible max-h-[50px] mt-6 bg-black text-white text-base font-medium py-3 px-6 rounded-full cursor-pointer'>Publish</button>
             {/* {profilePictureUrl && <Image
           src={profilePictureUrl}
           alt="Profile picture"

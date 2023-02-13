@@ -1,18 +1,13 @@
 import Link from 'next/link';
 import { useState, ReactNode, useEffect } from 'react';
-
 import { ImageListType } from 'react-images-uploading';
 import ImageUploading from 'react-images-uploading';
 import Image from 'next/image';
 import { useUser } from 'utils/useUser';
-import { postData } from 'utils/helpers';
 import { useRouter } from 'next/router';
-
 import { supabase } from '@/utils/supabase-client';
-
-import { User } from '@supabase/supabase-js';
-import { withPageAuth } from '@supabase/auth-helpers-nextjs';
-import { profile } from 'console';
+import SimpleLayout from "components/SimpleLayout"
+import { ReactElement } from 'react';
 
 interface Props {
   title: string;
@@ -27,8 +22,7 @@ interface Link {
     url: string;
 }
 
-
-export default function Tree() {
+export default function TreePage() {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const { isLoading, subscription, userDetails } = useUser();
@@ -38,6 +32,7 @@ export default function Tree() {
   const [links, setLinks] = useState<Link[]>();
   const [images, setImages] = useState<ImageListType>([]);
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
+  const [username, setUsername] = useState<string | any>();
   const user = useUser();
 
   const onChange = (imageList: ImageListType) => {
@@ -77,13 +72,15 @@ export default function Tree() {
    const getUser = async () => {
       try {
           const { data, error } = await supabase.from("users")
-          .select("id, profile_picture_url")
+          .select("id, profile_picture_url, username")
           .eq("username", creatorSlug)
           if (error) throw error;
-          const profilePictureUrl = data[0]["profile_picture_url"]
-          const userId = data[0]["id"]
+          const profilePictureUrl = data![0]["profile_picture_url"]
+          const userId = data![0]["id"]
+          const userName = data![0]["username"]
           setProfilePictureUrl(profilePictureUrl);
           setUserId(userId)
+          setUsername(userName)
         } catch (error) {
         console.log(error)
       }
@@ -126,7 +123,7 @@ export default function Tree() {
                   upsert: true
                 })
                 if (error) throw error;
-                const resp = supabase.storage.from("public").getPublicUrl(data.path);
+                const resp = supabase.storage.from("public").getPublicUrl(data!.path);
                 const publicUrl = resp.data.publicUrl;
                 const updateUserResponse = await supabase
                 .from("users")
@@ -141,8 +138,10 @@ export default function Tree() {
     }
   }
 
+  console.log(username)
+
   return (
-    <section className="bg-white mb-32">
+    <section className="bg-white mb-32 min-h-screen">
       <div className="max-w-6xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
         <div className='text-center'>
       {profilePictureUrl && <Image
@@ -152,9 +151,10 @@ export default function Tree() {
           width="100px"
           className="rounded-full"
           />}
+          {username && <p className='text-black'>@ {creatorSlug}</p>}
       {links?.map((link: Link, index: number) => (
             <div 
-            className='text-black border-8 text-center shadow-lg p-8' 
+            className='text-black border-8 text-center shadow-lg p-8 mt-4' 
             key={index}
             onClick={(e) => {
                 e.preventDefault();
@@ -164,30 +164,27 @@ export default function Tree() {
         ))}
               <div className="sm:flex sm:flex-col sm:align-center">
           {authenticated && (
-            <div>
+            <div className='mt-10'>
             <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
                   Edit your page
             </h1>
-            <p className="mt-5 text-xl text-black sm:text-center sm:text-2xl max-w-2xl m-auto">
-              Create your linktree
-            </p>
             <input 
               type="text" 
               name='title'
               id='title'
-              className='block w-full rounded-md text-black border-2 m-2 p-2'
-              placeholder='my awesome link'
+              className='block w-full rounded-md text-black border-2 mt-10 p-2'
+              placeholder='My awesome link'
               onChange={(e) => setTitle(e.target.value)}
             />
             <input 
             type="text" 
             name='url'
             id='urls'
-            className='block w-full rounded-md text-black border-2 m-2 p-2'
-            placeholder='my awesome url'
+            className='block w-full rounded-md text-black border-2 mt-10 mb-10 p-2'
+            placeholder='https://nettiauto.com/audi/801721'
             onChange={(e) => setUrl(e.target.value)}
             />
-            <button onClick={addNewLink} type='button' className='text-black border-2 '>Create a link</button>
+            <button onClick={addNewLink} type='button' className='rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0'>Create a link</button>
             <ImageUploading
                     multiple
                 value={images}
@@ -226,7 +223,7 @@ export default function Tree() {
           </div>
         )}
           </ImageUploading>
-          <button onClick={uploadProfilePicture} type='button' className='text-black border-2 text-center'>Upload profile picture</button>
+          <button onClick={uploadProfilePicture} type='button' className='mt-3 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0'>Upload profile picture</button>
         </div>
           )}
           </div>
@@ -235,3 +232,7 @@ export default function Tree() {
     </section>
   );
 }
+
+TreePage.getLayout = function(page: ReactElement) {
+  return <SimpleLayout>{page}</SimpleLayout>;
+};
