@@ -12,6 +12,8 @@ import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { AppProps } from 'next/app';
 import { MyUserContextProvider } from 'utils/useUser';
 import type { Database } from 'types_db';
+import type { NextPage } from 'next'
+
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [supabaseClient] = useState(() =>
@@ -33,8 +35,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     };
   }, [router.events]);
 
-  return (
-    <div className="bg-white">
+  const renderWithLayout =
+    Component.getLayout ||
+    function (page: JSX.Element) {
+    return (
+        <div className="bg-white">
       <SessionContextProvider supabaseClient={supabaseClient}>
         <MyUserContextProvider>
           <Layout>
@@ -43,5 +48,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         </MyUserContextProvider>
       </SessionContextProvider>
     </div>
-  );
+      );
+    };
+    return renderWithLayout(<Component {...pageProps} />);
 }

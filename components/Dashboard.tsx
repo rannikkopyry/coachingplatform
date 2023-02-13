@@ -3,7 +3,10 @@ import React from 'react'
 export default function Dashboard() {
   return (
    <>
-adadad
+    <div className='h-screen bg-white w-full'>
+    <div>Koiran karva</div>
+    </div>
    </>
   )
 }
+
