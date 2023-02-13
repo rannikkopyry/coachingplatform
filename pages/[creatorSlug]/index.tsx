@@ -28,7 +28,7 @@ interface Link {
 }
 
 
-export default function Tree({ user }: { user: User }) {
+export default function Tree() {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const { isLoading, subscription, userDetails } = useUser();
@@ -38,10 +38,17 @@ export default function Tree({ user }: { user: User }) {
   const [links, setLinks] = useState<Link[]>();
   const [images, setImages] = useState<ImageListType>([]);
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
+  const user = useUser();
 
   const onChange = (imageList: ImageListType) => {
     setImages(imageList);
   }
+
+  useEffect(() => {
+    if (user.user != null) {
+      setAuthenticated(true)
+    }
+  }, [user]);
 
   const router = useRouter();
   const { creatorSlug } = router.query;
@@ -62,7 +69,6 @@ export default function Tree({ user }: { user: User }) {
         }
     };
     if (userId) {
-      setAuthenticated(true)
         getLinks()
     }
   }, [userId])
@@ -110,7 +116,6 @@ export default function Tree({ user }: { user: User }) {
   }
 
   const uploadProfilePicture = async () => {
-    setUserId(user.id)
     try {
         if (images.length > 0) {
             const image = images[0]
@@ -136,16 +141,15 @@ export default function Tree({ user }: { user: User }) {
     }
   }
 
- 
-
   return (
     <section className="bg-white mb-32">
       <div className="max-w-6xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
+        <div className='text-center'>
       {profilePictureUrl && <Image
           src={profilePictureUrl}
           alt="Profile picture"
-          height={100}
-          width={100} 
+          height="100px"
+          width="100px"
           className="rounded-full"
           />}
       {links?.map((link: Link, index: number) => (
@@ -158,47 +162,47 @@ export default function Tree({ user }: { user: User }) {
             }}
             >{link.title}</div> 
         ))}
-        <div className="sm:flex sm:flex-col sm:align-center">
+              <div className="sm:flex sm:flex-col sm:align-center">
           {authenticated && (
             <div>
             <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
- Create a tree
-</h1>
-<p className="mt-5 text-xl text-black sm:text-center sm:text-2xl max-w-2xl m-auto">
- Create your linktree
-</p>
-<input 
-type="text" 
-name='title'
-id='title'
-className='block w-full rounded-md text-black border-2 m-2 p-2'
-placeholder='my awesome link'
-onChange={(e) => setTitle(e.target.value)}
-/>
-<input 
-type="text" 
-name='url'
-id='urls'
-className='block w-full rounded-md text-black border-2 m-2 p-2'
-placeholder='my awesome url'
-onChange={(e) => setUrl(e.target.value)}
-/>
-<button onClick={addNewLink} type='button' className='text-black border-2 '>Create a link</button>
-<ImageUploading
-        multiple
-        value={images}
-        onChange={onChange}
-        dataURLKey="data_url"
-      >
-        {({
-          imageList,
-          onImageUpload,
-          onImageRemoveAll,
-          onImageUpdate,
-          onImageRemove,
-          isDragging,
-          dragProps,
-        }) => (
+                  Edit your page
+            </h1>
+            <p className="mt-5 text-xl text-black sm:text-center sm:text-2xl max-w-2xl m-auto">
+              Create your linktree
+            </p>
+            <input 
+              type="text" 
+              name='title'
+              id='title'
+              className='block w-full rounded-md text-black border-2 m-2 p-2'
+              placeholder='my awesome link'
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <input 
+            type="text" 
+            name='url'
+            id='urls'
+            className='block w-full rounded-md text-black border-2 m-2 p-2'
+            placeholder='my awesome url'
+            onChange={(e) => setUrl(e.target.value)}
+            />
+            <button onClick={addNewLink} type='button' className='text-black border-2 '>Create a link</button>
+            <ImageUploading
+                    multiple
+                value={images}
+                onChange={onChange}
+                dataURLKey="data_url"
+              >
+                {({
+                  imageList,
+                  onImageUpload,
+                  onImageRemoveAll,
+                  onImageUpdate,
+                  onImageRemove,
+                  isDragging,
+                  dragProps,
+                }) => (
           // write your building UI
           <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-4 p-4">
             <button
@@ -221,10 +225,11 @@ onChange={(e) => setUrl(e.target.value)}
             ))}
           </div>
         )}
-      </ImageUploading>
-      <button onClick={uploadProfilePicture} type='button' className='text-black border-2 '>Upload profile picture</button>
-</div>
+          </ImageUploading>
+          <button onClick={uploadProfilePicture} type='button' className='text-black border-2 text-center'>Upload profile picture</button>
+        </div>
           )}
+          </div>
         </div>
       </div>
     </section>
