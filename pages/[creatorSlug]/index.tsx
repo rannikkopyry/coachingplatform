@@ -4,14 +4,10 @@ import { ImageListType } from 'react-images-uploading';
 import ImageUploading from 'react-images-uploading';
 import Image from 'next/image';
 import { useUser } from 'utils/useUser';
-import { postData } from 'utils/helpers';
 import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabase-client';
 import SimpleLayout from "components/SimpleLayout"
 import { ReactElement } from 'react';
-import { User } from '@supabase/supabase-js';
-import { withPageAuth } from '@supabase/auth-helpers-nextjs';
-import { profile } from 'console';
 
 interface Props {
   title: string;
@@ -25,7 +21,6 @@ interface Link {
     // Add right type when time 
     url: string;
 }
-
 
 export default function TreePage() {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
@@ -153,7 +148,7 @@ export default function TreePage() {
           />}
       {links?.map((link: Link, index: number) => (
             <div 
-            className='text-black border-8 text-center shadow-lg p-8' 
+            className='text-black border-8 text-center shadow-lg p-8 mt-4' 
             key={index}
             onClick={(e) => {
                 e.preventDefault();
@@ -163,30 +158,27 @@ export default function TreePage() {
         ))}
               <div className="sm:flex sm:flex-col sm:align-center">
           {authenticated && (
-            <div>
+            <div className='mt-10'>
             <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
                   Edit your page
             </h1>
-            <p className="mt-5 text-xl text-black sm:text-center sm:text-2xl max-w-2xl m-auto">
-              Create your linktree
-            </p>
             <input 
               type="text" 
               name='title'
               id='title'
-              className='block w-full rounded-md text-black border-2 m-2 p-2'
-              placeholder='my awesome link'
+              className='block w-full rounded-md text-black border-2 mt-10 p-2'
+              placeholder='My awesome link'
               onChange={(e) => setTitle(e.target.value)}
             />
             <input 
             type="text" 
             name='url'
             id='urls'
-            className='block w-full rounded-md text-black border-2 m-2 p-2'
-            placeholder='my awesome url'
+            className='block w-full rounded-md text-black border-2 mt-10 mb-10 p-2'
+            placeholder='https://nettiauto.com/audi/801721'
             onChange={(e) => setUrl(e.target.value)}
             />
-            <button onClick={addNewLink} type='button' className='text-black border-2 '>Create a link</button>
+            <button onClick={addNewLink} type='button' className='rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0'>Create a link</button>
             <ImageUploading
                     multiple
                 value={images}
@@ -225,7 +217,7 @@ export default function TreePage() {
           </div>
         )}
           </ImageUploading>
-          <button onClick={uploadProfilePicture} type='button' className='text-black border-2 text-center'>Upload profile picture</button>
+          <button onClick={uploadProfilePicture} type='button' className='mt-3 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0'>Upload profile picture</button>
         </div>
           )}
           </div>
