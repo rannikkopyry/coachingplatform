@@ -4,7 +4,9 @@ export default function Dashboard() {
   return (
    <>
     <div className='h-screen bg-white w-full'>
-    <div>Koiran karva</div>
+    <div className=''>
+
+    </div>
     </div>
    </>
   )

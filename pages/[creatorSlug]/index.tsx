@@ -74,7 +74,7 @@ export default function Tree() {
   }, [userId])
 
   useEffect(() => {
-    const getUser = async () => {
+   const getUser = async () => {
       try {
           const { data, error } = await supabase.from("users")
           .select("id, profile_picture_url")

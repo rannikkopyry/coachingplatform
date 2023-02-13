@@ -50,5 +50,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     </div>
       );
     };
-    return renderWithLayout(<Component {...pageProps} />);
+    return renderWithLayout(<SessionContextProvider supabaseClient={supabaseClient}>
+      <MyUserContextProvider>
+          <Component {...pageProps} />
+      </MyUserContextProvider>
+    </SessionContextProvider>);
 }
