@@ -32,6 +32,7 @@ export default function TreePage() {
   const [links, setLinks] = useState<Link[]>();
   const [images, setImages] = useState<ImageListType>([]);
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
+  const [username, setUsername] = useState<string | any>();
   const user = useUser();
 
   const onChange = (imageList: ImageListType) => {
@@ -71,13 +72,15 @@ export default function TreePage() {
    const getUser = async () => {
       try {
           const { data, error } = await supabase.from("users")
-          .select("id, profile_picture_url")
+          .select("id, profile_picture_url, username")
           .eq("username", creatorSlug)
           if (error) throw error;
           const profilePictureUrl = data![0]["profile_picture_url"]
           const userId = data![0]["id"]
+          const userName = data![0]["username"]
           setProfilePictureUrl(profilePictureUrl);
           setUserId(userId)
+          setUsername(userName)
         } catch (error) {
         console.log(error)
       }
@@ -135,6 +138,8 @@ export default function TreePage() {
     }
   }
 
+  console.log(username)
+
   return (
     <section className="bg-white mb-32 min-h-screen">
       <div className="max-w-6xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
@@ -146,6 +151,7 @@ export default function TreePage() {
           width="100px"
           className="rounded-full"
           />}
+          {username && <p className='text-black'>@ {creatorSlug}</p>}
       {links?.map((link: Link, index: number) => (
             <div 
             className='text-black border-8 text-center shadow-lg p-8 mt-4' 
