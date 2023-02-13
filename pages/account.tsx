@@ -69,7 +69,6 @@ export default function Account({ user }: { user: User }) {
           <p className="mt-5 text-xl text-black sm:text-center sm:text-2xl max-w-2xl m-auto">
             We partnered with Stripe for a simplified billing.
           </p>
-          <a className='text-black border-2 '>Create a tree</a>
         </div>
       </div>
       <div className="p-4 text-black">

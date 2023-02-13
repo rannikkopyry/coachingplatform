@@ -1,0 +1,19 @@
+.root {
+  @apply w-full md:w-auto fixed md:right-2 md:left-2 md:top-2 bg-white md:rounded-full md:items-center items-stretch border-b border-gray-500;
+}
+
+.link {
+  @apply inline-flex items-center leading-6 font-medium transition ease-in-out duration-75 cursor-pointer text-yellow-500 rounded-md p-1;
+}
+
+.link:hover {
+  @apply text-zinc-100;
+}
+
+.link:focus {
+  @apply outline-none text-zinc-100;
+}
+
+.logo {
+  @apply cursor-pointer rounded-full transform duration-100 ease-in-out;
+}

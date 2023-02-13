@@ -4,8 +4,6 @@ import { useState, ReactNode, useEffect } from 'react';
 import { ImageListType } from 'react-images-uploading';
 import ImageUploading from 'react-images-uploading';
 import Image from 'next/image';
-import LoadingDots from 'components/ui/LoadingDots';
-import Button from 'components/ui/Button';
 import { useUser } from 'utils/useUser';
 import { postData } from 'utils/helpers';
 import { useRouter } from 'next/router';
@@ -26,31 +24,36 @@ interface Props {
 interface Link {
     title: String;
     // Add right type when time 
-    url: any;
+    url: string;
 }
 
-export const getServerSideProps = withPageAuth({ redirectTo: '/signin' });
 
-export default function Tree({ user }: { user: User }) {
+export default function Tree() {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const { isLoading, subscription, userDetails } = useUser();
-  const [title, setTitle] = useState<string |undefined>();
-  const [url, setUrl] = useState<string |undefined>();
-  const [userId, setUserId] = useState<string |undefined>();
+  const [title, setTitle] = useState<string | undefined>();
+  const [url, setUrl] = useState<string | undefined>();
+  const [userId, setUserId] = useState<string | undefined>();
   const [links, setLinks] = useState<Link[]>();
   const [images, setImages] = useState<ImageListType>([]);
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
+  const user = useUser();
 
   const onChange = (imageList: ImageListType) => {
     setImages(imageList);
   }
 
+  useEffect(() => {
+    if (user.user != null) {
+      setAuthenticated(true)
+    }
+  }, [user]);
+
   const router = useRouter();
   const { creatorSlug } = router.query;
 
   useEffect(() => {
-    setUserId(user.id)
     const getLinks = async () => {
         try {
             const { data, error } = await supabase
@@ -66,13 +69,12 @@ export default function Tree({ user }: { user: User }) {
         }
     };
     if (userId) {
-      setAuthenticated(true)
         getLinks()
     }
   }, [userId])
 
- /*  useEffect(() => {
-    const getUser = async () => {
+  useEffect(() => {
+   const getUser = async () => {
       try {
           const { data, error } = await supabase.from("users")
           .select("id, profile_picture_url")
@@ -91,10 +93,9 @@ export default function Tree({ user }: { user: User }) {
       getUser();
     }
   }, [creatorSlug])
- */
+
   // Create a link
   const addNewLink = async () => {
-    setUserId(user.id)
     try {
         if (title && url && userId) {
             const { data, error } = await supabase.from("links").insert({
@@ -114,8 +115,7 @@ export default function Tree({ user }: { user: User }) {
     }
   }
 
-/*   const uploadProfilePicture = async () => {
-    setUserId(user.id)
+  const uploadProfilePicture = async () => {
     try {
         if (images.length > 0) {
             const image = images[0]
@@ -130,6 +130,7 @@ export default function Tree({ user }: { user: User }) {
                 const publicUrl = resp.data.publicUrl;
                 const updateUserResponse = await supabase
                 .from("users")
+                // @ts-ignore
                 .update({ profile_picture_url: publicUrl })
                 .eq("id", userId)
                 if (updateUserResponse.error) throw error;
@@ -138,54 +139,70 @@ export default function Tree({ user }: { user: User }) {
     } catch (error) {
         console.log(error)
     }
-  } */
-
- 
+  }
 
   return (
     <section className="bg-white mb-32">
       <div className="max-w-6xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
-        <div className="sm:flex sm:flex-col sm:align-center">
+        <div className='text-center'>
+      {profilePictureUrl && <Image
+          src={profilePictureUrl}
+          alt="Profile picture"
+          height="100px"
+          width="100px"
+          className="rounded-full"
+          />}
+      {links?.map((link: Link, index: number) => (
+            <div 
+            className='text-black border-8 text-center shadow-lg p-8' 
+            key={index}
+            onClick={(e) => {
+                e.preventDefault();
+                window.location.href = link.url;
+            }}
+            >{link.title}</div> 
+        ))}
+              <div className="sm:flex sm:flex-col sm:align-center">
           {authenticated && (
             <div>
             <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
- Create a tree
-</h1>
-<p className="mt-5 text-xl text-black sm:text-center sm:text-2xl max-w-2xl m-auto">
- Create your linktree
-</p>
-<input 
-type="text" 
-name='title'
-id='title'
-className='block w-full rounded-md text-black border-2 m-2 p-2'
-placeholder='my awesome link'
-onChange={(e) => setTitle(e.target.value)}
-/>
-<input 
-type="text" 
-name='url'
-id='urls'
-className='block w-full rounded-md text-black border-2 m-2 p-2'
-placeholder='my awesome url'
-onChange={(e) => setUrl(e.target.value)}
-/>
-<button onClick={addNewLink} type='button' className='text-black border-2 '>Create a link</button>
-<ImageUploading
-        multiple
-        value={images}
-        onChange={onChange}
-        dataURLKey="data_url"
-      >
-        {({
-          imageList,
-          onImageUpload,
-          onImageRemoveAll,
-          onImageUpdate,
-          onImageRemove,
-          isDragging,
-          dragProps,
-        }) => (
+                  Edit your page
+            </h1>
+            <p className="mt-5 text-xl text-black sm:text-center sm:text-2xl max-w-2xl m-auto">
+              Create your linktree
+            </p>
+            <input 
+              type="text" 
+              name='title'
+              id='title'
+              className='block w-full rounded-md text-black border-2 m-2 p-2'
+              placeholder='my awesome link'
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <input 
+            type="text" 
+            name='url'
+            id='urls'
+            className='block w-full rounded-md text-black border-2 m-2 p-2'
+            placeholder='my awesome url'
+            onChange={(e) => setUrl(e.target.value)}
+            />
+            <button onClick={addNewLink} type='button' className='text-black border-2 '>Create a link</button>
+            <ImageUploading
+                    multiple
+                value={images}
+                onChange={onChange}
+                dataURLKey="data_url"
+              >
+                {({
+                  imageList,
+                  onImageUpload,
+                  onImageRemoveAll,
+                  onImageUpdate,
+                  onImageRemove,
+                  isDragging,
+                  dragProps,
+                }) => (
           // write your building UI
           <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-4 p-4">
             <button
@@ -208,27 +225,11 @@ onChange={(e) => setUrl(e.target.value)}
             ))}
           </div>
         )}
-      </ImageUploading>
-      <button /* onClick={uploadProfilePicture} */ type='button' className='text-black border-2 '>Upload profile picture</button>
-</div>
+          </ImageUploading>
+          <button onClick={uploadProfilePicture} type='button' className='text-black border-2 text-center'>Upload profile picture</button>
+        </div>
           )}
-          {profilePictureUrl && <Image
-          src={profilePictureUrl}
-          alt="Profile picture"
-          height={100}
-          width={100} 
-          className="rounded-full"
-          />}
-        {links?.map((link: Link, index: number) => (
-            <div 
-            className='text-black border-8 text-center shadow-lg p-8' 
-            key={index}
-            onClick={(e) => {
-                e.preventDefault();
-                window.location.href = link.url;
-            }}
-            >{link.title}</div> 
-        ))}
+          </div>
         </div>
       </div>
     </section>
