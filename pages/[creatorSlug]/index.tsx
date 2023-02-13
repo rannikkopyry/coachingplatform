@@ -46,10 +46,7 @@ export default function Tree({ user }: { user: User }) {
   const router = useRouter();
   const { creatorSlug } = router.query;
 
-  
-
   useEffect(() => {
-    setUserId(user.id)
     const getLinks = async () => {
         try {
             const { data, error } = await supabase
@@ -93,7 +90,6 @@ export default function Tree({ user }: { user: User }) {
 
   // Create a link
   const addNewLink = async () => {
-    setUserId(user.id)
     try {
         if (title && url && userId) {
             const { data, error } = await supabase.from("links").insert({
