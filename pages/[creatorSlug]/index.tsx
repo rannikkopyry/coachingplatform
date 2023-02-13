@@ -1,15 +1,14 @@
 import Link from 'next/link';
 import { useState, ReactNode, useEffect } from 'react';
-
 import { ImageListType } from 'react-images-uploading';
 import ImageUploading from 'react-images-uploading';
 import Image from 'next/image';
 import { useUser } from 'utils/useUser';
 import { postData } from 'utils/helpers';
 import { useRouter } from 'next/router';
-
 import { supabase } from '@/utils/supabase-client';
-
+import SimpleLayout from "components/SimpleLayout"
+import { ReactElement } from 'react';
 import { User } from '@supabase/supabase-js';
 import { withPageAuth } from '@supabase/auth-helpers-nextjs';
 import { profile } from 'console';
@@ -28,7 +27,7 @@ interface Link {
 }
 
 
-export default function Tree() {
+export default function TreePage() {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const { isLoading, subscription, userDetails } = useUser();
@@ -235,3 +234,7 @@ export default function Tree() {
     </section>
   );
 }
+
+TreePage.getLayout = function(page: ReactElement) {
+  return <SimpleLayout>{page}</SimpleLayout>;
+};
