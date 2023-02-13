@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
+import AdminNavbar from 'components/ui/AdminNavbar';
+import Footer from 'components/ui/Footer';
 import { ReactNode } from 'react';
 import { PageMeta } from '../types';
 
@@ -37,6 +39,7 @@ export default function AlternativeLayout({ children, meta: pageMeta }: Props) {
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.cardImage} />
       </Head>
+      <AdminNavbar />
       <main id="skip">{children}</main>
     </>
   );
