@@ -141,7 +141,7 @@ export default function TreePage() {
   }
 
   return (
-    <section className="bg-white mb-32">
+    <section className="bg-white mb-32 min-h-screen">
       <div className="max-w-6xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
         <div className='text-center'>
       {profilePictureUrl && <Image
