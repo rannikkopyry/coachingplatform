@@ -14,6 +14,7 @@ const SignUp = () => {
   const [email, setEmail] = useState<string | undefined>();
   const [username, setUsername] = useState<string | undefined>();
   const [password, setPassword] = useState<string | undefined>();
+  const [ready, setReady] = useState<boolean | undefined>(false);
   
   const userId = user?.id;
 
@@ -23,7 +24,7 @@ const SignUp = () => {
     }
   }, [user]);
 
- /*  async function signUpWithEmail() {
+  async function signUpWithEmail() {
     try {
       if (email && password) {
         const resp = await supabase.auth.signUp({
@@ -35,13 +36,14 @@ const SignUp = () => {
         if (userId) {
             await createUser(userId)
         }
+        setReady(true)
         console.log(userId)
       }
     } catch (error) {
       console.log(error)
     }
   }
- */
+
   // Create user in the manually created users table
   async function createUser(userId: string) {
     try {
@@ -88,8 +90,11 @@ const SignUp = () => {
             placeholder='ExamplePassword'
             onChange={(e) => setPassword(e.target.value)}
              />
-             <button className="text-black border-4 p-3" /* onClick={signUpWithEmail} */>Sign up</button>
+             <button className="text-black border-4 p-3" onClick={signUpWithEmail}>Sign up</button>
           </div>
+          {ready === true && <>
+          <div className='text-black mt-5'>Check your email to verify your account.</div>
+          </>}
         </div>
       </div>
     );
