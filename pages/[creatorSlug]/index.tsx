@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabase-client';
 import SimpleLayout from 'components/SimpleLayout';
 import { ReactElement } from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 interface Props {
   title: string;
