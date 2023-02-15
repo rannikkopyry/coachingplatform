@@ -9,6 +9,8 @@ import { supabase } from '@/utils/supabase-client';
 import SimpleLayout from 'components/SimpleLayout';
 import { ReactElement } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import XDrag from '../../components/Drag';
+import XDrop from '../../components/Drop';
 
 interface Props {
   title: string;
