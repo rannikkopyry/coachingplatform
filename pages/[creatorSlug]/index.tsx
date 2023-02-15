@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import Link from 'next/link';
 import { useState, ReactNode, useEffect } from 'react';
 import { ImageListType } from 'react-images-uploading';
@@ -8,9 +9,12 @@ import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabase-client';
 import SimpleLayout from 'components/SimpleLayout';
 import { ReactElement } from 'react';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { DraggableProvided } from 'react-beautiful-dnd';
+import { IColumn } from '../../static/data';
 import XDrag from '../../components/Drag';
 import XDrop from '../../components/Drop';
+import { initialData } from '../../static/data';
 
 interface Props {
   title: string;
@@ -24,7 +28,12 @@ interface Link {
   url: string;
 }
 
-export default function TreePage() {
+interface IXColumn {
+  column: IColumn;
+  provided?: DraggableProvided;
+}
+
+const TreePage = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [title, setTitle] = useState<string | undefined>();
   const [url, setUrl] = useState<string | undefined>();
@@ -33,6 +42,7 @@ export default function TreePage() {
   const [images, setImages] = useState<ImageListType>([]);
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
   const [username, setUsername] = useState<string | any>();
+  const [data, setData] = useState<any>(initialData);
   const user = useUser();
 
   const onChange = (imageList: ImageListType) => {
@@ -141,127 +151,126 @@ export default function TreePage() {
     }
   };
 
-  const onDragEnd = () => {};
-
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <section className="bg-white mb-32 min-h-screen">
-        <div className="max-w-xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="">
-              {profilePictureUrl && (
-                <Image
-                  src={profilePictureUrl}
-                  alt="Profile picture"
-                  height="100px"
-                  width="100px"
-                  className="rounded-full"
-                />
-              )}
-              {username && <p className="text-black">@ {creatorSlug}</p>}
-              {links?.map((link: Link, index: number) => (
-                <div
-                  className="text-black border-8 text-center shadow-lg p-8 mt-4"
-                  key={index}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href = link.url;
-                  }}
-                >
-                  {link.title}
-                </div>
-              ))}
-              <div className="sm:flex sm:flex-col sm:align-center">
-                {authenticated && (
-                  <div className="mt-10">
-                    <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
-                      Edit your page
-                    </h1>
-                    <input
-                      type="text"
-                      name="title"
-                      id="title"
-                      className="block w-full rounded-md text-black border-2 mt-10 p-2"
-                      placeholder="My awesome link"
-                      onChange={(e) => setTitle(e.target.value)}
-                    />
-                    <input
-                      type="text"
-                      name="url"
-                      id="urls"
-                      className="block w-full rounded-md text-black border-2 mt-10 mb-10 p-2"
-                      placeholder="https://nettiauto.com/audi/801721"
-                      onChange={(e) => setUrl(e.target.value)}
-                    />
-                    <button
-                      onClick={addNewLink}
-                      type="button"
-                      className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
-                    >
-                      Create a link
-                    </button>
-                    <ImageUploading
-                      multiple
-                      value={images}
-                      onChange={onChange}
-                      dataURLKey="data_url"
-                    >
-                      {({
-                        imageList,
-                        onImageUpload,
-                        onImageRemoveAll,
-                        onImageUpdate,
-                        onImageRemove,
-                        isDragging,
-                        dragProps
-                      }) => (
-                        // write your building UI
-                        <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-4 p-4">
-                          <button
-                            style={isDragging ? { color: 'red' } : undefined}
-                            onClick={onImageUpload}
-                            {...dragProps}
-                          >
-                            Click or Drop here
-                          </button>
-                          &nbsp;
-                          <button onClick={onImageRemoveAll}>
-                            Remove all images
-                          </button>
-                          {imageList.map((image, index) => (
-                            <div key={index} className="image-item">
-                              <img src={image['data_url']} alt="" width="100" />
-                              <div className="image-item__btn-wrapper">
-                                <button onClick={() => onImageUpdate(index)}>
-                                  Update
-                                </button>
-                                <button onClick={() => onImageRemove(index)}>
-                                  Remove
-                                </button>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </ImageUploading>
-                    <button
-                      onClick={uploadProfilePicture}
-                      type="button"
-                      className="mt-3 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
-                    >
-                      Upload profile picture
-                    </button>
-                  </div>
-                )}
+    <section className="bg-white mb-32 min-h-screen">
+      <div className="max-w-xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <div className="">
+            {profilePictureUrl && (
+              <Image
+                src={profilePictureUrl}
+                alt="Profile picture"
+                height="100px"
+                width="100px"
+                className="rounded-full"
+              />
+            )}
+            {username && <p className="text-black">@ {creatorSlug}</p>}
+            {links?.map((link: Link, index: number) => (
+              // @ts-ignore
+              <div
+                className="text-black border-8 text-center shadow-lg p-8 mt-4"
+                key={index}
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = link.url;
+                }}
+              >
+                {link.title}
               </div>
+            ))}
+            <div className="sm:flex sm:flex-col sm:align-center">
+              {authenticated && (
+                <div className="mt-10">
+                  <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
+                    Edit your page
+                  </h1>
+                  <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    className="block w-full rounded-md text-black border-2 mt-10 p-2"
+                    placeholder="My awesome link"
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    name="url"
+                    id="urls"
+                    className="block w-full rounded-md text-black border-2 mt-10 mb-10 p-2"
+                    placeholder="https://nettiauto.com/audi/801721"
+                    onChange={(e) => setUrl(e.target.value)}
+                  />
+                  <button
+                    onClick={addNewLink}
+                    type="button"
+                    className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                  >
+                    Create a link
+                  </button>
+                  <ImageUploading
+                    multiple
+                    value={images}
+                    onChange={onChange}
+                    dataURLKey="data_url"
+                  >
+                    {({
+                      imageList,
+                      onImageUpload,
+                      onImageRemoveAll,
+                      onImageUpdate,
+                      onImageRemove,
+                      isDragging,
+                      dragProps
+                    }) => (
+                      // write your building UI
+                      <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-4 p-4">
+                        <button
+                          style={isDragging ? { color: 'red' } : undefined}
+                          onClick={onImageUpload}
+                          {...dragProps}
+                        >
+                          Click or Drop here
+                        </button>
+                        &nbsp;
+                        <button onClick={onImageRemoveAll}>
+                          Remove all images
+                        </button>
+                        {imageList.map((image, index) => (
+                          <div key={index} className="image-item">
+                            <img src={image['data_url']} alt="" width="100" />
+                            <div className="image-item__btn-wrapper">
+                              <button onClick={() => onImageUpdate(index)}>
+                                Update
+                              </button>
+                              <button onClick={() => onImageRemove(index)}>
+                                Remove
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </ImageUploading>
+                  <button
+                    onClick={uploadProfilePicture}
+                    type="button"
+                    className="mt-3 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                  >
+                    Upload profile picture
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
-      </section>
-    </DragDropContext>
+      </div>
+    </section>
   );
-}
+};
 
 TreePage.getLayout = function (page: ReactElement) {
   return <SimpleLayout>{page}</SimpleLayout>;
 };
+
+export default TreePage;
