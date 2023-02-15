@@ -1,10 +1,11 @@
 import Link from 'next/link';
-import { useState, ReactNode } from 'react';
+import { useState, ReactNode, ReactElement } from 'react';
 
 import LoadingDots from 'components/ui/LoadingDots';
 import Button from 'components/ui/Button';
 import { useUser } from 'utils/useUser';
 import { postData } from 'utils/helpers';
+import AlternativeLayout from 'components/AlternativeLayout';
 
 import { User } from '@supabase/supabase-js';
 import { withPageAuth } from '@supabase/auth-helpers-nextjs';
@@ -50,7 +51,6 @@ export default function Account({ user }: { user: User }) {
     setLoading(false);
   };
 
-
   const subscriptionPrice =
     subscription &&
     new Intl.NumberFormat('en-US', {
@@ -60,7 +60,7 @@ export default function Account({ user }: { user: User }) {
     }).format((subscription?.prices?.unit_amount || 0) / 100);
 
   return (
-    <section className="bg-white mb-32">
+    <section className="bg-white pb-32 pt-32">
       <div className="max-w-6xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:flex-col sm:align-center">
           <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
@@ -140,3 +140,7 @@ export default function Account({ user }: { user: User }) {
     </section>
   );
 }
+
+Account.getLayout = function (page: ReactElement) {
+  return <AlternativeLayout>{page}</AlternativeLayout>;
+};

@@ -1,6 +1,5 @@
-
 import Link from 'next/link';
-import s from "./AdminNavbar.module.css"
+import s from './AdminNavbar.module.css';
 
 import { useRouter } from 'next/router';
 import { useUser } from 'utils/useUser';
@@ -13,8 +12,8 @@ import Logo from '@/components/icons/Logo';
 const AdminNavbar = () => {
   const router = useRouter();
   const supabaseClient = useSupabaseClient();
-/*   const { user } = useUser();
- */
+  /*   const { user } = useUser();
+   */
 
   return (
     <nav className={s.root}>
@@ -30,8 +29,8 @@ const AdminNavbar = () => {
               </a>
             </Link>
             <nav className="space-x-2 ml-6 hidden lg:block">
-              <Link href="#pricing">
-                <a className={s.link}>My tree</a>
+              <Link href="/dashboard">
+                <a className={s.link}>Dashboard</a>
               </Link>
               <Link href="/account">
                 <a className={s.link}>Account</a>
@@ -40,8 +39,12 @@ const AdminNavbar = () => {
           </div>
 
           <div className="hidden md:flex flex-1 justify-end space-x-8">
-            <button className='invisible lg:visible md:visible max-h-[50px] mt-6 bg-black text-white text-base font-medium py-3 px-6 rounded-full cursor-pointer'>Upgrade</button>
-            <button className='invisible lg:visible md:visible max-h-[50px] mt-6 bg-black text-white text-base font-medium py-3 px-6 rounded-full cursor-pointer'>Publish</button>
+            <button className="invisible lg:visible md:visible max-h-[50px] mt-6 bg-black text-white text-base font-medium py-3 px-6 rounded-full cursor-pointer">
+              Upgrade
+            </button>
+            <button className="invisible lg:visible md:visible max-h-[50px] mt-6 bg-black text-white text-base font-medium py-3 px-6 rounded-full cursor-pointer">
+              Publish
+            </button>
             {/* {profilePictureUrl && <Image
           src={profilePictureUrl}
           alt="Profile picture"
