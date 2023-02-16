@@ -4,7 +4,7 @@ import { useUser } from 'utils/useUser';
 
 export default function Dashboard() {
   const [userId, setUserId] = useState<string | undefined>();
-  const [trees, setTrees] = useState<string | undefined>();
+  const [trees, setTrees] = useState<string | any>();
   const user = useUser();
 
   useEffect(() => {
