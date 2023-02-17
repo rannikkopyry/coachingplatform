@@ -11,6 +11,24 @@ const SignIn = () => {
   const router = useRouter();
   const user = useUser();
   const supabaseClient = useSupabaseClient();
+  const [email, setEmail] = useState<string | undefined>();
+  const [password, setPassword] = useState<string | undefined>();
+
+  async function signInWithEmail() {
+    try {
+      if (email && password) {
+        const resp = await supabase.auth.signUp({
+          email: email,
+          password: password
+        });
+        if (resp.error) throw resp.error;
+        const userId = resp.data.user?.id;
+        console.log(userId);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     if (user) {
@@ -26,24 +44,34 @@ const SignIn = () => {
             <Logo width="64px" height="64px" />
           </div>
           <div className="flex flex-col space-y-4">
-            <Auth
-              supabaseClient={supabaseClient}
-              providers={['github']}
-              redirectTo={getURL()}
-              magicLink={true}
-              appearance={{
-                theme: ThemeSupa,
-                variables: {
-                  default: {
-                    colors: {
-                      brand: '#404040',
-                      brandAccent: '#52525b'
-                    }
-                  }
-                }
-              }}
-              theme="dark"
+            <label className="text-black" htmlFor="email">
+              Email:
+            </label>
+            <input
+              name="email"
+              type="email"
+              id="email"
+              className="block w-ful rounded-lg border-4 text-black p-3"
+              placeholder="you@exampe.com"
+              onChange={(e) => setEmail(e.target.value)}
             />
+            <label className="text-black" htmlFor="email">
+              Password:
+            </label>
+            <input
+              name="password"
+              type="password"
+              id="password"
+              className="block w-full rounded-lg border-4 text-black p-3"
+              placeholder="ExamplePassword"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button
+              className="text-black border-4 p-3"
+              onClick={signInWithEmail}
+            >
+              Sign up
+            </button>
           </div>
         </div>
       </div>
