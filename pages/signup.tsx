@@ -102,6 +102,12 @@ const SignUp = () => {
             >
               Sign up
             </button>
+            <div className="text-black">
+              <a href="/signin">
+                Already have an account?{' '}
+                <span className="underline">Sign in</span>
+              </a>
+            </div>
           </div>
           {ready === true && (
             <>

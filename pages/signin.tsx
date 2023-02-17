@@ -22,8 +22,6 @@ const SignIn = () => {
           password: password
         });
         if (resp.error) throw resp.error;
-        const userId = resp.data.user?.id;
-        console.log(userId);
       }
     } catch (error) {
       console.log(error);
@@ -70,8 +68,14 @@ const SignIn = () => {
               className="text-black border-4 p-3"
               onClick={signInWithEmail}
             >
-              Sign up
+              Sign in
             </button>
+            <div className="text-black">
+              <a href="/signin">
+                Dont have an account yet?{' '}
+                <span className="underline">Sign up</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
