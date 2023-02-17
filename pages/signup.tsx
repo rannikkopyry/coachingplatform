@@ -96,6 +96,13 @@ const SignUp = () => {
               placeholder="ExamplePassword"
               onChange={(e) => setPassword(e.target.value)}
             />
+            {ready === true && (
+              <>
+                <div className="text-black mt-5">
+                  Check your email to verify your account.
+                </div>
+              </>
+            )}
             <button
               className="text-black border-4 p-3"
               onClick={signUpWithEmail}
@@ -109,13 +116,6 @@ const SignUp = () => {
               </a>
             </div>
           </div>
-          {ready === true && (
-            <>
-              <div className="text-black mt-5">
-                Check your email to verify your account.
-              </div>
-            </>
-          )}
         </div>
       </div>
     );

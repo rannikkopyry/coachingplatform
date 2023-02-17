@@ -13,15 +13,20 @@ const SignIn = () => {
   const supabaseClient = useSupabaseClient();
   const [email, setEmail] = useState<string | undefined>();
   const [password, setPassword] = useState<string | undefined>();
+  const [ready, setReady] = useState<boolean | undefined>(false);
 
   async function signInWithEmail() {
     try {
       if (email && password) {
-        const resp = await supabase.auth.signUp({
+        const resp = await supabase.auth.signInWithPassword({
           email: email,
           password: password
         });
         if (resp.error) throw resp.error;
+        const userId = resp.data.user?.id;
+        console.log(userId);
+        setReady(true);
+        router.push('/dashboard');
       }
     } catch (error) {
       console.log(error);
@@ -71,7 +76,7 @@ const SignIn = () => {
               Sign in
             </button>
             <div className="text-black">
-              <a href="/signin">
+              <a href="/signup">
                 Dont have an account yet?{' '}
                 <span className="underline">Sign up</span>
               </a>
