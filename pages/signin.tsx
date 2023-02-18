@@ -42,9 +42,12 @@ const SignIn = () => {
   if (!user)
     return (
       <div className="flex justify-center height-screen-helper">
-        <div className="flex flex-col justify-between max-w-lg p-3 m-auto w-80 ">
-          <div className="flex justify-center pb-12 ">
+        <div className="flex flex-col justify-between max-w-lg p-8 m-auto w-80 border-2 border-black rounded-xl shadow-xl">
+          <div className="flex justify-center pb-4">
             <Logo width="64px" height="64px" />
+          </div>
+          <div className="flex justify-center">
+            <h2 className="text-black text-3xl font-extrabold p-4">Sign in</h2>
           </div>
           <div className="flex flex-col space-y-4">
             <label className="text-black" htmlFor="email">
