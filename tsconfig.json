@@ -29,7 +29,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "utils/gtag.js"  ],
+, "utils/gtag.js", "components/PrivacyPolicy.js"  ],
   "exclude": [
     "node_modules"
   ]

@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabase-client';
 import SimpleLayout from 'components/SimpleLayout';
 import { ReactElement } from 'react';
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult, Id } from 'react-beautiful-dnd';
 import { DraggableProvided } from 'react-beautiful-dnd';
 import { IColumn } from '../../static/data';
 import XDrag from '../../components/Drag';
@@ -26,6 +26,7 @@ interface Props {
 interface Link {
   title: String;
   url: string;
+  id: string;
 }
 
 interface IXColumn {
@@ -42,7 +43,6 @@ const TreePage = () => {
   const [images, setImages] = useState<ImageListType>([]);
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
   const [username, setUsername] = useState<string | any>();
-  const [data, setData] = useState<any>(initialData);
   const user = useUser();
 
   const onChange = (imageList: ImageListType) => {
@@ -63,7 +63,7 @@ const TreePage = () => {
       try {
         const { data, error } = await supabase
           .from('links')
-          .select('title, url')
+          .select('title, url, id')
           .eq('user_id', userId);
         if (error) throw error;
         if (data) {
@@ -124,6 +124,18 @@ const TreePage = () => {
       console.log('error', error);
     }
   };
+  console.log(links);
+
+  // Delete one link
+  const deleteLink = async () => {
+    try {
+      const { error } = await supabase.from('links').delete().eq('id', link.id);
+      if (error) throw error;
+      setLinks;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const uploadProfilePicture = async () => {
     try {
@@ -177,6 +189,12 @@ const TreePage = () => {
                 }}
               >
                 {link.title}
+                <button
+                  className="flex underline"
+                  onClick={() => deleteLink(console.log(link.id))}
+                >
+                  Delete
+                </button>
               </div>
             ))}
             <div className="sm:flex sm:flex-col sm:align-center">

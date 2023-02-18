@@ -8,8 +8,8 @@ export default function Dashboard() {
   const user = useUser();
 
   useEffect(() => {
-    setUserId(user!.user!.id);
-  }, [userId]);
+    setUserId(user?.user?.id);
+  }, [user]);
 
   useEffect(() => {
     const getTrees = async () => {
