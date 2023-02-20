@@ -11,6 +11,7 @@ import { withPageAuth } from '@supabase/auth-helpers-nextjs';
 import Image from 'next/image';
 import { ImageListType } from 'react-images-uploading';
 import ImageUploading from 'react-images-uploading';
+import { profile } from 'console';
 
 interface Props {
   title: string;
@@ -90,7 +91,7 @@ export default function Account({ user }: { user: User }) {
     if (user) {
       getUser();
     }
-  }, []);
+  }, [profilePictureUrl]);
 
   // Upload profile picture
   const uploadProfilePicture = async () => {
