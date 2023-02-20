@@ -9,6 +9,8 @@ import { supabase } from '@/utils/supabase-client';
 import { User } from '@supabase/supabase-js';
 import { withPageAuth } from '@supabase/auth-helpers-nextjs';
 import Image from 'next/image';
+import { ImageListType } from 'react-images-uploading';
+import ImageUploading from 'react-images-uploading';
 
 interface Props {
   title: string;
@@ -40,6 +42,11 @@ export default function Account({ user }: { user: User }) {
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
   const [loading, setLoading] = useState(false);
   const { isLoading, subscription, userDetails } = useUser();
+  const [images, setImages] = useState<ImageListType>([]);
+
+  const onChange = (imageList: ImageListType) => {
+    setImages(imageList);
+  };
 
   const redirectToCustomerPortal = async () => {
     setLoading(true);
@@ -84,6 +91,33 @@ export default function Account({ user }: { user: User }) {
       getUser();
     }
   }, []);
+
+  // Upload profile picture
+  const uploadProfilePicture = async () => {
+    try {
+      if (images.length > 0) {
+        const image = images[0];
+        if (image.file && userId) {
+          const { data, error } = await supabase.storage
+            .from('public')
+            .upload(`${userId}/${image.file.name}`, image.file, {
+              upsert: true
+            });
+          if (error) throw error;
+          const resp = supabase.storage.from('public').getPublicUrl(data!.path);
+          const publicUrl = resp.data.publicUrl;
+          const updateUserResponse = await supabase
+            .from('users')
+            // @ts-ignore
+            .update({ profile_picture_url: publicUrl })
+            .eq('id', userId);
+          if (updateUserResponse.error) throw error;
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <section className="bg-white pb-32 pt-32">
@@ -161,6 +195,55 @@ export default function Account({ user }: { user: User }) {
                 className="rounded-full"
               />
             )}
+            <ImageUploading
+              multiple
+              value={images}
+              onChange={onChange}
+              dataURLKey="data_url"
+            >
+              {({
+                imageList,
+                onImageUpload,
+                onImageRemoveAll,
+                onImageUpdate,
+                onImageRemove,
+                isDragging,
+                dragProps
+              }) => (
+                // write your building UI
+                <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-4 p-4">
+                  <button
+                    style={isDragging ? { color: 'red' } : undefined}
+                    onClick={onImageUpload}
+                    {...dragProps}
+                  >
+                    Click or Drop here
+                  </button>
+                  &nbsp;
+                  <button onClick={onImageRemoveAll}>Remove all images</button>
+                  {imageList.map((image, index) => (
+                    <div key={index} className="image-item">
+                      <img src={image['data_url']} alt="" width="100" />
+                      <div className="image-item__btn-wrapper">
+                        <button onClick={() => onImageUpdate(index)}>
+                          Update
+                        </button>
+                        <button onClick={() => onImageRemove(index)}>
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </ImageUploading>
+            <button
+              onClick={uploadProfilePicture}
+              type="button"
+              className="mt-3 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+            >
+              Upload profile picture
+            </button>
           </div>
         </Card>
         <Card
