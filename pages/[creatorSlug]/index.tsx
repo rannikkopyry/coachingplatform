@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState, ReactNode, useEffect } from 'react';
+import { useState, ReactNode, useEffect, ReactElement } from 'react';
 import { ImageListType } from 'react-images-uploading';
 import ImageUploading from 'react-images-uploading';
 import Image from 'next/image';
@@ -7,13 +7,14 @@ import { useUser } from 'utils/useUser';
 import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabase-client';
 import SimpleLayout from 'components/SimpleLayout';
-import { ReactElement } from 'react';
 
 interface Link {
   title: String;
   url: string;
   id: string;
   thumbnail_url: string;
+  tagline: string;
+  tags: any;
 }
 
 const TreePage = () => {
@@ -25,9 +26,19 @@ const TreePage = () => {
   const [links, setLinks] = useState<Link[]>();
   const [images, setImages] = useState<ImageListType>([]);
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
+  const [tagline, setTagline] = useState<string | any>();
+  const [tags, setTags] = useState<string | any>([]);
   const [carUrl, setCarUrl] = useState<string | any>();
   const [username, setUsername] = useState<string | any>();
+  const [open, setOpen] = useState<number | null>(1);
+  const [city, setCity] = useState<string | any>();
+  const [country, setCountry] = useState<string | any>();
+  const [bio, setBio] = useState<string | any>();
   const user = useUser();
+
+  const handleOpen = (value: any) => {
+    setOpen(open === value ? 0 : value);
+  };
 
   const onChange = (imageList: ImageListType) => {
     setImages(imageList);
@@ -47,7 +58,7 @@ const TreePage = () => {
       try {
         const { data, error } = await supabase
           .from('links')
-          .select('title, url, id, thumbnail_url')
+          .select('title, url, id, thumbnail_url, tagline, tags')
           .eq('user_id', userId);
         if (error) throw error;
         if (data) {
@@ -69,12 +80,20 @@ const TreePage = () => {
       try {
         const { data, error } = await supabase
           .from('users')
-          .select('id, profile_picture_url, username')
+          .select('id, profile_picture_url, username, bio, country, city')
           .eq('username', creatorSlug);
         if (error) throw error;
         const profilePictureUrl = data![0]['profile_picture_url'];
         const userId = data![0]['id'];
         const userName = data![0]['username'];
+        const bio = data![0]['bio'];
+        const country = data![0]['country'];
+        const city = data![0]['city'];
+        setProfilePictureUrl(profilePictureUrl);
+        setUserId(userId);
+        setBio(bio);
+        setCity(city);
+        setCountry(country);
         setProfilePictureUrl(profilePictureUrl);
         setUserId(userId);
         setUsername(userName);
@@ -98,7 +117,8 @@ const TreePage = () => {
             title: title,
             url: url,
             user_id: userId,
-            link_id: linkId
+            tagline: tagline,
+            tags: tags
           })
           .select();
         if (error) throw error;
@@ -124,32 +144,6 @@ const TreePage = () => {
     }
   };
 
-  const uploadProfilePicture = async () => {
-    try {
-      if (images.length > 0) {
-        const image = images[0];
-        if (image.file && userId) {
-          const { data, error } = await supabase.storage
-            .from('public')
-            .upload(`${userId}/${image.file.name}`, image.file, {
-              upsert: true
-            });
-          if (error) throw error;
-          const resp = supabase.storage.from('public').getPublicUrl(data!.path);
-          const publicUrl = resp.data.publicUrl;
-          const updateUserResponse = await supabase
-            .from('users')
-            // @ts-ignore
-            .update({ profile_picture_url: publicUrl })
-            .eq('id', userId);
-          if (updateUserResponse.error) throw error;
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const uploadCarPicture = async () => {
     try {
       if (images.length > 0) {
@@ -167,8 +161,7 @@ const TreePage = () => {
             .from('links')
             // @ts-ignore
             .update({ thumbnail_url: publicUrl })
-            .eq('user', userId)
-            .eq('id', linkId);
+            .eq('user', userId);
           if (updateUserResponse.error) throw error;
         }
       }
@@ -177,21 +170,40 @@ const TreePage = () => {
     }
   };
 
+  console.log(links);
+
   return (
     <section className="bg-white mb-32 min-h-screen">
       <div className="max-w-xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <div className="">
+          <div className="text-center">
             {profilePictureUrl && (
               <Image
                 src={profilePictureUrl}
                 alt="Profile picture"
                 height="100px"
                 width="100px"
-                className="rounded-full"
+                className="rounded-full justify-center"
               />
             )}
-            {username && <p className="text-black">@ {creatorSlug}</p>}
+            {username && (
+              <p className="text-black font-extrabold text-lg">
+                motorlinks.io/{creatorSlug}
+              </p>
+            )}
+
+            {username && (
+              <div className="flex items-center">
+                <img className="h-5 text-center" src="/location.svg" alt="" />
+                <p className="text-black align-middle">
+                  {city}, {country}
+                </p>
+              </div>
+            )}
+            {username && <p className="text-black">{bio}</p>}
+            <h2 className="mt-4 text-2xl text-black font-bold">
+              Recent listing:
+            </h2>
             {links?.map((link: Link, index: number) => (
               <>
                 // @ts-ignore
@@ -203,8 +215,8 @@ const TreePage = () => {
                     window.location.href = link.url;
                   }}
                 >
-                  <div className="h-[150px] overflow-hidden rounded-t-md relative">
-                    <img src={link.thumbnail_url} alt="" />
+                  <div className="h-[200px] overflow-hidden rounded-t-md relative justify-center">
+                    <img src={link.thumbnail_url} alt="" className="" />
                     <span className="absolute py-1 px-2 top-2 left-2 rounded-full bg-stone-800 text-white text-xs z-10">
                       58 725€
                     </span>
@@ -214,19 +226,27 @@ const TreePage = () => {
                       {link.title}
                     </p>
                     <p className="text-xs text-stone-400 mt-1">
-                      T8 AWD Long Range High Performance Plus Bright Edition aut
+                      {link.tagline}
                     </p>
-                    <p className="jsx-902cb4503c8a7a8 text-[10px] text-stone-500 mt-2 flex gap-2">
+                    <p
+                      className="jsx-902cb4503c8a7a8 text-[10px] text-stone-500 mt-2 flex gap-2"
+                      key={index}
+                    >
                       <span className="jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center">
-                        Hybrid
-                      </span>
-                      <span className="jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center">
-                        Family
-                      </span>
-                      <span className="jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center">
-                        4WD
+                        4Wd
                       </span>
                     </p>
+                    ;
+                    {links.tags?.map((tag, index) => {
+                      <p
+                        className="jsx-902cb4503c8a7a8 text-[10px] text-stone-500 mt-2 flex gap-2"
+                        key={index}
+                      >
+                        <span className="jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center">
+                          {tag[0]}
+                        </span>
+                      </p>;
+                    })}
                   </div>
                 </div>
               </>
@@ -245,7 +265,7 @@ const TreePage = () => {
                       type="text"
                       name="title"
                       id="title"
-                      className="block w-full rounded-md text-black border-2 mt-10 p-2"
+                      className="block w-full rounded-md text-black border-2 mt-5 p-2"
                       placeholder="My awesome link"
                       onChange={(e) => setTitle(e.target.value)}
                     />
@@ -256,9 +276,33 @@ const TreePage = () => {
                       type="text"
                       name="url"
                       id="urls"
-                      className="block w-full rounded-md text-black border-2 mt-10 mb-10 p-2"
+                      className="block w-full rounded-md text-black border-2 mt-5 mb-10 p-2"
                       placeholder="https://nettiauto.com/audi/801721"
                       onChange={(e) => setUrl(e.target.value)}
+                    />
+                    <label className="text-black" htmlFor="title">
+                      Tagline
+                    </label>
+                    <input
+                      type="text"
+                      name="title"
+                      id="title"
+                      className="block w-full rounded-md text-black border-2 mt-5 p-2"
+                      placeholder="My awesome link"
+                      onChange={(e) => setTagline(e.target.value)}
+                    />
+                    <label className="text-black" htmlFor="title">
+                      Tags
+                    </label>
+                    <input
+                      type="text"
+                      name="tags"
+                      id="title"
+                      className="block w-full rounded-md text-black border-2 mt-5 p-2"
+                      placeholder="My awesome link"
+                      onChange={(e) =>
+                        setTags((current: any) => [...current, e.target.value])
+                      }
                     />
                   </div>
                   <h3 className="text-black">Upload thumbnail for the car</h3>
@@ -309,70 +353,19 @@ const TreePage = () => {
                   <button
                     onClick={uploadCarPicture}
                     type="button"
-                    className="mt-3 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                    className="mt-3 mb-5 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
                   >
                     Upload car picture
                   </button>
-                  <button
-                    onClick={addNewLink}
-                    type="button"
-                    className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
-                  >
-                    Create a link
-                  </button>
-                  <ImageUploading
-                    multiple
-                    value={images}
-                    onChange={onChange}
-                    dataURLKey="data_url"
-                  >
-                    {({
-                      imageList,
-                      onImageUpload,
-                      onImageRemoveAll,
-                      onImageUpdate,
-                      onImageRemove,
-                      isDragging,
-                      dragProps
-                    }) => (
-                      // write your building UI
-                      <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-4 p-4">
-                        <button
-                          style={isDragging ? { color: 'red' } : undefined}
-                          onClick={onImageUpload}
-                          {...dragProps}
-                        >
-                          Click or Drop here
-                        </button>
-                        &nbsp;
-                        <button onClick={onImageRemoveAll}>
-                          Remove all images
-                        </button>
-                        {imageList.map((image, index) => (
-                          <div key={index} className="image-item">
-                            <img src={image['data_url']} alt="" width="100" />
-                            <div className="image-item__btn-wrapper">
-                              <button onClick={() => onImageUpdate(index)}>
-                                Update
-                              </button>
-                              <button onClick={() => onImageRemove(index)}>
-                                Remove
-                              </button>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </ImageUploading>
-                  <button
-                    onClick={uploadProfilePicture}
-                    type="button"
-                    className="mt-3 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
-                  >
-                    Upload profile picture
-                  </button>
                 </div>
               )}
+              <button
+                onClick={addNewLink}
+                type="button"
+                className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+              >
+                Create a link
+              </button>
             </div>
           </div>
         </div>
