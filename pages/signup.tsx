@@ -24,6 +24,26 @@ const SignUp = () => {
     }
   }, [user]);
 
+  async function signUpWithGoogle() {
+    try {
+      if (email && password) {
+        const resp = await supabase.auth.signUp({
+          email: email,
+          password: password
+        });
+        if (resp.error) throw resp.error;
+        const userId = resp.data.user?.id;
+        if (userId) {
+          await createUser(userId);
+        }
+        setReady(true);
+        console.log(userId);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function signUpWithEmail() {
     try {
       if (email && password) {
@@ -57,8 +77,8 @@ const SignUp = () => {
 
   if (!user)
     return (
-      <div className="flex justify-center height-screen sm: mb-20">
-        <div className="flex flex-col justify-between max-w-lg p-8 m-auto w-80 border-2 border-black rounded-xl shadow-xl">
+      <div className="flex justify-center height-screen mb-20 mt-20">
+        <div className="flex flex-col justify-between max-w-lg p-8 m-auto w-120 sm: max-w-80 border-2 border-black rounded-xl shadow-xl">
           <div className="flex justify-center pb-2">
             <Logo width="64px" height="64px" />
           </div>
@@ -118,6 +138,13 @@ const SignUp = () => {
                 <span className="underline">Sign in</span>
               </a>
             </div>
+            <button
+              className="text-black border-4 p-3 flex align-middle text-center"
+              onClick={signUpWithGoogle}
+            >
+              <img className="h-7 align-middle" src="/google.png" alt="" />
+              Sign up using Google
+            </button>
           </div>
         </div>
       </div>

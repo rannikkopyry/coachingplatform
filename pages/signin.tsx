@@ -41,7 +41,7 @@ const SignIn = () => {
 
   if (!user)
     return (
-      <div className="flex justify-center height-screen">
+      <div className="flex justify-center min-height-screen mb-20 mt-20 ">
         <div className="flex flex-col justify-between max-w-lg p-8 m-auto w-80 border-2 border-black rounded-xl shadow-xl">
           <div className="flex justify-center pb-4">
             <Logo width="64px" height="64px" />
