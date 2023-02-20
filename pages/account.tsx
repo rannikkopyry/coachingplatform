@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { ImageListType } from 'react-images-uploading';
 import ImageUploading from 'react-images-uploading';
 import { profile } from 'console';
+import { CLIENT_STATIC_FILES_RUNTIME_POLYFILLS_SYMBOL } from 'next/dist/shared/lib/constants';
 
 interface Props {
   title: string;
@@ -41,6 +42,9 @@ export default function Account({ user }: { user: User }) {
   const [userId, setUserId] = useState<string | undefined>();
   const [userName, setUserName] = useState<string | any>();
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
+  const [city, setCity] = useState<string | any>();
+  const [country, setCountry] = useState<string | any>();
+  const [bio, setBio] = useState<string | any>();
   const [loading, setLoading] = useState(false);
   const { isLoading, subscription, userDetails } = useUser();
   const [images, setImages] = useState<ImageListType>([]);
@@ -75,15 +79,21 @@ export default function Account({ user }: { user: User }) {
       try {
         const { data, error } = await supabase
           .from('users')
-          .select('id, profile_picture_url, username')
+          .select('id, profile_picture_url, username, bio, country, city')
           .eq('id', user.id);
         if (error) throw error;
         const profilePictureUrl = data![0]['profile_picture_url'];
         const userId = data![0]['id'];
         const userName = data![0]['username'];
+        const bio = data![0]['bio'];
+        const country = data![0]['country'];
+        const city = data![0]['city'];
         setProfilePictureUrl(profilePictureUrl);
         setUserId(userId);
         setUserName(userName);
+        setBio(bio);
+        setCity(city);
+        setCountry(country);
       } catch (error) {
         console.log(error);
       }
@@ -246,6 +256,15 @@ export default function Account({ user }: { user: User }) {
               Upload profile picture
             </button>
           </div>
+        </Card>
+        <Card
+          title="Your location and biography"
+          description="Enter your location and biography text. These are shown in you are public profile."
+          footer={<p>We will email you to verify the change.</p>}
+        >
+          <p className="text-xl mt-8 mb-4 font-semibold">City: {city}</p>
+          <p className="text-xl mt-8 mb-4 font-semibold">Country: {country}</p>
+          <p className="text-xl mt-8 mb-4 font-semibold">Bio text: {bio}</p>
         </Card>
         <Card
           title="Your Email"

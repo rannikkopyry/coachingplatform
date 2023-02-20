@@ -32,6 +32,9 @@ const TreePage = () => {
   const [carUrl, setCarUrl] = useState<string | any>();
   const [username, setUsername] = useState<string | any>();
   const [open, setOpen] = useState<number | null>(1);
+  const [city, setCity] = useState<string | any>();
+  const [country, setCountry] = useState<string | any>();
+  const [bio, setBio] = useState<string | any>();
   const user = useUser();
 
   const handleOpen = (value: any) => {
@@ -78,12 +81,20 @@ const TreePage = () => {
       try {
         const { data, error } = await supabase
           .from('users')
-          .select('id, profile_picture_url, username')
+          .select('id, profile_picture_url, username, bio, country, city')
           .eq('username', creatorSlug);
         if (error) throw error;
         const profilePictureUrl = data![0]['profile_picture_url'];
         const userId = data![0]['id'];
         const userName = data![0]['username'];
+        const bio = data![0]['bio'];
+        const country = data![0]['country'];
+        const city = data![0]['city'];
+        setProfilePictureUrl(profilePictureUrl);
+        setUserId(userId);
+        setBio(bio);
+        setCity(city);
+        setCountry(country);
         setProfilePictureUrl(profilePictureUrl);
         setUserId(userId);
         setUsername(userName);
@@ -178,6 +189,10 @@ const TreePage = () => {
               />
             )}
             {username && <p className="text-black">@ {creatorSlug}</p>}
+            {username && <p className="text-black">@ {city}</p>}
+            {username && <p className="text-black">@ {country}</p>}
+            {username && <p className="text-black">@ {bio}</p>}
+
             {links?.map((link: Link, index: number) => (
               <>
                 // @ts-ignore
@@ -202,17 +217,16 @@ const TreePage = () => {
                     <p className="text-xs text-stone-400 mt-1">
                       {link.tagline}
                     </p>
-                    <p className="jsx-902cb4503c8a7a8 text-[10px] text-stone-500 mt-2 flex gap-2">
-                      <span className="jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center">
-                        Hybrid
-                      </span>
-                      <span className="jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center">
-                        Family
-                      </span>
-                      <span className="jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center">
-                        4WD
-                      </span>
-                    </p>
+                    {links.tags?.map((tag, index) => {
+                      <p
+                        className="jsx-902cb4503c8a7a8 text-[10px] text-stone-500 mt-2 flex gap-2"
+                        key={index}
+                      >
+                        <span className="jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center">
+                          {tag[0]}
+                        </span>
+                      </p>;
+                    })}
                   </div>
                 </div>
               </>
