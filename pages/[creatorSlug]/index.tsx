@@ -9,19 +9,6 @@ import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabase-client';
 import SimpleLayout from 'components/SimpleLayout';
 import { ReactElement } from 'react';
-import { DragDropContext, DropResult, Id } from 'react-beautiful-dnd';
-import { DraggableProvided } from 'react-beautiful-dnd';
-import { IColumn } from '../../static/data';
-import XDrag from '../../components/Drag';
-import XDrop from '../../components/Drop';
-import { initialData } from '../../static/data';
-
-interface Props {
-  title: string;
-  description?: string;
-  footer?: ReactNode;
-  children: ReactNode;
-}
 
 interface Link {
   title: String;
@@ -30,16 +17,12 @@ interface Link {
   thumbnail_url: string;
 }
 
-interface IXColumn {
-  column: IColumn;
-  provided?: DraggableProvided;
-}
-
 const TreePage = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [title, setTitle] = useState<string | undefined>();
   const [url, setUrl] = useState<string | undefined>();
   const [userId, setUserId] = useState<string | undefined>();
+  const [linkId, setLinkId] = useState<string | undefined>();
   const [links, setLinks] = useState<Link[]>();
   const [images, setImages] = useState<ImageListType>([]);
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
@@ -79,6 +62,10 @@ const TreePage = () => {
       getLinks();
     }
   }, [userId]);
+
+  useEffect(() => {
+    setLinkId(links?.id);
+  });
 
   useEffect(() => {
     const getUser = async () => {
@@ -131,7 +118,7 @@ const TreePage = () => {
   // Delete one link
   const deleteLink = async () => {
     try {
-      const { error } = await supabase.from('links').delete().eq('id', link.id);
+      const { error } = await supabase.from('links').delete().eq('id', linkId);
       if (error) throw error;
       setLinks;
     } catch (error) {
@@ -182,7 +169,8 @@ const TreePage = () => {
             .from('links')
             // @ts-ignore
             .update({ thumbnail_url: publicUrl })
-            .eq('user_id', userId);
+            .eq('user', userId)
+            .eq('id', linkId);
           if (updateUserResponse.error) throw error;
         }
       }
