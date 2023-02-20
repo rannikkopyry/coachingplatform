@@ -1,16 +1,14 @@
 import Link from 'next/link';
 import { useState, ReactNode, ReactElement, useEffect } from 'react';
-
 import LoadingDots from 'components/ui/LoadingDots';
 import Button from 'components/ui/Button';
 import { useUser } from 'utils/useUser';
 import { postData } from 'utils/helpers';
 import AlternativeLayout from 'components/AlternativeLayout';
-
 import { supabase } from '@/utils/supabase-client';
-
 import { User } from '@supabase/supabase-js';
 import { withPageAuth } from '@supabase/auth-helpers-nextjs';
+import Image from 'next/image';
 
 interface Props {
   title: string;
@@ -27,7 +25,7 @@ function Card({ title, description, footer, children }: Props) {
         <p className="text-zinc-300">{description}</p>
         {children}
       </div>
-      <div className="border-t border-zinc-700 bg-white p-4 text-zinc-500 rounded-b-md">
+      <div className="border-t border-zinc-700 bg-white p-4 rounded-b-md">
         {footer}
       </div>
     </div>
@@ -38,7 +36,7 @@ export const getServerSideProps = withPageAuth({ redirectTo: '/signin' });
 
 export default function Account({ user }: { user: User }) {
   const [userId, setUserId] = useState<string | undefined>();
-  const [username, setUsername] = useState<string | any>();
+  const [userName, setUserName] = useState<string | any>();
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
   const [loading, setLoading] = useState(false);
   const { isLoading, subscription, userDetails } = useUser();
@@ -56,7 +54,6 @@ export default function Account({ user }: { user: User }) {
     setLoading(false);
   };
 
-  console.log(user);
   const subscriptionPrice =
     subscription &&
     new Intl.NumberFormat('en-US', {
@@ -78,11 +75,14 @@ export default function Account({ user }: { user: User }) {
         const userName = data![0]['username'];
         setProfilePictureUrl(profilePictureUrl);
         setUserId(userId);
-        setUsername(userName);
+        setUserName(userName);
       } catch (error) {
         console.log(error);
       }
     };
+    if (user) {
+      getUser();
+    }
   }, []);
 
   return (
@@ -136,20 +136,30 @@ export default function Account({ user }: { user: User }) {
           </div>
         </Card>
         <Card
-          title="Your Name"
-          description="Please enter your full name, or a display name you are comfortable with."
+          title="Your username"
+          description="Your unique username"
           footer={<p>Please use 64 characters at maximum.</p>}
         >
-          <div className="text-xl mt-8 mb-4 font-semibold">
-            {userDetails ? (
-              `${
-                userDetails.full_name ??
-                `${userDetails.first_name} ${userDetails.last_name}`
-              }`
-            ) : (
-              <div className="h-8 mb-6">
-                <LoadingDots />
-              </div>
+          <div className="text-xl mt-8 mb-4 font-semibold text-black">
+            <span className="text-grey-500">motorlinks.io/</span>
+
+            {userName}
+          </div>
+        </Card>
+        <Card
+          title="Your profile pciture"
+          description="This picture will be shown at the top of your public page"
+          footer={<p>Please use 64 characters at maximum.</p>}
+        >
+          <div className="text-xl mt-8 mb-4 font-semibold text-black">
+            {profilePictureUrl && (
+              <Image
+                src={profilePictureUrl}
+                alt="Profile picture"
+                height="100px"
+                width="100px"
+                className="rounded-full"
+              />
             )}
           </div>
         </Card>
