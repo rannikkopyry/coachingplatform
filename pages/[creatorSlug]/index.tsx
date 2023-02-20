@@ -178,7 +178,7 @@ const TreePage = () => {
     <section className="bg-white mb-32 min-h-screen">
       <div className="max-w-xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <div className="">
+          <div className="text-center">
             {profilePictureUrl && (
               <Image
                 src={profilePictureUrl}
@@ -188,10 +188,18 @@ const TreePage = () => {
                 className="rounded-full"
               />
             )}
-            {username && <p className="text-black">@ {creatorSlug}</p>}
-            {username && <p className="text-black">@ {city}</p>}
-            {username && <p className="text-black">@ {country}</p>}
-            {username && <p className="text-black">@ {bio}</p>}
+            {username && (
+              <p className="text-black font-extrabold text-lg">
+                motorlinks.io/{creatorSlug}
+              </p>
+            )}
+            {username && (
+              <p className="text-black flex align-middle">
+                <img className="h-5" src="/location.svg" alt="" />
+                {city}, {country}
+              </p>
+            )}
+            {username && <p className="text-black">{bio}</p>}
 
             {links?.map((link: Link, index: number) => (
               <>
