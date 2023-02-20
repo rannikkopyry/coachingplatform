@@ -7,7 +7,6 @@ import { useUser } from 'utils/useUser';
 import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabase-client';
 import SimpleLayout from 'components/SimpleLayout';
-import { triggerAsyncId } from 'async_hooks';
 
 interface Link {
   title: String;
@@ -162,8 +161,7 @@ const TreePage = () => {
             .from('links')
             // @ts-ignore
             .update({ thumbnail_url: publicUrl })
-            .eq('user', userId)
-            .eq('id', linkId);
+            .eq('user', userId);
           if (updateUserResponse.error) throw error;
         }
       }
@@ -185,7 +183,7 @@ const TreePage = () => {
                 alt="Profile picture"
                 height="100px"
                 width="100px"
-                className="rounded-full"
+                className="rounded-full justify-center"
               />
             )}
             {username && (
@@ -193,14 +191,19 @@ const TreePage = () => {
                 motorlinks.io/{creatorSlug}
               </p>
             )}
+
             {username && (
-              <p className="text-black flex align-middle">
-                <img className="h-5" src="/location.svg" alt="" />
-                {city}, {country}
-              </p>
+              <div className="flex items-center">
+                <img className="h-5 text-center" src="/location.svg" alt="" />
+                <p className="text-black align-middle">
+                  {city}, {country}
+                </p>
+              </div>
             )}
             {username && <p className="text-black">{bio}</p>}
-
+            <h2 className="mt-4 text-2xl text-black font-bold">
+              Recent listing:
+            </h2>
             {links?.map((link: Link, index: number) => (
               <>
                 // @ts-ignore
@@ -212,8 +215,8 @@ const TreePage = () => {
                     window.location.href = link.url;
                   }}
                 >
-                  <div className="h-[150px] overflow-hidden rounded-t-md relative">
-                    <img src={link.thumbnail_url} alt="" />
+                  <div className="h-[200px] overflow-hidden rounded-t-md relative justify-center">
+                    <img src={link.thumbnail_url} alt="" className="" />
                     <span className="absolute py-1 px-2 top-2 left-2 rounded-full bg-stone-800 text-white text-xs z-10">
                       58 725€
                     </span>
@@ -225,6 +228,15 @@ const TreePage = () => {
                     <p className="text-xs text-stone-400 mt-1">
                       {link.tagline}
                     </p>
+                    <p
+                      className="jsx-902cb4503c8a7a8 text-[10px] text-stone-500 mt-2 flex gap-2"
+                      key={index}
+                    >
+                      <span className="jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center">
+                        4Wd
+                      </span>
+                    </p>
+                    ;
                     {links.tags?.map((tag, index) => {
                       <p
                         className="jsx-902cb4503c8a7a8 text-[10px] text-stone-500 mt-2 flex gap-2"
