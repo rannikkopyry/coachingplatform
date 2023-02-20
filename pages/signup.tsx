@@ -26,19 +26,14 @@ const SignUp = () => {
 
   async function signUpWithGoogle() {
     try {
-      if (email && password) {
-        const resp = await supabase.auth.signUp({
-          email: email,
-          password: password
-        });
-        if (resp.error) throw resp.error;
-        const userId = resp.data.user?.id;
-        if (userId) {
-          await createUser(userId);
-        }
-        setReady(true);
-        console.log(userId);
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google'
+      });
+      if (userId) {
+        await createUser(userId);
       }
+      setReady(true);
+      console.log(userId);
     } catch (error) {
       console.log(error);
     }
