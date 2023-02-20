@@ -7,17 +7,15 @@ import { useUser } from 'utils/useUser';
 import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabase-client';
 import SimpleLayout from 'components/SimpleLayout';
-import {
-  Accordion,
-  AccordionHeader,
-  AccordionBody
-} from '@material-tailwind/react';
+import { triggerAsyncId } from 'async_hooks';
 
 interface Link {
   title: String;
   url: string;
   id: string;
   thumbnail_url: string;
+  tagline: string;
+  tags: any;
 }
 
 const TreePage = () => {
@@ -29,6 +27,8 @@ const TreePage = () => {
   const [links, setLinks] = useState<Link[]>();
   const [images, setImages] = useState<ImageListType>([]);
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
+  const [tagline, setTagline] = useState<string | any>();
+  const [tags, setTags] = useState<string | any>([]);
   const [carUrl, setCarUrl] = useState<string | any>();
   const [username, setUsername] = useState<string | any>();
   const [open, setOpen] = useState<number | null>(1);
@@ -56,7 +56,7 @@ const TreePage = () => {
       try {
         const { data, error } = await supabase
           .from('links')
-          .select('title, url, id, thumbnail_url')
+          .select('title, url, id, thumbnail_url, tagline, tags')
           .eq('user_id', userId);
         if (error) throw error;
         if (data) {
@@ -107,7 +107,8 @@ const TreePage = () => {
             title: title,
             url: url,
             user_id: userId,
-            link_id: linkId
+            tagline: tagline,
+            tags: tags
           })
           .select();
         if (error) throw error;
@@ -160,6 +161,8 @@ const TreePage = () => {
     }
   };
 
+  console.log(links);
+
   return (
     <section className="bg-white mb-32 min-h-screen">
       <div className="max-w-xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
@@ -197,7 +200,7 @@ const TreePage = () => {
                       {link.title}
                     </p>
                     <p className="text-xs text-stone-400 mt-1">
-                      T8 AWD Long Range High Performance Plus Bright Edition aut
+                      {link.tagline}
                     </p>
                     <p className="jsx-902cb4503c8a7a8 text-[10px] text-stone-500 mt-2 flex gap-2">
                       <span className="jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center">
@@ -228,7 +231,7 @@ const TreePage = () => {
                       type="text"
                       name="title"
                       id="title"
-                      className="block w-full rounded-md text-black border-2 mt-10 p-2"
+                      className="block w-full rounded-md text-black border-2 mt-5 p-2"
                       placeholder="My awesome link"
                       onChange={(e) => setTitle(e.target.value)}
                     />
@@ -239,9 +242,33 @@ const TreePage = () => {
                       type="text"
                       name="url"
                       id="urls"
-                      className="block w-full rounded-md text-black border-2 mt-10 mb-10 p-2"
+                      className="block w-full rounded-md text-black border-2 mt-5 mb-10 p-2"
                       placeholder="https://nettiauto.com/audi/801721"
                       onChange={(e) => setUrl(e.target.value)}
+                    />
+                    <label className="text-black" htmlFor="title">
+                      Tagline
+                    </label>
+                    <input
+                      type="text"
+                      name="title"
+                      id="title"
+                      className="block w-full rounded-md text-black border-2 mt-5 p-2"
+                      placeholder="My awesome link"
+                      onChange={(e) => setTagline(e.target.value)}
+                    />
+                    <label className="text-black" htmlFor="title">
+                      Tags
+                    </label>
+                    <input
+                      type="text"
+                      name="tags"
+                      id="title"
+                      className="block w-full rounded-md text-black border-2 mt-5 p-2"
+                      placeholder="My awesome link"
+                      onChange={(e) =>
+                        setTags((current: any) => [...current, e.target.value])
+                      }
                     />
                   </div>
                   <h3 className="text-black">Upload thumbnail for the car</h3>
@@ -292,83 +319,20 @@ const TreePage = () => {
                   <button
                     onClick={uploadCarPicture}
                     type="button"
-                    className="mt-3 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                    className="mt-3 mb-5 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
                   >
                     Upload car picture
                   </button>
-                  <button
-                    onClick={addNewLink}
-                    type="button"
-                    className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
-                  >
-                    Create a link
-                  </button>
                 </div>
               )}
+              <button
+                onClick={addNewLink}
+                type="button"
+                className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+              >
+                Create a link
+              </button>
             </div>
-            <Accordion
-              open={open === 1}
-              nonce={undefined}
-              onResize={undefined}
-              onResizeCapture={undefined}
-            >
-              <AccordionHeader
-                onClick={() => handleOpen(1)}
-                nonce={undefined}
-                onResize={undefined}
-                onResizeCapture={undefined}
-              >
-                What is Material Tailwind?
-              </AccordionHeader>
-              <AccordionBody>
-                We&apos;re not always in the position that we want to be at.
-                We&apos;re constantly growing. We&apos;re constantly making
-                mistakes. We&apos;re constantly trying to express ourselves and
-                actualize our dreams.
-              </AccordionBody>
-            </Accordion>
-            <Accordion
-              open={open === 2}
-              nonce={undefined}
-              onResize={undefined}
-              onResizeCapture={undefined}
-            >
-              <AccordionHeader
-                onClick={() => handleOpen(2)}
-                nonce={undefined}
-                onResize={undefined}
-                onResizeCapture={undefined}
-              >
-                How to use Material Tailwind?
-              </AccordionHeader>
-              <AccordionBody>
-                We&apos;re not always in the position that we want to be at.
-                We&apos;re constantly growing. We&apos;re constantly making
-                mistakes. We&apos;re constantly trying to express ourselves and
-                actualize our dreams.
-              </AccordionBody>
-            </Accordion>
-            <Accordion
-              open={open === 3}
-              nonce={undefined}
-              onResize={undefined}
-              onResizeCapture={undefined}
-            >
-              <AccordionHeader
-                onClick={() => handleOpen(3)}
-                nonce={undefined}
-                onResize={undefined}
-                onResizeCapture={undefined}
-              >
-                What can I do with Material Tailwind?
-              </AccordionHeader>
-              <AccordionBody>
-                We&apos;re not always in the position that we want to be at.
-                We&apos;re constantly growing. We&apos;re constantly making
-                mistakes. We&apos;re constantly trying to express ourselves and
-                actualize our dreams.
-              </AccordionBody>
-            </Accordion>
           </div>
         </div>
       </div>
