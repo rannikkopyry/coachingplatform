@@ -1,11 +1,13 @@
 import Link from 'next/link';
-import { useState, ReactNode, ReactElement } from 'react';
+import { useState, ReactNode, ReactElement, useEffect } from 'react';
 
 import LoadingDots from 'components/ui/LoadingDots';
 import Button from 'components/ui/Button';
 import { useUser } from 'utils/useUser';
 import { postData } from 'utils/helpers';
 import AlternativeLayout from 'components/AlternativeLayout';
+
+import { supabase } from '@/utils/supabase-client';
 
 import { User } from '@supabase/supabase-js';
 import { withPageAuth } from '@supabase/auth-helpers-nextjs';
@@ -35,6 +37,9 @@ function Card({ title, description, footer, children }: Props) {
 export const getServerSideProps = withPageAuth({ redirectTo: '/signin' });
 
 export default function Account({ user }: { user: User }) {
+  const [userId, setUserId] = useState<string | undefined>();
+  const [username, setUsername] = useState<string | any>();
+  const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
   const [loading, setLoading] = useState(false);
   const { isLoading, subscription, userDetails } = useUser();
 
@@ -51,6 +56,7 @@ export default function Account({ user }: { user: User }) {
     setLoading(false);
   };
 
+  console.log(user);
   const subscriptionPrice =
     subscription &&
     new Intl.NumberFormat('en-US', {
@@ -58,6 +64,26 @@ export default function Account({ user }: { user: User }) {
       currency: subscription?.prices?.currency,
       minimumFractionDigits: 0
     }).format((subscription?.prices?.unit_amount || 0) / 100);
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('users')
+          .select('id, profile_picture_url, username')
+          .eq('id', user.id);
+        if (error) throw error;
+        const profilePictureUrl = data![0]['profile_picture_url'];
+        const userId = data![0]['id'];
+        const userName = data![0]['username'];
+        setProfilePictureUrl(profilePictureUrl);
+        setUserId(userId);
+        setUsername(userName);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }, []);
 
   return (
     <section className="bg-white pb-32 pt-32">

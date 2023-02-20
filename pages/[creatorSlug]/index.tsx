@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import Link from 'next/link';
 import { useState, ReactNode, useEffect } from 'react';
 import { ImageListType } from 'react-images-uploading';
@@ -63,9 +62,7 @@ const TreePage = () => {
     }
   }, [userId]);
 
-  useEffect(() => {
-    setLinkId(links?.id);
-  });
+  console.log(links);
 
   useEffect(() => {
     const getUser = async () => {
@@ -100,7 +97,8 @@ const TreePage = () => {
           .insert({
             title: title,
             url: url,
-            user_id: userId
+            user_id: userId,
+            link_id: linkId
           })
           .select();
         if (error) throw error;
