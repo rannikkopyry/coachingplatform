@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState, ReactNode, useEffect } from 'react';
+import { useState, ReactNode, useEffect, ReactElement } from 'react';
 import { ImageListType } from 'react-images-uploading';
 import ImageUploading from 'react-images-uploading';
 import Image from 'next/image';
@@ -7,7 +7,6 @@ import { useUser } from 'utils/useUser';
 import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabase-client';
 import SimpleLayout from 'components/SimpleLayout';
-import { ReactElement } from 'react';
 import {
   Accordion,
   AccordionHeader,
@@ -32,7 +31,12 @@ const TreePage = () => {
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
   const [carUrl, setCarUrl] = useState<string | any>();
   const [username, setUsername] = useState<string | any>();
+  const [open, setOpen] = useState<number | null>(1);
   const user = useUser();
+
+  const handleOpen = (value: any) => {
+    setOpen(open === value ? 0 : value);
+  };
 
   const onChange = (imageList: ImageListType) => {
     setImages(imageList);
@@ -124,32 +128,6 @@ const TreePage = () => {
       const { error } = await supabase.from('links').delete().eq('id', linkId);
       if (error) throw error;
       setLinks;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const uploadProfilePicture = async () => {
-    try {
-      if (images.length > 0) {
-        const image = images[0];
-        if (image.file && userId) {
-          const { data, error } = await supabase.storage
-            .from('public')
-            .upload(`${userId}/${image.file.name}`, image.file, {
-              upsert: true
-            });
-          if (error) throw error;
-          const resp = supabase.storage.from('public').getPublicUrl(data!.path);
-          const publicUrl = resp.data.publicUrl;
-          const updateUserResponse = await supabase
-            .from('users')
-            // @ts-ignore
-            .update({ profile_picture_url: publicUrl })
-            .eq('id', userId);
-          if (updateUserResponse.error) throw error;
-        }
-      }
     } catch (error) {
       console.log(error);
     }
@@ -328,8 +306,18 @@ const TreePage = () => {
                 </div>
               )}
             </div>
-            <Accordion open={open === 1}>
-              <AccordionHeader onClick={() => handleOpen(1)}>
+            <Accordion
+              open={open === 1}
+              nonce={undefined}
+              onResize={undefined}
+              onResizeCapture={undefined}
+            >
+              <AccordionHeader
+                onClick={() => handleOpen(1)}
+                nonce={undefined}
+                onResize={undefined}
+                onResizeCapture={undefined}
+              >
                 What is Material Tailwind?
               </AccordionHeader>
               <AccordionBody>
@@ -339,8 +327,18 @@ const TreePage = () => {
                 actualize our dreams.
               </AccordionBody>
             </Accordion>
-            <Accordion open={open === 2}>
-              <AccordionHeader onClick={() => handleOpen(2)}>
+            <Accordion
+              open={open === 2}
+              nonce={undefined}
+              onResize={undefined}
+              onResizeCapture={undefined}
+            >
+              <AccordionHeader
+                onClick={() => handleOpen(2)}
+                nonce={undefined}
+                onResize={undefined}
+                onResizeCapture={undefined}
+              >
                 How to use Material Tailwind?
               </AccordionHeader>
               <AccordionBody>
@@ -350,8 +348,18 @@ const TreePage = () => {
                 actualize our dreams.
               </AccordionBody>
             </Accordion>
-            <Accordion open={open === 3}>
-              <AccordionHeader onClick={() => handleOpen(3)}>
+            <Accordion
+              open={open === 3}
+              nonce={undefined}
+              onResize={undefined}
+              onResizeCapture={undefined}
+            >
+              <AccordionHeader
+                onClick={() => handleOpen(3)}
+                nonce={undefined}
+                onResize={undefined}
+                onResizeCapture={undefined}
+              >
                 What can I do with Material Tailwind?
               </AccordionHeader>
               <AccordionBody>
