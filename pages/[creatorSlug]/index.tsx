@@ -42,6 +42,10 @@ const TreePage = () => {
   const [open, setOpen] = useState<number | null>(1);
   const [city, setCity] = useState<string | any>();
   const [country, setCountry] = useState<string | any>();
+  const [socialTitle, setSocialTitle] = useState<string | undefined>();
+  const [socialType, setSocialsocialType] = useState<string | undefined>();
+  const [socialUrl, setSocialsocialUrl] = useState<string | undefined>();
+
   const [bio, setBio] = useState<string | any>();
   const user = useUser();
 
@@ -169,10 +173,10 @@ const TreePage = () => {
         const { data, error } = await supabase
           .from('social_links')
           .insert({
-            title: social_title,
-            url: social_url,
+            title: socialTitle,
+            url: socialUrl,
             user_id: userId,
-            type: social_type
+            type: socialType
           })
           .select();
         if (error) throw error;
