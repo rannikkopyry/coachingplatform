@@ -7,6 +7,7 @@ import { useUser } from 'utils/useUser';
 import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabase-client';
 import SimpleLayout from 'components/SimpleLayout';
+import { string } from 'yup';
 
 interface Link {
   title: String;
@@ -17,6 +18,13 @@ interface Link {
   tags: any;
 }
 
+interface SocialLink {
+  title: string;
+  url: string;
+  id: string;
+  type: string;
+}
+
 const TreePage = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [title, setTitle] = useState<string | undefined>();
@@ -24,6 +32,7 @@ const TreePage = () => {
   const [userId, setUserId] = useState<string | undefined>();
   const [linkId, setLinkId] = useState<string | undefined>();
   const [links, setLinks] = useState<Link[]>();
+  const [socialLinks, setSocialLinks] = useState<SocialLink[]>();
   const [images, setImages] = useState<ImageListType>([]);
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
   const [tagline, setTagline] = useState<string | any>();
@@ -33,6 +42,10 @@ const TreePage = () => {
   const [open, setOpen] = useState<number | null>(1);
   const [city, setCity] = useState<string | any>();
   const [country, setCountry] = useState<string | any>();
+  const [socialTitle, setSocialTitle] = useState<string | undefined>();
+  const [socialType, setSocialsocialType] = useState<string | undefined>();
+  const [socialUrl, setSocialsocialUrl] = useState<string | undefined>();
+
   const [bio, setBio] = useState<string | any>();
   const user = useUser();
 
@@ -53,6 +66,7 @@ const TreePage = () => {
   const router = useRouter();
   const { creatorSlug } = router.query;
 
+  // Get listings
   useEffect(() => {
     const getLinks = async () => {
       try {
@@ -73,7 +87,26 @@ const TreePage = () => {
     }
   }, [userId]);
 
-  console.log(links);
+  // Get social links
+  useEffect(() => {
+    const getSocialLinks = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('social_links')
+          .select('title, url, id, type')
+          .eq('user_id', userId);
+        if (error) throw error;
+        if (data) {
+          setSocialLinks(data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (userId) {
+      getSocialLinks();
+    }
+  }, [userId]);
 
   useEffect(() => {
     const getUser = async () => {
@@ -133,6 +166,31 @@ const TreePage = () => {
   };
   console.log(links);
 
+  // Create a social link
+  const addNewSocialLink = async () => {
+    try {
+      if (title && url && userId) {
+        const { data, error } = await supabase
+          .from('social_links')
+          .insert({
+            title: socialTitle,
+            url: socialUrl,
+            user_id: userId,
+            type: socialType
+          })
+          .select();
+        if (error) throw error;
+        console.log('data', data);
+        if (links && data) {
+          setLinks([...data, ...links]);
+        }
+      }
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+  console.log(links);
+
   // Delete one link
   const deleteLink = async () => {
     try {
@@ -170,7 +228,31 @@ const TreePage = () => {
     }
   };
 
-  console.log(links);
+  const uploadSocialPicture = async () => {
+    try {
+      if (images.length > 0) {
+        const image = images[0];
+        if (image.file && userId) {
+          const { data, error } = await supabase.storage
+            .from('public')
+            .upload(`${userId}/thumbnails/${image.file.name}`, image.file, {
+              upsert: true
+            });
+          if (error) throw error;
+          const resp = supabase.storage.from('public').getPublicUrl(data!.path);
+          const publicUrl = resp.data.publicUrl;
+          const updateUserResponse = await supabase
+            .from('links')
+            // @ts-ignore
+            .update({ thumbnail_url: publicUrl })
+            .eq('user', userId);
+          if (updateUserResponse.error) throw error;
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <section className="bg-white mb-32 min-h-screen">
@@ -257,55 +339,174 @@ const TreePage = () => {
                   <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
                     Edit your page
                   </h1>
-                  <div className="flex flex-col">
-                    <label className="text-black" htmlFor="title">
+                  <div className="flex flex-col bg-stone-500 p-10 mt-10 mb-10">
+                    <h2 className="text-black font-extrabold text-2xl">
+                      Create a listing
+                    </h2>
+                    <label className="text-black mt-5" htmlFor="title">
                       Link text
                     </label>
                     <input
                       type="text"
                       name="title"
                       id="title"
-                      className="block w-full rounded-md text-black border-2 mt-5 p-2"
+                      className="block w-full rounded-md text-black border-2 mt-1 p-2"
                       placeholder="My awesome link"
                       onChange={(e) => setTitle(e.target.value)}
                     />
-                    <label className="text-black" htmlFor="url">
+                    <label className="text-black mt-2" htmlFor="url">
                       Link url
                     </label>
                     <input
                       type="text"
                       name="url"
                       id="urls"
-                      className="block w-full rounded-md text-black border-2 mt-5 mb-10 p-2"
+                      className="block w-full rounded-md text-black border-2 mt-1 mb-10 p-2"
                       placeholder="https://nettiauto.com/audi/801721"
                       onChange={(e) => setUrl(e.target.value)}
                     />
-                    <label className="text-black" htmlFor="title">
+                    <label className="text-black mt-2" htmlFor="title">
                       Tagline
                     </label>
                     <input
                       type="text"
                       name="title"
                       id="title"
-                      className="block w-full rounded-md text-black border-2 mt-5 p-2"
+                      className="block w-full rounded-md text-black border-2 mt-1 p-2"
                       placeholder="My awesome link"
                       onChange={(e) => setTagline(e.target.value)}
                     />
-                    <label className="text-black" htmlFor="title">
+                    <label className="text-black mt-2" htmlFor="title">
                       Tags
                     </label>
                     <input
                       type="text"
                       name="tags"
                       id="title"
-                      className="block w-full rounded-md text-black border-2 mt-5 p-2"
+                      className="block w-full rounded-md text-black border-2 mt-1 p-2"
                       placeholder="My awesome link"
                       onChange={(e) =>
                         setTags((current: any) => [...current, e.target.value])
                       }
                     />
+                    <h3 className="text-black mt-4">
+                      Upload thumbnail for the car
+                    </h3>
+                    <ImageUploading
+                      multiple
+                      value={images}
+                      onChange={onChange}
+                      dataURLKey="data_url"
+                    >
+                      {({
+                        imageList,
+                        onImageUpload,
+                        onImageRemoveAll,
+                        onImageUpdate,
+                        onImageRemove,
+                        isDragging,
+                        dragProps
+                      }) => (
+                        // write your building UI
+                        <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-2 p-4">
+                          <button
+                            style={isDragging ? { color: 'red' } : undefined}
+                            onClick={onImageUpload}
+                            {...dragProps}
+                          >
+                            Click or Drop here
+                          </button>
+                          &nbsp;
+                          <button onClick={onImageRemoveAll}>
+                            Remove all images
+                          </button>
+                          {imageList.map((image, index) => (
+                            <div key={index} className="image-item">
+                              <img src={image['data_url']} alt="" width="100" />
+                              <div className="image-item__btn-wrapper">
+                                <button onClick={() => onImageUpdate(index)}>
+                                  Update
+                                </button>
+                                <button onClick={() => onImageRemove(index)}>
+                                  Remove
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </ImageUploading>
+                    <button
+                      onClick={uploadCarPicture}
+                      type="button"
+                      className="mt-3 mb-5 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                    >
+                      Upload car picture
+                    </button>
+                    <button
+                      onClick={addNewLink}
+                      type="button"
+                      className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                    >
+                      Create a listing
+                    </button>
                   </div>
-                  <h3 className="text-black">Upload thumbnail for the car</h3>
+                </div>
+              )}
+              <div>
+                <div className="flex flex-col bg-stone-500 p-10 mt-10 mb-10">
+                  <h2 className="text-black font-extrabold text-2xl">
+                    Create a social link
+                  </h2>
+                  <label className="text-black mt-5" htmlFor="title">
+                    Link text
+                  </label>
+                  <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    className="block w-full rounded-md text-black border-2 mt-1 p-2"
+                    placeholder="My awesome link"
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                  <label className="text-black mt-2" htmlFor="url">
+                    Link url
+                  </label>
+                  <input
+                    type="text"
+                    name="url"
+                    id="urls"
+                    className="block w-full rounded-md text-black border-2 mt-1 mb-10 p-2"
+                    placeholder="https://nettiauto.com/audi/801721"
+                    onChange={(e) => setUrl(e.target.value)}
+                  />
+                  <label className="text-black mt-2" htmlFor="title">
+                    Tagline
+                  </label>
+                  <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    className="block w-full rounded-md text-black border-2 mt-1 p-2"
+                    placeholder="My awesome link"
+                    onChange={(e) => setTagline(e.target.value)}
+                  />
+                  <label className="text-black mt-2" htmlFor="title">
+                    Tags
+                  </label>
+                  <input
+                    type="text"
+                    name="tags"
+                    id="title"
+                    className="block w-full rounded-md text-black border-2 mt-1 p-2"
+                    placeholder="My awesome link"
+                    onChange={(e) =>
+                      setTags((current: any) => [...current, e.target.value])
+                    }
+                  />
+                  <h3 className="text-black mt-4">
+                    Upload thumbnail for the car
+                  </h3>
                   <ImageUploading
                     multiple
                     value={images}
@@ -322,7 +523,7 @@ const TreePage = () => {
                       dragProps
                     }) => (
                       // write your building UI
-                      <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-4 p-4">
+                      <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-2 p-4">
                         <button
                           style={isDragging ? { color: 'red' } : undefined}
                           onClick={onImageUpload}
@@ -351,21 +552,21 @@ const TreePage = () => {
                     )}
                   </ImageUploading>
                   <button
-                    onClick={uploadCarPicture}
+                    onClick={uploadSocialPicture}
                     type="button"
                     className="mt-3 mb-5 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
                   >
                     Upload car picture
                   </button>
+                  <button
+                    onClick={addNewSocialLink}
+                    type="button"
+                    className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                  >
+                    Create a social link
+                  </button>
                 </div>
-              )}
-              <button
-                onClick={addNewLink}
-                type="button"
-                className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
-              >
-                Create a link
-              </button>
+              </div>
             </div>
           </div>
         </div>
