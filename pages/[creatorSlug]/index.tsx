@@ -206,7 +206,7 @@ const TreePage = () => {
       const { error } = await supabase
         .from('social_links')
         .delete()
-        .eq('id', linkId);
+        .eq('id', socialLinkId);
       if (error) throw error;
     } catch (error) {
       console.log(error);
@@ -311,7 +311,7 @@ const TreePage = () => {
                     <button
                       className="text-black"
                       onClick={() => {
-                        setLinkId(link.id);
+                        setSocialLinkId(link.id);
                         deleteSocialLink();
                       }}
                     >
@@ -369,7 +369,10 @@ const TreePage = () => {
                     })}
                     <button
                       className="text-black"
-                      onClick={() => deleteLink(link.id)}
+                      onClick={() => {
+                        setLinkId(link.id);
+                        deleteLink();
+                      }}
                     >
                       Delete
                     </button>
