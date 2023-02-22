@@ -194,7 +194,19 @@ const TreePage = () => {
     try {
       const { error } = await supabase.from('links').delete().eq('id', linkId);
       if (error) throw error;
-      setLinks;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Delete social link
+  const deleteSocialLink = async () => {
+    try {
+      const { error } = await supabase
+        .from('social_links')
+        .delete()
+        .eq('id', linkId);
+      if (error) throw error;
     } catch (error) {
       console.log(error);
     }
@@ -282,12 +294,28 @@ const TreePage = () => {
             )}
             {username && <p className="text-black font-bold">{bio}</p>}
             {socialLinks?.map((link: SocialLink, index: number) => (
-              <div key={index}>
-                <div className="h-[50px] mb-4 mt-4">
-                  <div className="h-full p-2 rounded-lg bg-stone-500">
-                    <p className="text-md font-bold leading-none text-black">
+              <div
+                className=""
+                key={index}
+                /* onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = link.url;
+                }} */
+              >
+                <div className="h-[50px] mb-4 mt-4 shadow-xl bg-stone-400">
+                  <div className="h-full p-4 rounded-2xl">
+                    <p className="text-xl font-bold leading-none text-black">
                       {link.title}
                     </p>
+                    <button
+                      className="text-black"
+                      onClick={() => {
+                        setLinkId(link.id);
+                        deleteSocialLink();
+                      }}
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               </div>
@@ -301,10 +329,10 @@ const TreePage = () => {
                 <div
                   className="shadow-lg"
                   key={index}
-                  onClick={(e) => {
+                  /*  onClick={(e) => {
                     e.preventDefault();
                     window.location.href = link.url;
-                  }}
+                  }} */
                 >
                   <div className="h-[200px] overflow-hidden rounded-t-md relative justify-center">
                     <img src={link.thumbnail_url} alt="" className="" />
@@ -338,6 +366,12 @@ const TreePage = () => {
                         </span>
                       </p>;
                     })}
+                    <button
+                      className="text-black"
+                      onClick={() => deleteLink(link.id)}
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               </>
