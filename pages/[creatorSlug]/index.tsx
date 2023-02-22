@@ -280,10 +280,18 @@ const TreePage = () => {
                 </p>
               </div>
             )}
-            {socialLinks?.map((link) => (
-              <p className="text-black">{link.title}</p>
+            {username && <p className="text-black font-bold">{bio}</p>}
+            {socialLinks?.map((link: SocialLink, index: number) => (
+              <div key={index}>
+                <div className="h-[50px] mb-4 mt-4">
+                  <div className="h-full p-2 rounded-lg bg-stone-500">
+                    <p className="text-md font-bold leading-none text-black">
+                      {link.title}
+                    </p>
+                  </div>
+                </div>
+              </div>
             ))}
-            {username && <p className="text-black">{bio}</p>}
             <h2 className="mt-4 text-2xl text-black font-bold">
               Recent listing:
             </h2>
