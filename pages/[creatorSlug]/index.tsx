@@ -31,6 +31,7 @@ const TreePage = () => {
   const [url, setUrl] = useState<string | undefined>();
   const [userId, setUserId] = useState<string | undefined>();
   const [linkId, setLinkId] = useState<string | undefined>();
+  const [socialLinkId, setSocialLinkId] = useState<string | undefined>();
   const [links, setLinks] = useState<Link[]>();
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>();
   const [images, setImages] = useState<ImageListType>([]);
