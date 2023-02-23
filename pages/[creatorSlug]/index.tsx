@@ -46,7 +46,6 @@ const TreePage = () => {
   const [socialTitle, setSocialTitle] = useState<string | undefined>();
   const [socialType, setSocialType] = useState<string | undefined>();
   const [socialUrl, setSocialUrl] = useState<string | undefined>();
-
   const [bio, setBio] = useState<string | any>();
   const user = useUser();
 
@@ -264,6 +263,7 @@ const TreePage = () => {
       console.log(error);
     }
   };
+  console.log(url);
 
   return (
     <section className="bg-white mb-32 min-h-screen">
@@ -286,9 +286,9 @@ const TreePage = () => {
             )}
 
             {username && (
-              <div className="flex items-center">
+              <div className="flex items-center justify-center">
                 <img className="h-5 text-center" src="/location.svg" alt="" />
-                <p className="text-black align-middle">
+                <p className="text-black">
                   {city}, {country}
                 </p>
               </div>
@@ -321,9 +321,11 @@ const TreePage = () => {
                 </div>
               </div>
             ))}
-            <h2 className="mt-4 text-2xl text-black font-bold">
-              Recent listing:
-            </h2>
+            {links?.lenght !== 0 && links?.lenght !== undefined && (
+              <h2 className="mt-4 text-2xl text-black font-bold">
+                Recent listing:
+              </h2>
+            )}
             {links?.map((link: Link, index: number) => (
               <>
                 // @ts-ignore
@@ -387,7 +389,7 @@ const TreePage = () => {
                     <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
                       Edit your page
                     </h1>
-                    <div className="flex flex-col bg-stone-500 p-10 mt-10 mb-10">
+                    <div className="flex flex-col bg-white p-10 mt-10 mb-10 border-2 rounded-2xl">
                       <h2 className="text-black font-extrabold text-2xl">
                         Create a listing
                       </h2>
@@ -508,7 +510,7 @@ const TreePage = () => {
                     </div>
                   </div>
                   <div>
-                    <div className="flex flex-col bg-stone-500 p-10 mt-10 mb-10">
+                    <div className="flex flex-col bg-white p-10 mt-10 mb-10 border-2 rounded-2xl">
                       <h2 className="text-black font-extrabold text-2xl">
                         Create a social link
                       </h2>

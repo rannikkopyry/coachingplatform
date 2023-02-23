@@ -11,8 +11,8 @@ import { withPageAuth } from '@supabase/auth-helpers-nextjs';
 import Image from 'next/image';
 import { ImageListType } from 'react-images-uploading';
 import ImageUploading from 'react-images-uploading';
-import { profile } from 'console';
-import { CLIENT_STATIC_FILES_RUNTIME_POLYFILLS_SYMBOL } from 'next/dist/shared/lib/constants';
+import { EditText, EditTextarea } from 'react-edit-text';
+import 'react-edit-text/dist/index.css';
 
 interface Props {
   title: string;
@@ -43,6 +43,7 @@ export default function Account({ user }: { user: User }) {
   const [userName, setUserName] = useState<string | any>();
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
   const [city, setCity] = useState<string | any>();
+  const [updatedCity, setUpdatedCity] = useState<string | any>();
   const [country, setCountry] = useState<string | any>();
   const [bio, setBio] = useState<string | any>();
   const [loading, setLoading] = useState(false);
@@ -129,6 +130,25 @@ export default function Account({ user }: { user: User }) {
       console.log(error);
     }
   };
+
+  // Update title
+  const updateCity = async () => {
+    try {
+      if (updatedCity) {
+        const { error } = await supabase
+          .from('users')
+          .update({
+            city: updatedCity
+          })
+          .eq('id', userId);
+        if (error) throw error;
+      }
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
+  console.log(updatedCity);
 
   return (
     <section className="bg-white pb-32 pt-32">
@@ -262,9 +282,14 @@ export default function Account({ user }: { user: User }) {
           description="Enter your location and biography text. These are shown in you are public profile."
           footer={<p>We will email you to verify the change.</p>}
         >
-          <p className="text-xl mt-8 mb-4 font-semibold">City: {city}</p>
-          <p className="text-xl mt-8 mb-4 font-semibold">Country: {country}</p>
-          <p className="text-xl mt-8 mb-4 font-semibold">Bio text: {bio}</p>
+          <input
+            className=""
+            defaultValue={city}
+            onChange={(e) => setUpdatedCity(e.target.value)}
+          />
+          <EditText className="" showEditButton defaultValue={country} />
+          <EditTextarea className="" defaultValue={bio} />
+          <button onClick={updateCity}>Save changes</button>
         </Card>
         <Card
           title="Your Email"
