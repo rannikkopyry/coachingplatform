@@ -43,7 +43,9 @@ export default function Account({ user }: { user: User }) {
   const [userName, setUserName] = useState<string | any>();
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
   const [city, setCity] = useState<string | any>();
+  const [updatedCountry, setUpdatedCountry] = useState<string | any>();
   const [updatedCity, setUpdatedCity] = useState<string | any>();
+  const [updatedBio, setUpdatedBio] = useState<string | any>();
   const [country, setCountry] = useState<string | any>();
   const [bio, setBio] = useState<string | any>();
   const [loading, setLoading] = useState(false);
@@ -131,8 +133,8 @@ export default function Account({ user }: { user: User }) {
     }
   };
 
-  // Update title
-  const updateCity = async () => {
+  // Update account details
+  const updateDetails = async () => {
     try {
       if (updatedCity) {
         const { error } = await supabase
@@ -290,14 +292,14 @@ export default function Account({ user }: { user: User }) {
           <input
             className=""
             defaultValue={country}
-            onChange={(e) => setUpdatedCity(e.target.value)}
+            onChange={(e) => setUpdatedCountry(e.target.value)}
           />
           <textarea
             className=""
             defaultValue={bio}
-            onChange={(e) => setUpdatedCity(e.target.value)}
+            onChange={(e) => setUpdatedBio(e.target.value)}
           />
-          <button onClick={updateCity}>Save changes</button>
+          <button onClick={updateDetails}>Save changes</button>
         </Card>
         <Card
           title="Your Email"
