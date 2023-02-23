@@ -130,6 +130,23 @@ export default function Account({ user }: { user: User }) {
     }
   };
 
+  // Update title
+  const updateCity = async () => {
+    try {
+      if (city) {
+        const { data, error } = await supabase
+          .from('users')
+          .update({
+            city: city
+          })
+          .eq('id', userId);
+        if (error) throw error;
+      }
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
   return (
     <section className="bg-white pb-32 pt-32">
       <div className="max-w-6xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
@@ -262,7 +279,12 @@ export default function Account({ user }: { user: User }) {
           description="Enter your location and biography text. These are shown in you are public profile."
           footer={<p>We will email you to verify the change.</p>}
         >
-          <EditText className="" showEditButton defaultValue={city} />
+          <EditText
+            className=""
+            showEditButton
+            defaultValue={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
           <EditText className="" showEditButton defaultValue={country} />
           <EditTextarea className="" defaultValue={bio} />
         </Card>
