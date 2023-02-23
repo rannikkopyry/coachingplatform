@@ -263,7 +263,7 @@ const TreePage = () => {
       console.log(error);
     }
   };
-  console.log(links);
+  console.log(url);
 
   return (
     <section className="bg-white mb-32 min-h-screen">
