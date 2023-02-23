@@ -11,8 +11,8 @@ import { withPageAuth } from '@supabase/auth-helpers-nextjs';
 import Image from 'next/image';
 import { ImageListType } from 'react-images-uploading';
 import ImageUploading from 'react-images-uploading';
-import { profile } from 'console';
-import { CLIENT_STATIC_FILES_RUNTIME_POLYFILLS_SYMBOL } from 'next/dist/shared/lib/constants';
+import { EditText, EditTextarea } from 'react-edit-text';
+import 'react-edit-text/dist/index.css';
 
 interface Props {
   title: string;
@@ -262,9 +262,9 @@ export default function Account({ user }: { user: User }) {
           description="Enter your location and biography text. These are shown in you are public profile."
           footer={<p>We will email you to verify the change.</p>}
         >
-          <p className="text-xl mt-8 mb-4 font-semibold">City: {city}</p>
-          <p className="text-xl mt-8 mb-4 font-semibold">Country: {country}</p>
-          <p className="text-xl mt-8 mb-4 font-semibold">Bio text: {bio}</p>
+          <EditText className="" showEditButton defaultValue={city} />
+          <EditText className="" showEditButton defaultValue={country} />
+          <EditTextarea className="" defaultValue={bio} />
         </Card>
         <Card
           title="Your Email"
