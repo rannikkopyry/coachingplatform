@@ -389,7 +389,7 @@ const TreePage = () => {
                     <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
                       Edit your page
                     </h1>
-                    <div className="flex flex-col bg-stone-500 p-10 mt-10 mb-10">
+                    <div className="flex flex-col bg-white p-10 mt-10 mb-10 border-2 rounded-2xl">
                       <h2 className="text-black font-extrabold text-2xl">
                         Create a listing
                       </h2>
@@ -510,7 +510,7 @@ const TreePage = () => {
                     </div>
                   </div>
                   <div>
-                    <div className="flex flex-col bg-stone-500 p-10 mt-10 mb-10">
+                    <div className="flex flex-col bg-white p-10 mt-10 mb-10 border-2 rounded-2xl">
                       <h2 className="text-black font-extrabold text-2xl">
                         Create a social link
                       </h2>
