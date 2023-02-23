@@ -263,6 +263,7 @@ const TreePage = () => {
       console.log(error);
     }
   };
+  console.log(links);
 
   return (
     <section className="bg-white mb-32 min-h-screen">
@@ -320,9 +321,11 @@ const TreePage = () => {
                 </div>
               </div>
             ))}
-            <h2 className="mt-4 text-2xl text-black font-bold">
-              Recent listing:
-            </h2>
+            {links?.lenght !== 0 && links?.lenght !== undefined && (
+              <h2 className="mt-4 text-2xl text-black font-bold">
+                Recent listing:
+              </h2>
+            )}
             {links?.map((link: Link, index: number) => (
               <>
                 // @ts-ignore
