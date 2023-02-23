@@ -287,8 +287,16 @@ export default function Account({ user }: { user: User }) {
             defaultValue={city}
             onChange={(e) => setUpdatedCity(e.target.value)}
           />
-          <EditText className="" showEditButton defaultValue={country} />
-          <EditTextarea className="" defaultValue={bio} />
+          <input
+            className=""
+            defaultValue={country}
+            onChange={(e) => setUpdatedCity(e.target.value)}
+          />
+          <textarea
+            className=""
+            defaultValue={bio}
+            onChange={(e) => setUpdatedCity(e.target.value)}
+          />
           <button onClick={updateCity}>Save changes</button>
         </Card>
         <Card
