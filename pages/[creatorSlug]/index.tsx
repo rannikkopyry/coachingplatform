@@ -46,7 +46,6 @@ const TreePage = () => {
   const [socialTitle, setSocialTitle] = useState<string | undefined>();
   const [socialType, setSocialType] = useState<string | undefined>();
   const [socialUrl, setSocialUrl] = useState<string | undefined>();
-
   const [bio, setBio] = useState<string | any>();
   const user = useUser();
 
@@ -286,9 +285,9 @@ const TreePage = () => {
             )}
 
             {username && (
-              <div className="flex items-center">
+              <div className="flex items-center justify-center">
                 <img className="h-5 text-center" src="/location.svg" alt="" />
-                <p className="text-black align-middle">
+                <p className="text-black">
                   {city}, {country}
                 </p>
               </div>
