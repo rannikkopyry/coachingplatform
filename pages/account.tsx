@@ -43,7 +43,9 @@ export default function Account({ user }: { user: User }) {
   const [userName, setUserName] = useState<string | any>();
   const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
   const [city, setCity] = useState<string | any>();
+  const [updatedCountry, setUpdatedCountry] = useState<string | any>();
   const [updatedCity, setUpdatedCity] = useState<string | any>();
+  const [updatedBio, setUpdatedBio] = useState<string | any>();
   const [country, setCountry] = useState<string | any>();
   const [bio, setBio] = useState<string | any>();
   const [loading, setLoading] = useState(false);
@@ -131,15 +133,20 @@ export default function Account({ user }: { user: User }) {
     }
   };
 
-  // Update title
-  const updateCity = async () => {
+  // Update account details
+  const updateDetails = async () => {
     try {
       if (updatedCity) {
         const { error } = await supabase
           .from('users')
-          .update({
-            city: updatedCity
-          })
+          .update(
+            {
+              city: updatedCity,
+              country: updatedCountry,
+              bio: updatedBio
+            },
+            { upsert: true }
+          )
           .eq('id', userId);
         if (error) throw error;
       }
@@ -287,9 +294,17 @@ export default function Account({ user }: { user: User }) {
             defaultValue={city}
             onChange={(e) => setUpdatedCity(e.target.value)}
           />
-          <EditText className="" showEditButton defaultValue={country} />
-          <EditTextarea className="" defaultValue={bio} />
-          <button onClick={updateCity}>Save changes</button>
+          <input
+            className=""
+            defaultValue={country}
+            onChange={(e) => setUpdatedCountry(e.target.value)}
+          />
+          <textarea
+            className=""
+            defaultValue={bio}
+            onChange={(e) => setUpdatedBio(e.target.value)}
+          />
+          <button onClick={updateDetails}>Save changes</button>
         </Card>
         <Card
           title="Your Email"
