@@ -139,9 +139,14 @@ export default function Account({ user }: { user: User }) {
       if (updatedCity) {
         const { error } = await supabase
           .from('users')
-          .update({
-            city: updatedCity
-          })
+          .update(
+            {
+              city: updatedCity,
+              country: updatedCountry,
+              bio: updatedBio
+            },
+            { upsert: true }
+          )
           .eq('id', userId);
         if (error) throw error;
       }
