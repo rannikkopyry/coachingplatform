@@ -33,6 +33,16 @@ const SignIn = () => {
     }
   }
 
+  async function signInWithGoogle() {
+    try {
+      const resp = await supabase.auth.signInWithOAuth({
+        provider: 'google'
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     if (user) {
       router.replace('/dashboard');
@@ -84,6 +94,13 @@ const SignIn = () => {
                 <span className="underline">Sign up</span>
               </a>
             </div>
+            <button
+              className="text-black border-4 p-3 flex align-middle text-center"
+              onClick={signInWithGoogle}
+            >
+              <img className="h-7 align-middle" src="/google.png" alt="" />
+              Sign in using Google
+            </button>
           </div>
         </div>
       </div>
