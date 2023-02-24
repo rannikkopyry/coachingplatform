@@ -288,22 +288,32 @@ export default function Account({ user }: { user: User }) {
           description="Enter your location and biography text. These are shown in you are public profile."
           footer={<p>We will email you to verify the change.</p>}
         >
-          <div className="flex flex-column">
+          <div className="flex flex-col mt-4">
+            <label htmlFor="" className="text-black">
+              Your city:
+            </label>
             <input
               placeholder="City/Area"
               className="p-4 m-4 bg-gray-200 rounded-2xl"
               defaultValue={city}
               onChange={(e) => setUpdatedCity(e.target.value)}
             />
+            <label htmlFor="" className="text-black">
+              Your country:
+            </label>
             <input
               placeholder="Country"
               className="bg-gray-200 rounded-2xl p-4 m-4"
               defaultValue={country}
               onChange={(e) => setUpdatedCountry(e.target.value)}
             />
+            <label htmlFor="" className="text-black">
+              Your bio text:
+            </label>
             <textarea
+              rows={5}
               placeholder="Bio"
-              className="bg-gray-200 rounded-2xl p-2"
+              className="bg-gray-200 rounded-2xl p-2 m-4"
               defaultValue={bio}
               onChange={(e) => setUpdatedBio(e.target.value)}
             />
