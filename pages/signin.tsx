@@ -99,7 +99,7 @@ const SignIn = () => {
               onClick={signInWithGoogle}
             >
               <img className="h-7 align-middle" src="/google.png" alt="" />
-              Sign up using Google
+              Sign in using Google
             </button>
           </div>
         </div>
