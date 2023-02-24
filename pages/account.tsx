@@ -210,7 +210,7 @@ export default function Account({ user }: { user: User }) {
         <Card
           title="Your username"
           description="Your unique username"
-          footer={<p>Please use 64 characters at maximum.</p>}
+          footer={<p>PNG and JPG formats accepted.</p>}
         >
           <div className="text-xl mt-8 mb-4 font-semibold text-black">
             <span className="text-grey-500">motorlinks.io/</span>
@@ -248,7 +248,7 @@ export default function Account({ user }: { user: User }) {
                 dragProps
               }) => (
                 // write your building UI
-                <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-4 p-4">
+                <div className="upload__image-wrapper text-black text-center bg-gray-200 border-4 m-4 p-4 rounded-2xl">
                   <button
                     style={isDragging ? { color: 'red' } : undefined}
                     onClick={onImageUpload}
@@ -286,7 +286,7 @@ export default function Account({ user }: { user: User }) {
         <Card
           title="Your location and biography"
           description="Enter your location and biography text. These are shown in you are public profile."
-          footer={<p>We will email you to verify the change.</p>}
+          footer={<p>This is not required information but recommended.</p>}
         >
           <div className="flex flex-col mt-4">
             <label htmlFor="" className="text-black">
@@ -313,11 +313,17 @@ export default function Account({ user }: { user: User }) {
             <textarea
               rows={5}
               placeholder="Bio"
-              className="bg-gray-200 rounded-2xl p-2 m-4"
+              className="bg-gray-200 rounded-2xl p-4 m-4"
               defaultValue={bio}
               onChange={(e) => setUpdatedBio(e.target.value)}
             />
-            <button onClick={updateDetails}>Save changes</button>
+            <button
+              onClick={updateDetails}
+              type="button"
+              className="mt-3 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+            >
+              Save changes
+            </button>
           </div>
         </Card>
         <Card
