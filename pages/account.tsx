@@ -155,7 +155,7 @@ export default function Account({ user }: { user: User }) {
     }
   };
 
-  console.log(updatedCity);
+  console.log(userName);
 
   return (
     <section className="bg-white pb-32 pt-32">
@@ -214,7 +214,6 @@ export default function Account({ user }: { user: User }) {
         >
           <div className="text-xl mt-8 mb-4 font-semibold text-black">
             <span className="text-grey-500">motorlinks.io/</span>
-
             {userName}
           </div>
         </Card>
@@ -289,22 +288,27 @@ export default function Account({ user }: { user: User }) {
           description="Enter your location and biography text. These are shown in you are public profile."
           footer={<p>We will email you to verify the change.</p>}
         >
-          <input
-            className=""
-            defaultValue={city}
-            onChange={(e) => setUpdatedCity(e.target.value)}
-          />
-          <input
-            className=""
-            defaultValue={country}
-            onChange={(e) => setUpdatedCountry(e.target.value)}
-          />
-          <textarea
-            className=""
-            defaultValue={bio}
-            onChange={(e) => setUpdatedBio(e.target.value)}
-          />
-          <button onClick={updateDetails}>Save changes</button>
+          <div className="flex flex-column">
+            <input
+              placeholder="City/Area"
+              className="p-4 m-4 bg-gray-200 rounded-2xl"
+              defaultValue={city}
+              onChange={(e) => setUpdatedCity(e.target.value)}
+            />
+            <input
+              placeholder="Country"
+              className="bg-gray-200 rounded-2xl p-4 m-4"
+              defaultValue={country}
+              onChange={(e) => setUpdatedCountry(e.target.value)}
+            />
+            <textarea
+              placeholder="Bio"
+              className="bg-gray-200 rounded-2xl p-2"
+              defaultValue={bio}
+              onChange={(e) => setUpdatedBio(e.target.value)}
+            />
+            <button onClick={updateDetails}>Save changes</button>
+          </div>
         </Card>
         <Card
           title="Your Email"

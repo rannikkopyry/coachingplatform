@@ -35,9 +35,10 @@ const SignIn = () => {
 
   async function signInWithGoogle() {
     try {
-      const resp = await supabase.auth.signInWithOAuth({
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google'
       });
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
