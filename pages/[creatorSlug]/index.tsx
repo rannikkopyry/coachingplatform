@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabase-client';
 import SimpleLayout from 'components/SimpleLayout';
 import { string } from 'yup';
+import ContactBar from '@/components/ContactBar';
 
 interface Link {
   title: String;
@@ -264,6 +265,8 @@ const TreePage = () => {
     }
   };
 
+  console.log(links?.length);
+
   return (
     <section className="bg-white mb-32 min-h-screen">
       <div className="max-w-xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
@@ -320,7 +323,7 @@ const TreePage = () => {
                 </div>
               </div>
             ))}
-            {links?.lenght !== 0 && links?.lenght !== undefined ? (
+            {links?.lenght > 0 || links?.lenght !== undefined ? (
               <h2 className="mt-4 text-2xl text-black font-bold">
                 Recent listing:
               </h2>
@@ -624,6 +627,7 @@ const TreePage = () => {
           </div>
         </div>
       </div>
+      <ContactBar />
     </section>
   );
 };
