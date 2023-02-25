@@ -2,7 +2,7 @@ import React from 'react';
 
 function ContactBar() {
   return (
-    <div className="fixed bottom-0 bg-black">
+    <div className=" flex fixed bottom-0 bg-black m-auto mb-4 p-4 justify-center text-center">
       <div>
         <button className="text-white">Contact details</button>
       </div>

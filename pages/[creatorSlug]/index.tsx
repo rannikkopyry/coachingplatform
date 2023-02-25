@@ -268,7 +268,7 @@ const TreePage = () => {
   console.log(links?.length);
 
   return (
-    <section className="bg-white mb-32 min-h-screen">
+    <section className="bg-white min-h-screen">
       <div className="max-w-xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <div className="text-center">
@@ -624,10 +624,10 @@ const TreePage = () => {
                 </>
               )}
             </div>
+            <ContactBar />
           </div>
         </div>
       </div>
-      <ContactBar />
     </section>
   );
 };
