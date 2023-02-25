@@ -229,7 +229,7 @@ const TreePage = () => {
             .from('links')
             // @ts-ignore
             .update({ thumbnail_url: publicUrl })
-            .eq('user', userId);
+            .eq('user_id', userId);
           if (updateUserResponse.error) throw error;
         }
       }
