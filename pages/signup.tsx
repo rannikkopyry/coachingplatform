@@ -18,24 +18,25 @@ const SignUp = () => {
 
   const userId = user?.id;
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (user) {
       router.replace('/account');
     }
-  }, [user]);
+  }, [user]); */
 
   async function signUpWithGoogle() {
     try {
-      const resp = await supabase.auth.signInWithOAuth({
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google'
       });
-      if (resp.error) throw resp.error;
-      const userId = resp.data.user?.id;
+      if (error) throw error;
+      console.log(data);
+      const userId = data.data.user?.id;
+      console.log(userId);
       if (userId) {
         await createUser(userId);
       }
       setReady(true);
-      console.log(userId);
     } catch (error) {
       console.log(error);
     }
@@ -139,7 +140,7 @@ const SignUp = () => {
               className="text-black border-4 p-3 flex align-middle text-center"
               onClick={signUpWithGoogle}
             >
-              <img className="h-7 align-middle" src="/google.png" alt="" />
+              <img className="h-7 mr-4 align-middle" src="/google.png" alt="" />
               Sign up using Google
             </button>
           </div>

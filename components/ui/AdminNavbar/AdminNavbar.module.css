@@ -1,5 +1,5 @@
 .root {
-  @apply w-full md:w-auto fixed md:right-2 md:left-2 md:top-2 bg-white md:rounded-full md:items-center items-stretch border-b border-gray-500;
+  @apply w-full md:w-auto fixed z-40 md:right-2 md:left-2 md:top-2 bg-white md:rounded-full md:items-center items-stretch border-b border-gray-500;
 }
 
 .link {

@@ -49,6 +49,7 @@ export default function Account({ user }: { user: User }) {
   const [country, setCountry] = useState<string | any>();
   const [bio, setBio] = useState<string | any>();
   const [loading, setLoading] = useState(false);
+  const [ready, setReady] = useState(false);
   const { isLoading, subscription, userDetails } = useUser();
   const [images, setImages] = useState<ImageListType>([]);
 
@@ -149,13 +150,14 @@ export default function Account({ user }: { user: User }) {
           )
           .eq('id', userId);
         if (error) throw error;
+        setReady(true);
       }
     } catch (error) {
       console.log('error', error);
     }
   };
 
-  console.log(updatedCity);
+  console.log(userName);
 
   return (
     <section className="bg-white pb-32 pt-32">
@@ -183,6 +185,7 @@ export default function Account({ user }: { user: User }) {
                 Manage your subscription on Stripe.
               </p>
               <Button
+                className=""
                 variant="slim"
                 loading={loading}
                 disabled={loading || !subscription}
@@ -210,11 +213,10 @@ export default function Account({ user }: { user: User }) {
         <Card
           title="Your username"
           description="Your unique username"
-          footer={<p>Please use 64 characters at maximum.</p>}
+          footer={<p>PNG and JPG formats accepted.</p>}
         >
           <div className="text-xl mt-8 mb-4 font-semibold text-black">
             <span className="text-grey-500">motorlinks.io/</span>
-
             {userName}
           </div>
         </Card>
@@ -230,7 +232,7 @@ export default function Account({ user }: { user: User }) {
                 alt="Profile picture"
                 height="100px"
                 width="100px"
-                className="rounded-full"
+                className="rounded-full z-0"
               />
             )}
             <ImageUploading
@@ -249,7 +251,7 @@ export default function Account({ user }: { user: User }) {
                 dragProps
               }) => (
                 // write your building UI
-                <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-4 p-4">
+                <div className="upload__image-wrapper text-black text-center bg-gray-200 border-4 m-4 p-4 rounded-2xl">
                   <button
                     style={isDragging ? { color: 'red' } : undefined}
                     onClick={onImageUpload}
@@ -287,24 +289,46 @@ export default function Account({ user }: { user: User }) {
         <Card
           title="Your location and biography"
           description="Enter your location and biography text. These are shown in you are public profile."
-          footer={<p>We will email you to verify the change.</p>}
+          footer={<p>This is not required information but recommended.</p>}
         >
-          <input
-            className=""
-            defaultValue={city}
-            onChange={(e) => setUpdatedCity(e.target.value)}
-          />
-          <input
-            className=""
-            defaultValue={country}
-            onChange={(e) => setUpdatedCountry(e.target.value)}
-          />
-          <textarea
-            className=""
-            defaultValue={bio}
-            onChange={(e) => setUpdatedBio(e.target.value)}
-          />
-          <button onClick={updateDetails}>Save changes</button>
+          <div className="flex flex-col mt-4">
+            <label htmlFor="" className="text-black">
+              Your city:
+            </label>
+            <input
+              placeholder="City/Area"
+              className="p-4 m-4 bg-gray-200 rounded-2xl"
+              defaultValue={city}
+              onChange={(e) => setUpdatedCity(e.target.value)}
+            />
+            <label htmlFor="" className="text-black">
+              Your country:
+            </label>
+            <input
+              placeholder="Country"
+              className="bg-gray-200 rounded-2xl p-4 m-4"
+              defaultValue={country}
+              onChange={(e) => setUpdatedCountry(e.target.value)}
+            />
+            <label htmlFor="" className="text-black">
+              Your bio text:
+            </label>
+            <textarea
+              rows={5}
+              placeholder="Bio"
+              className="bg-gray-200 rounded-2xl p-4 m-4"
+              defaultValue={bio}
+              onChange={(e) => setUpdatedBio(e.target.value)}
+            />
+            <button
+              onClick={updateDetails}
+              type="button"
+              className="mt-3 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+            >
+              Save changes
+            </button>
+            {ready === true && <p className="text-black">Changes succesful</p>}
+          </div>
         </Card>
         <Card
           title="Your Email"

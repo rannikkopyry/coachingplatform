@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import s from './Navbar.module.css';
-
 import Logo from 'components/icons/Logo';
 import { useRouter } from 'next/router';
 import { useUser } from 'utils/useUser';
@@ -18,7 +17,7 @@ const Navbar = () => {
       </a>
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex justify-between align-center flex-row py-4 md:py-6 relative">
-          <div className="flex flex-1 items-center">
+          <div className="flex flex-1 items-center ">
             <Link href="/">
               <a className={s.logo} aria-label="Logo">
                 <Logo />
@@ -28,14 +27,16 @@ const Navbar = () => {
               <Link href="#pricing">
                 <a className={s.link}>Pricing</a>
               </Link>
-             {/*  <Link href="/account">
+              {/*  <Link href="/account">
                 <a className={s.link}>Account</a>
               </Link> */}
             </nav>
           </div>
 
           <div className="hidden md:flex flex-1 justify-end space-x-8">
-            <button className='invisible lg:visible md:visible max-h-[50px] mt-6 bg-black text-white text-base font-medium py-3 px-6 rounded-full cursor-pointer'>Coming soon</button>
+            <button className="invisible lg:visible md:visible max-h-[50px] mt-6 bg-black text-white text-base font-medium py-3 px-6 rounded-full cursor-pointer">
+              <a href="/dashboard">Your dashboard</a>
+            </button>
             {user ? (
               <span
                 className={s.link}

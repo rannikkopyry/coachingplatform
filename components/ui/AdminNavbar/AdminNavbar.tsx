@@ -5,22 +5,53 @@ import { useRouter } from 'next/router';
 import { useUser } from 'utils/useUser';
 import Image from 'next/image';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
-import { useEffect } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { supabase } from '@/utils/supabase-client';
 import Logo from '@/components/icons/Logo';
+import SimpleLayout from '@/components/SimpleLayout';
 
 const AdminNavbar = () => {
   const router = useRouter();
   const supabaseClient = useSupabaseClient();
-  /*   const { user } = useUser();
-   */
+  const [profilePictureUrl, setProfilePictureUrl] = useState<string | any>();
+  const [username, setUsername] = useState<string | any>();
+  const [userId, setUserId] = useState<string | any>();
+
+  /* const { user } = useUser();
+
+  console.log(user); */
+
+  const { creatorSlug } = router.query;
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('users')
+          .select('id, profile_picture_url, username')
+          .eq('username', creatorSlug);
+        if (error) throw error;
+        const profilePictureUrl = data![0]['profile_picture_url'];
+        const userId = data![0]['id'];
+        const userName = data![0]['username'];
+        setUserId(userId);
+        setProfilePictureUrl(profilePictureUrl);
+        setUsername(userName);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (creatorSlug) {
+      getUser();
+    }
+  }, [creatorSlug]);
 
   return (
     <nav className={s.root}>
       <a href="#skip" className="sr-only focus:not-sr-only">
         Skip to content
       </a>
-      <div className="mx-7">
+      <div className="mx-7 z-40">
         <div className="flex justitfy-between align-center flex-row py-4 md:py-6 relative">
           <div className="flex flex-1 items-center">
             <Link href="/">
@@ -29,6 +60,9 @@ const AdminNavbar = () => {
               </a>
             </Link>
             <nav className="space-x-2 ml-6 hidden lg:block">
+              <Link href="/dashboard">
+                <a className={s.link}>My page</a>
+              </Link>
               <Link href="/dashboard">
                 <a className={s.link}>Dashboard</a>
               </Link>

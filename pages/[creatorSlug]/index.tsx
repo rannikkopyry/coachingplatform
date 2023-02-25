@@ -229,7 +229,7 @@ const TreePage = () => {
             .from('links')
             // @ts-ignore
             .update({ thumbnail_url: publicUrl })
-            .eq('user', userId);
+            .eq('user_id', userId);
           if (updateUserResponse.error) throw error;
         }
       }
@@ -263,7 +263,6 @@ const TreePage = () => {
       console.log(error);
     }
   };
-  console.log(url);
 
   return (
     <section className="bg-white mb-32 min-h-screen">
@@ -321,10 +320,15 @@ const TreePage = () => {
                 </div>
               </div>
             ))}
-            {links?.lenght !== 0 && links?.lenght !== undefined && (
+            {links?.lenght !== 0 && links?.lenght !== undefined ? (
               <h2 className="mt-4 text-2xl text-black font-bold">
                 Recent listing:
               </h2>
+            ) : (
+              <p className="text-black">
+                It seems empty here,{' '}
+                <button>Add your first listing or link.</button>
+              </p>
             )}
             {links?.map((link: Link, index: number) => (
               <>
