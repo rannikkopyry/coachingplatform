@@ -50,7 +50,7 @@ const AdminNavbar = () => {
       <a href="#skip" className="sr-only focus:not-sr-only">
         Skip to content
       </a>
-      <div className="mx-7">
+      <div className="mx-7 z-40">
         <div className="flex justitfy-between align-center flex-row py-4 md:py-6 relative">
           <div className="flex flex-1 items-center">
             <Link href="/">

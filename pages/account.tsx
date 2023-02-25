@@ -49,6 +49,7 @@ export default function Account({ user }: { user: User }) {
   const [country, setCountry] = useState<string | any>();
   const [bio, setBio] = useState<string | any>();
   const [loading, setLoading] = useState(false);
+  const [ready, setReady] = useState(false);
   const { isLoading, subscription, userDetails } = useUser();
   const [images, setImages] = useState<ImageListType>([]);
 
@@ -149,6 +150,7 @@ export default function Account({ user }: { user: User }) {
           )
           .eq('id', userId);
         if (error) throw error;
+        setReady(true);
       }
     } catch (error) {
       console.log('error', error);
@@ -183,6 +185,7 @@ export default function Account({ user }: { user: User }) {
                 Manage your subscription on Stripe.
               </p>
               <Button
+                className=""
                 variant="slim"
                 loading={loading}
                 disabled={loading || !subscription}
@@ -229,7 +232,7 @@ export default function Account({ user }: { user: User }) {
                 alt="Profile picture"
                 height="100px"
                 width="100px"
-                className="rounded-full"
+                className="rounded-full z-0"
               />
             )}
             <ImageUploading
@@ -324,6 +327,7 @@ export default function Account({ user }: { user: User }) {
             >
               Save changes
             </button>
+            {ready === true && <p className="text-black">Changes succesful</p>}
           </div>
         </Card>
         <Card
