@@ -5,9 +5,10 @@ import { useRouter } from 'next/router';
 import { useUser } from 'utils/useUser';
 import Image from 'next/image';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { supabase } from '@/utils/supabase-client';
 import Logo from '@/components/icons/Logo';
+import SimpleLayout from '@/components/SimpleLayout';
 
 const AdminNavbar = () => {
   const router = useRouter();
