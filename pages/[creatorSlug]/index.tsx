@@ -276,7 +276,7 @@ const TreePage = () => {
         .from('users')
         // @ts-ignore
         .update({ contact_bar: enabled })
-        .eq('user', userId);
+        .eq('id', userId);
       if (updateContactBarPreferrence.error) throw Error;
     } catch (error) {
       console.log('error', error);
