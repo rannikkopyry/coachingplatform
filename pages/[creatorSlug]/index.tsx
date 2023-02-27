@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState, ReactNode, useEffect, ReactElement } from 'react';
+import { useState, ReactNode, useEffect, ReactElement, Fragment } from 'react';
 import { ImageListType } from 'react-images-uploading';
 import ImageUploading from 'react-images-uploading';
 import Image from 'next/image';
@@ -11,6 +11,7 @@ import ContactBar from '@/components/ContactBar';
 import ContactBarLayout from '@/components/ContactBarLayout';
 import SimpleLayout from '@/components/SimpleLayout';
 import { Switch } from '@headlessui/react';
+import { Combobox, Transition } from '@headlessui/react';
 
 interface Link {
   title: String;
@@ -28,6 +29,15 @@ interface SocialLink {
   id: string;
   type: string;
 }
+
+const people = [
+  { id: 1, name: 'Wade Cooper' },
+  { id: 2, name: 'Arlene Mccoy' },
+  { id: 3, name: 'Devon Webb' },
+  { id: 4, name: 'Tom Cook' },
+  { id: 5, name: 'Tanya Fox' },
+  { id: 6, name: 'Hellen Schmidt' }
+];
 
 const TreePage = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
@@ -54,6 +64,20 @@ const TreePage = () => {
   const [bio, setBio] = useState<string | any>();
   const [enabled, setEnabled] = useState(false);
   const [showContactBar, setShowContactBar] = useState<boolean>(true);
+
+  const [selected, setSelected] = useState(people[0]);
+  const [query, setQuery] = useState('');
+
+  const filteredPeople =
+    query === ''
+      ? people
+      : people.filter((person) =>
+          person.name
+            .toLowerCase()
+            .replace(/\s+/g, '')
+            .includes(query.toLowerCase().replace(/\s+/g, ''))
+        );
+
   const user = useUser();
 
   const handleOpen = (value: any) => {
@@ -303,7 +327,7 @@ const TreePage = () => {
                   window.location.href = link.url;
                 }} */
                 >
-                  <div className="h-[50px] mb-4 mt-4 shadow-xl bg-stone-400">
+                  <div className="h-[50px] mb-4 mt-4 shadow-2xl bg-white">
                     <div className="h-full p-4 rounded-2xl">
                       <p className="text-xl font-bold leading-none text-black">
                         {link.title}
@@ -321,7 +345,6 @@ const TreePage = () => {
                   </div>
                 </div>
               ))}
-              // @ts-ignore
               {links?.length > 0 ? (
                 <h2 className="mt-4 text-2xl text-black font-bold">
                   Recent listing:
@@ -336,7 +359,7 @@ const TreePage = () => {
                 <>
                   // @ts-ignore
                   <div
-                    className="shadow-lg"
+                    className="shadow-2xl"
                     key={index}
                     /*  onClick={(e) => {
                     e.preventDefault();
@@ -559,6 +582,82 @@ const TreePage = () => {
                           placeholder="https://nettiauto.com/audi/801721"
                           onChange={(e) => setSocialUrl(e.target.value)}
                         />
+                        <Combobox value={selected} onChange={setSelected}>
+                          <div className="relative mt-1">
+                            <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+                              <Combobox.Input
+                                className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
+                                displayValue={(person) => person.name}
+                                onChange={(event) =>
+                                  setQuery(event.target.value)
+                                }
+                              />
+                              <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
+                                {/* <ChevronUpDownIcon
+                                    className="h-5 w-5 text-gray-400"
+                                    aria-hidden="true"
+                                  /> */}
+                              </Combobox.Button>
+                            </div>
+                            <Transition
+                              as={Fragment}
+                              leave="transition ease-in duration-100"
+                              leaveFrom="opacity-100"
+                              leaveTo="opacity-0"
+                              afterLeave={() => setQuery('')}
+                            >
+                              <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                {filteredPeople.length === 0 && query !== '' ? (
+                                  <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
+                                    Nothing found.
+                                  </div>
+                                ) : (
+                                  filteredPeople.map((person) => (
+                                    <Combobox.Option
+                                      key={person.id}
+                                      className={({ active }) =>
+                                        `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                                          active
+                                            ? 'bg-teal-600 text-white'
+                                            : 'text-gray-900'
+                                        }`
+                                      }
+                                      value={person}
+                                    >
+                                      {({ selected, active }) => (
+                                        <>
+                                          <span
+                                            className={`block truncate ${
+                                              selected
+                                                ? 'font-medium'
+                                                : 'font-normal'
+                                            }`}
+                                          >
+                                            {person.name}
+                                          </span>
+                                          {selected ? (
+                                            <span
+                                              className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                                                active
+                                                  ? 'text-white'
+                                                  : 'text-teal-600'
+                                              }`}
+                                            >
+                                              {/*  <CheckIcon
+                                                  className="h-5 w-5"
+                                                  aria-hidden="true"
+                                                /> */}
+                                            </span>
+                                          ) : null}
+                                        </>
+                                      )}
+                                    </Combobox.Option>
+                                  ))
+                                )}
+                              </Combobox.Options>
+                            </Transition>
+                          </div>
+                        </Combobox>
                         <label className="text-black mt-2" htmlFor="url">
                           Link type
                         </label>
@@ -570,63 +669,7 @@ const TreePage = () => {
                           placeholder="https://nettiauto.com/audi/801721"
                           onChange={(e) => setSocialType(e.target.value)}
                         />
-                        <h3 className="text-black mt-4">
-                          Upload thumbnail for the car
-                        </h3>
-                        <ImageUploading
-                          multiple
-                          value={images}
-                          onChange={onChange}
-                          dataURLKey="data_url"
-                        >
-                          {({
-                            imageList,
-                            onImageUpload,
-                            onImageRemoveAll,
-                            onImageUpdate,
-                            onImageRemove,
-                            isDragging,
-                            dragProps
-                          }) => (
-                            // write your building UI
-                            <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-2 p-4">
-                              <button
-                                style={
-                                  isDragging ? { color: 'red' } : undefined
-                                }
-                                onClick={onImageUpload}
-                                {...dragProps}
-                              >
-                                Click or Drop here
-                              </button>
-                              &nbsp;
-                              <button onClick={onImageRemoveAll}>
-                                Remove all images
-                              </button>
-                              {imageList.map((image, index) => (
-                                <div key={index} className="image-item">
-                                  <img
-                                    src={image['data_url']}
-                                    alt=""
-                                    width="100"
-                                  />
-                                  <div className="image-item__btn-wrapper">
-                                    <button
-                                      onClick={() => onImageUpdate(index)}
-                                    >
-                                      Update
-                                    </button>
-                                    <button
-                                      onClick={() => onImageRemove(index)}
-                                    >
-                                      Remove
-                                    </button>
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </ImageUploading>
+                        <div className="fixed top-16 w-56 text-right"></div>
                         <button
                           onClick={addNewSocialLink}
                           type="button"
