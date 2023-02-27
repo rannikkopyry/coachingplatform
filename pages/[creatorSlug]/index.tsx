@@ -269,7 +269,7 @@ const TreePage = () => {
     }
   };
 
-  console.log(links);
+  console.log(enabled);
 
   return (
     <>
@@ -670,7 +670,7 @@ const TreePage = () => {
             </div>
           </div>
         </div>
-        <ContactBar />
+        {enabled == true && <ContactBar />}
       </section>
     </>
   );
