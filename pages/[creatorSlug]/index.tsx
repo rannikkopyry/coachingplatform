@@ -642,7 +642,6 @@ const TreePage = () => {
           </div>
         </div>
       </section>
-      <ContactBar />
     </>
   );
 };
