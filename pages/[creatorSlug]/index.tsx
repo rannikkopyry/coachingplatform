@@ -118,7 +118,9 @@ const TreePage = () => {
       try {
         const { data, error } = await supabase
           .from('users')
-          .select('id, profile_picture_url, username, bio, country, city')
+          .select(
+            'id, profile_picture_url, username, bio, country, city, contact_bar'
+          )
           .eq('username', creatorSlug);
         if (error) throw error;
         const profilePictureUrl = data![0]['profile_picture_url'];
@@ -127,6 +129,7 @@ const TreePage = () => {
         const bio = data![0]['bio'];
         const country = data![0]['country'];
         const city = data![0]['city'];
+        const contactBar = data![0]['contact_bar'];
         setProfilePictureUrl(profilePictureUrl);
         setUserId(userId);
         setBio(bio);
@@ -135,6 +138,7 @@ const TreePage = () => {
         setProfilePictureUrl(profilePictureUrl);
         setUserId(userId);
         setUsername(userName);
+        setShowContactBar(contactBar);
       } catch (error) {
         console.log(error);
       }
@@ -283,7 +287,7 @@ const TreePage = () => {
     }
   };
 
-  console.log(enabled);
+  console.log(showContactBar);
 
   return (
     <>
@@ -689,7 +693,7 @@ const TreePage = () => {
             </div>
           </div>
         </div>
-        {enabled == true && <ContactBar />}
+        {showContactBar == true && <ContactBar />}
       </section>
     </>
   );
