@@ -242,33 +242,6 @@ const TreePage = () => {
             // @ts-ignore
             .update({ thumbnail_url: publicUrl })
             .eq('user_id', userId);
-          /*             .eq('id', )
-           */ if (updateUserResponse.error) throw error;
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const uploadSocialPicture = async () => {
-    try {
-      if (images.length > 0) {
-        const image = images[0];
-        if (image.file && userId) {
-          const { data, error } = await supabase.storage
-            .from('public')
-            .upload(`${userId}/thumbnails/${image.file.name}`, image.file, {
-              upsert: true
-            });
-          if (error) throw error;
-          const resp = supabase.storage.from('public').getPublicUrl(data!.path);
-          const publicUrl = resp.data.publicUrl;
-          const updateUserResponse = await supabase
-            .from('links')
-            // @ts-ignore
-            .update({ thumbnail_url: publicUrl })
-            .eq('user', userId);
           if (updateUserResponse.error) throw error;
         }
       }
@@ -655,13 +628,6 @@ const TreePage = () => {
                           )}
                         </ImageUploading>
                         <button
-                          onClick={uploadSocialPicture}
-                          type="button"
-                          className="mt-3 mb-5 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
-                        >
-                          Upload car picture
-                        </button>
-                        <button
                           onClick={addNewSocialLink}
                           type="button"
                           className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
@@ -678,9 +644,8 @@ const TreePage = () => {
                           onChange={setEnabled}
                           className={`${
                             enabled ? 'bg-black' : 'bg-gray-200'
-                          } relative inline-flex h-6 w-11 items-center rounded-full`}
+                          } relative inline-flex h-6 w-11 items-center rounded-full mt-4`}
                         >
-                          <span className="sr-only">Enable notifications</span>
                           <span
                             className={`${
                               enabled ? 'translate-x-6' : 'translate-x-1'
@@ -695,7 +660,7 @@ const TreePage = () => {
                         <button
                           onClick={saveContactBarPreferrence}
                           type="button"
-                          className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                          className="rounded-md border mt-5 border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
                         >
                           Save changes
                         </button>
