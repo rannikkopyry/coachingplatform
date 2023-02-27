@@ -212,7 +212,7 @@ const TreePage = () => {
             title: socialTitle,
             url: socialUrl,
             user_id: userId,
-            type: socialType
+            type: selected.name
           })
           .select();
         if (error) throw error;
@@ -288,7 +288,7 @@ const TreePage = () => {
     }
   };
 
-  console.log(showContactBar);
+  console.log(selected);
 
   return (
     <>
