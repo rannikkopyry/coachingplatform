@@ -231,7 +231,8 @@ const TreePage = () => {
             // @ts-ignore
             .update({ thumbnail_url: publicUrl })
             .eq('user_id', userId);
-          if (updateUserResponse.error) throw error;
+          /*             .eq('id', )
+           */ if (updateUserResponse.error) throw error;
         }
       }
     } catch (error) {
@@ -265,7 +266,7 @@ const TreePage = () => {
     }
   };
 
-  console.log(links?.length);
+  console.log(links);
 
   return (
     <section className="bg-white min-h-screen">
@@ -286,7 +287,6 @@ const TreePage = () => {
                 motorlinks.io/{creatorSlug}
               </p>
             )}
-
             {username && (
               <div className="flex items-center justify-center">
                 <img className="h-5 text-center" src="/location.svg" alt="" />
@@ -323,7 +323,8 @@ const TreePage = () => {
                 </div>
               </div>
             ))}
-            {links?.lenght > 0 || links?.lenght !== undefined ? (
+            // @ts-ignore
+            {links?.length > 0 ? (
               <h2 className="mt-4 text-2xl text-black font-bold">
                 Recent listing:
               </h2>
