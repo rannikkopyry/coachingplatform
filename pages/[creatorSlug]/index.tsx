@@ -655,6 +655,11 @@ const TreePage = () => {
                             } inline-block h-4 w-4 transform rounded-full bg-white transition`}
                           />
                         </Switch>
+                        {enabled === true ? (
+                          <p className="text-black">Contact bar visible</p>
+                        ) : (
+                          <p className="text-black">Contact bar not visible</p>
+                        )}
                         <button
                           onClick={addNewSocialLink}
                           type="button"
