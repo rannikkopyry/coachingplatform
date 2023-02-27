@@ -9,6 +9,7 @@ import { supabase } from '@/utils/supabase-client';
 import { string } from 'yup';
 import ContactBar from '@/components/ContactBar';
 import ContactBarLayout from '@/components/ContactBarLayout';
+import SimpleLayout from '@/components/SimpleLayout';
 
 interface Link {
   title: String;
@@ -641,13 +642,14 @@ const TreePage = () => {
             </div>
           </div>
         </div>
+        <ContactBar />
       </section>
     </>
   );
 };
 
 TreePage.getLayout = function (page: ReactElement) {
-  return <ContactBarLayout>{page}</ContactBarLayout>;
+  return <SimpleLayout>{page}</SimpleLayout>;
 };
 
 export default TreePage;
