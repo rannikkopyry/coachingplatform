@@ -19,6 +19,7 @@ interface Link {
   thumbnail_url: string;
   tagline: string;
   tags: any;
+  price: string;
 }
 
 interface SocialLink {
@@ -45,12 +46,14 @@ const TreePage = () => {
   const [username, setUsername] = useState<string | any>();
   const [open, setOpen] = useState<number | null>(1);
   const [city, setCity] = useState<string | any>();
+  const [price, setPrice] = useState<string | any>();
   const [country, setCountry] = useState<string | any>();
   const [socialTitle, setSocialTitle] = useState<string | undefined>();
   const [socialType, setSocialType] = useState<string | undefined>();
   const [socialUrl, setSocialUrl] = useState<string | undefined>();
   const [bio, setBio] = useState<string | any>();
   const [enabled, setEnabled] = useState(false);
+  const [showContactBar, setShowContactBar] = useState<boolean>(true);
   const user = useUser();
 
   const handleOpen = (value: any) => {
@@ -76,7 +79,7 @@ const TreePage = () => {
       try {
         const { data, error } = await supabase
           .from('links')
-          .select('title, url, id, thumbnail_url, tagline, tags')
+          .select('title, url, id, thumbnail_url, tagline, tags, price')
           .eq('user_id', userId);
         if (error) throw error;
         if (data) {
@@ -117,7 +120,9 @@ const TreePage = () => {
       try {
         const { data, error } = await supabase
           .from('users')
-          .select('id, profile_picture_url, username, bio, country, city')
+          .select(
+            'id, profile_picture_url, username, bio, country, city, contact_bar'
+          )
           .eq('username', creatorSlug);
         if (error) throw error;
         const profilePictureUrl = data![0]['profile_picture_url'];
@@ -126,6 +131,7 @@ const TreePage = () => {
         const bio = data![0]['bio'];
         const country = data![0]['country'];
         const city = data![0]['city'];
+        const contactBar = data![0]['contact_bar'];
         setProfilePictureUrl(profilePictureUrl);
         setUserId(userId);
         setBio(bio);
@@ -134,6 +140,7 @@ const TreePage = () => {
         setProfilePictureUrl(profilePictureUrl);
         setUserId(userId);
         setUsername(userName);
+        setShowContactBar(contactBar);
       } catch (error) {
         console.log(error);
       }
@@ -155,7 +162,8 @@ const TreePage = () => {
             url: url,
             user_id: userId,
             tagline: tagline,
-            tags: tags
+            tags: tags,
+            price: price
           })
           .select();
         if (error) throw error;
@@ -234,33 +242,6 @@ const TreePage = () => {
             // @ts-ignore
             .update({ thumbnail_url: publicUrl })
             .eq('user_id', userId);
-          /*             .eq('id', )
-           */ if (updateUserResponse.error) throw error;
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const uploadSocialPicture = async () => {
-    try {
-      if (images.length > 0) {
-        const image = images[0];
-        if (image.file && userId) {
-          const { data, error } = await supabase.storage
-            .from('public')
-            .upload(`${userId}/thumbnails/${image.file.name}`, image.file, {
-              upsert: true
-            });
-          if (error) throw error;
-          const resp = supabase.storage.from('public').getPublicUrl(data!.path);
-          const publicUrl = resp.data.publicUrl;
-          const updateUserResponse = await supabase
-            .from('links')
-            // @ts-ignore
-            .update({ thumbnail_url: publicUrl })
-            .eq('user', userId);
           if (updateUserResponse.error) throw error;
         }
       }
@@ -269,7 +250,20 @@ const TreePage = () => {
     }
   };
 
-  console.log(enabled);
+  const saveContactBarPreferrence = async () => {
+    try {
+      const updateContactBarPreferrence = await supabase
+        .from('users')
+        // @ts-ignore
+        .update({ contact_bar: enabled })
+        .eq('id', userId);
+      if (updateContactBarPreferrence.error) throw Error;
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
+  console.log(showContactBar);
 
   return (
     <>
@@ -352,7 +346,7 @@ const TreePage = () => {
                     <div className="h-[200px] overflow-hidden rounded-t-md relative justify-center">
                       <img src={link.thumbnail_url} alt="" className="" />
                       <span className="absolute py-1 px-2 top-2 left-2 rounded-full bg-stone-800 text-white text-xs z-10">
-                        58 725€
+                        {link.price}
                       </span>
                     </div>
                     <div className="h-full p-2 rounded-b-md bg-white">
@@ -406,7 +400,7 @@ const TreePage = () => {
                           Create a listing
                         </h2>
                         <label className="text-black mt-5" htmlFor="title">
-                          Link text
+                          Listing text
                         </label>
                         <input
                           type="text"
@@ -417,7 +411,7 @@ const TreePage = () => {
                           onChange={(e) => setTitle(e.target.value)}
                         />
                         <label className="text-black mt-2" htmlFor="url">
-                          Link url
+                          Listing url
                         </label>
                         <input
                           type="text"
@@ -426,6 +420,17 @@ const TreePage = () => {
                           className="block w-full rounded-md text-black border-2 mt-1 mb-10 p-2"
                           placeholder="https://nettiauto.com/audi/801721"
                           onChange={(e) => setUrl(e.target.value)}
+                        />
+                        <label className="text-black mt-2" htmlFor="title">
+                          Price
+                        </label>
+                        <input
+                          type="text"
+                          name="url"
+                          id="urls"
+                          className="block w-full rounded-md text-black border-2 mt-1 mb-10 p-2"
+                          placeholder="32 550"
+                          onChange={(e) => setPrice(e.target.value)}
                         />
                         <label className="text-black mt-2" htmlFor="title">
                           Tagline
@@ -623,13 +628,6 @@ const TreePage = () => {
                           )}
                         </ImageUploading>
                         <button
-                          onClick={uploadSocialPicture}
-                          type="button"
-                          className="mt-3 mb-5 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
-                        >
-                          Upload car picture
-                        </button>
-                        <button
                           onClick={addNewSocialLink}
                           type="button"
                           className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
@@ -645,10 +643,9 @@ const TreePage = () => {
                           checked={enabled}
                           onChange={setEnabled}
                           className={`${
-                            enabled ? 'bg-blue-600' : 'bg-gray-200'
-                          } relative inline-flex h-6 w-11 items-center rounded-full`}
+                            enabled ? 'bg-black' : 'bg-gray-200'
+                          } relative inline-flex h-6 w-11 items-center rounded-full mt-4`}
                         >
-                          <span className="sr-only">Enable notifications</span>
                           <span
                             className={`${
                               enabled ? 'translate-x-6' : 'translate-x-1'
@@ -661,9 +658,9 @@ const TreePage = () => {
                           <p className="text-black">Contact bar not visible</p>
                         )}
                         <button
-                          onClick={addNewSocialLink}
+                          onClick={saveContactBarPreferrence}
                           type="button"
-                          className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                          className="rounded-md border mt-5 border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
                         >
                           Save changes
                         </button>
@@ -675,7 +672,7 @@ const TreePage = () => {
             </div>
           </div>
         </div>
-        {enabled == true && <ContactBar />}
+        {showContactBar == true && <ContactBar />}
       </section>
     </>
   );
