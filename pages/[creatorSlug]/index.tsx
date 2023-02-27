@@ -51,6 +51,7 @@ const TreePage = () => {
   const [socialUrl, setSocialUrl] = useState<string | undefined>();
   const [bio, setBio] = useState<string | any>();
   const [enabled, setEnabled] = useState(false);
+  const [showContactBar, setShowContactBar] = useState<boolean>(true);
   const user = useUser();
 
   const handleOpen = (value: any) => {
@@ -266,6 +267,19 @@ const TreePage = () => {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const saveContactBarPreferrence = async () => {
+    try {
+      const updateContactBarPreferrence = await supabase
+        .from('users')
+        // @ts-ignore
+        .update({ contact_bar: enabled })
+        .eq('user', userId);
+      if (updateContactBarPreferrence.error) throw Error;
+    } catch (error) {
+      console.log('error', error);
     }
   };
 
@@ -645,7 +659,7 @@ const TreePage = () => {
                           checked={enabled}
                           onChange={setEnabled}
                           className={`${
-                            enabled ? 'bg-blue-600' : 'bg-gray-200'
+                            enabled ? 'bg-black' : 'bg-gray-200'
                           } relative inline-flex h-6 w-11 items-center rounded-full`}
                         >
                           <span className="sr-only">Enable notifications</span>
@@ -661,7 +675,7 @@ const TreePage = () => {
                           <p className="text-black">Contact bar not visible</p>
                         )}
                         <button
-                          onClick={addNewSocialLink}
+                          onClick={saveContactBarPreferrence}
                           type="button"
                           className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
                         >
