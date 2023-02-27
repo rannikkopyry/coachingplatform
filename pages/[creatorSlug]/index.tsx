@@ -10,6 +10,7 @@ import { string } from 'yup';
 import ContactBar from '@/components/ContactBar';
 import ContactBarLayout from '@/components/ContactBarLayout';
 import SimpleLayout from '@/components/SimpleLayout';
+import { Switch } from '@headlessui/react';
 
 interface Link {
   title: String;
@@ -49,6 +50,7 @@ const TreePage = () => {
   const [socialType, setSocialType] = useState<string | undefined>();
   const [socialUrl, setSocialUrl] = useState<string | undefined>();
   const [bio, setBio] = useState<string | any>();
+  const [enabled, setEnabled] = useState(false);
   const user = useUser();
 
   const handleOpen = (value: any) => {
@@ -639,6 +641,20 @@ const TreePage = () => {
                         <h2 className="text-black font-extrabold text-2xl">
                           Toggle contact bar
                         </h2>
+                        <Switch
+                          checked={enabled}
+                          onChange={setEnabled}
+                          className={`${
+                            enabled ? 'bg-blue-600' : 'bg-gray-200'
+                          } relative inline-flex h-6 w-11 items-center rounded-full`}
+                        >
+                          <span className="sr-only">Enable notifications</span>
+                          <span
+                            className={`${
+                              enabled ? 'translate-x-6' : 'translate-x-1'
+                            } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+                          />
+                        </Switch>
                         <button
                           onClick={addNewSocialLink}
                           type="button"
