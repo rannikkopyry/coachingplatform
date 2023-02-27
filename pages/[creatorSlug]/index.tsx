@@ -31,13 +31,13 @@ interface SocialLink {
   type: string;
 }
 
-const people = [
-  { id: 1, name: 'Wade Cooper' },
-  { id: 2, name: 'Arlene Mccoy' },
-  { id: 3, name: 'Devon Webb' },
-  { id: 4, name: 'Tom Cook' },
-  { id: 5, name: 'Tanya Fox' },
-  { id: 6, name: 'Hellen Schmidt' }
+const socials = [
+  { id: 1, name: 'Instagram' },
+  { id: 2, name: 'Twitter' },
+  { id: 3, name: 'Whatsapp' },
+  { id: 4, name: 'BeReal' },
+  { id: 5, name: 'Youtube' },
+  { id: 6, name: 'Snapchat' }
 ];
 
 const TreePage = () => {
@@ -66,13 +66,13 @@ const TreePage = () => {
   const [enabled, setEnabled] = useState(false);
   const [showContactBar, setShowContactBar] = useState<boolean>(true);
 
-  const [selected, setSelected] = useState(people[0]);
+  const [selected, setSelected] = useState(socials[0]);
   const [query, setQuery] = useState('');
 
-  const filteredPeople =
+  const filteredSocials =
     query === ''
-      ? people
-      : people.filter((person) =>
+      ? socials
+      : socials.filter((person) =>
           person.name
             .toLowerCase()
             .replace(/\s+/g, '')
@@ -583,6 +583,9 @@ const TreePage = () => {
                           placeholder="https://nettiauto.com/audi/801721"
                           onChange={(e) => setSocialUrl(e.target.value)}
                         />
+                        <label className="text-black mt-2" htmlFor="url">
+                          Link type
+                        </label>
                         <Combobox value={selected} onChange={setSelected}>
                           <div className="relative mt-1">
                             <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
@@ -608,12 +611,13 @@ const TreePage = () => {
                               afterLeave={() => setQuery('')}
                             >
                               <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                {filteredPeople.length === 0 && query !== '' ? (
+                                {filteredSocials.length === 0 &&
+                                query !== '' ? (
                                   <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                                     Nothing found.
                                   </div>
                                 ) : (
-                                  filteredPeople.map((person) => (
+                                  filteredSocials.map((person) => (
                                     <Combobox.Option
                                       key={person.id}
                                       className={({ active }) =>
@@ -659,22 +663,10 @@ const TreePage = () => {
                             </Transition>
                           </div>
                         </Combobox>
-                        <label className="text-black mt-2" htmlFor="url">
-                          Link type
-                        </label>
-                        <input
-                          type="text"
-                          name="url"
-                          id="urls"
-                          className="block w-full rounded-md text-black border-2 mt-1 mb-10 p-2"
-                          placeholder="https://nettiauto.com/audi/801721"
-                          onChange={(e) => setSocialType(e.target.value)}
-                        />
-                        <div className="fixed top-16 w-56 text-right"></div>
                         <button
                           onClick={addNewSocialLink}
                           type="button"
-                          className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                          className="rounded-md mt-5 border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
                         >
                           Create a social link
                         </button>
