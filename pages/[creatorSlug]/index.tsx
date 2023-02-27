@@ -269,367 +269,381 @@ const TreePage = () => {
   console.log(links);
 
   return (
-    <section className="bg-white min-h-screen">
-      <div className="max-w-xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
+    <>
+      <section className="bg-white min-h-screen">
+        <div className="max-w-xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            {profilePictureUrl && (
-              <Image
-                src={profilePictureUrl}
-                alt="Profile picture"
-                height="100px"
-                width="100px"
-                className="rounded-full justify-center"
-              />
-            )}
-            {username && (
-              <p className="text-black font-extrabold text-lg">
-                motorlinks.io/{creatorSlug}
-              </p>
-            )}
-            {username && (
-              <div className="flex items-center justify-center">
-                <img className="h-5 text-center" src="/location.svg" alt="" />
-                <p className="text-black">
-                  {city}, {country}
+            <div className="text-center">
+              {profilePictureUrl && (
+                <Image
+                  src={profilePictureUrl}
+                  alt="Profile picture"
+                  height="100px"
+                  width="100px"
+                  className="rounded-full justify-center"
+                />
+              )}
+              {username && (
+                <p className="text-black font-extrabold text-lg">
+                  motorlinks.io/{creatorSlug}
                 </p>
-              </div>
-            )}
-            {username && <p className="text-black font-bold">{bio}</p>}
-            {socialLinks?.map((link: SocialLink, index: number) => (
-              <div
-                className=""
-                key={index}
-                /* onClick={(e) => {
+              )}
+              {username && (
+                <div className="flex items-center justify-center">
+                  <img className="h-5 text-center" src="/location.svg" alt="" />
+                  <p className="text-black">
+                    {city}, {country}
+                  </p>
+                </div>
+              )}
+              {username && <p className="text-black font-bold">{bio}</p>}
+              {socialLinks?.map((link: SocialLink, index: number) => (
+                <div
+                  className=""
+                  key={index}
+                  /* onClick={(e) => {
                   e.preventDefault();
                   window.location.href = link.url;
                 }} */
-              >
-                <div className="h-[50px] mb-4 mt-4 shadow-xl bg-stone-400">
-                  <div className="h-full p-4 rounded-2xl">
-                    <p className="text-xl font-bold leading-none text-black">
-                      {link.title}
-                    </p>
-                    <button
-                      className="text-black"
-                      onClick={() => {
-                        setSocialLinkId(link.id);
-                        deleteSocialLink();
-                      }}
-                    >
-                      Delete
-                    </button>
+                >
+                  <div className="h-[50px] mb-4 mt-4 shadow-xl bg-stone-400">
+                    <div className="h-full p-4 rounded-2xl">
+                      <p className="text-xl font-bold leading-none text-black">
+                        {link.title}
+                      </p>
+                      <button
+                        className="text-black"
+                        onClick={() => {
+                          setSocialLinkId(link.id);
+                          deleteSocialLink();
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-            // @ts-ignore
-            {links?.length > 0 ? (
-              <h2 className="mt-4 text-2xl text-black font-bold">
-                Recent listing:
-              </h2>
-            ) : (
-              <p className="text-black">
-                It seems empty here,{' '}
-                <button>Add your first listing or link.</button>
-              </p>
-            )}
-            {links?.map((link: Link, index: number) => (
-              <>
-                // @ts-ignore
-                <div
-                  className="shadow-lg"
-                  key={index}
-                  /*  onClick={(e) => {
+              ))}
+              // @ts-ignore
+              {links?.length > 0 ? (
+                <h2 className="mt-4 text-2xl text-black font-bold">
+                  Recent listing:
+                </h2>
+              ) : (
+                <p className="text-black">
+                  It seems empty here,{' '}
+                  <button>Add your first listing or link.</button>
+                </p>
+              )}
+              {links?.map((link: Link, index: number) => (
+                <>
+                  // @ts-ignore
+                  <div
+                    className="shadow-lg"
+                    key={index}
+                    /*  onClick={(e) => {
                     e.preventDefault();
                     window.location.href = link.url;
                   }} */
-                >
-                  <div className="h-[200px] overflow-hidden rounded-t-md relative justify-center">
-                    <img src={link.thumbnail_url} alt="" className="" />
-                    <span className="absolute py-1 px-2 top-2 left-2 rounded-full bg-stone-800 text-white text-xs z-10">
-                      58 725€
-                    </span>
-                  </div>
-                  <div className="h-full p-2 rounded-b-md bg-white">
-                    <p className="text-md font-bold leading-none text-black">
-                      {link.title}
-                    </p>
-                    <p className="text-xs text-stone-400 mt-1">
-                      {link.tagline}
-                    </p>
-                    <p
-                      className="jsx-902cb4503c8a7a8 text-[10px] text-stone-500 mt-2 flex gap-2"
-                      key={index}
-                    >
-                      <span className="jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center">
-                        4Wd
+                  >
+                    <div className="h-[200px] overflow-hidden rounded-t-md relative justify-center">
+                      <img src={link.thumbnail_url} alt="" className="" />
+                      <span className="absolute py-1 px-2 top-2 left-2 rounded-full bg-stone-800 text-white text-xs z-10">
+                        58 725€
                       </span>
-                    </p>
-                    ;
-                    {links.tags?.map((tag, index) => {
+                    </div>
+                    <div className="h-full p-2 rounded-b-md bg-white">
+                      <p className="text-md font-bold leading-none text-black">
+                        {link.title}
+                      </p>
+                      <p className="text-xs text-stone-400 mt-1">
+                        {link.tagline}
+                      </p>
                       <p
                         className="jsx-902cb4503c8a7a8 text-[10px] text-stone-500 mt-2 flex gap-2"
                         key={index}
                       >
                         <span className="jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center">
-                          {tag[0]}
+                          4Wd
                         </span>
-                      </p>;
-                    })}
-                    <button
-                      className="text-black"
-                      onClick={() => {
-                        setLinkId(link.id);
-                        deleteLink();
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </>
-            ))}
-            <div className="sm:flex sm:flex-col sm:align-center">
-              {authenticated && (
-                <>
-                  <div className="mt-10">
-                    <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
-                      Edit your page
-                    </h1>
-                    <div className="flex flex-col bg-white p-10 mt-10 mb-10 border-2 rounded-2xl">
-                      <h2 className="text-black font-extrabold text-2xl">
-                        Create a listing
-                      </h2>
-                      <label className="text-black mt-5" htmlFor="title">
-                        Link text
-                      </label>
-                      <input
-                        type="text"
-                        name="title"
-                        id="title"
-                        className="block w-full rounded-md text-black border-2 mt-1 p-2"
-                        placeholder="My awesome link"
-                        onChange={(e) => setTitle(e.target.value)}
-                      />
-                      <label className="text-black mt-2" htmlFor="url">
-                        Link url
-                      </label>
-                      <input
-                        type="text"
-                        name="url"
-                        id="urls"
-                        className="block w-full rounded-md text-black border-2 mt-1 mb-10 p-2"
-                        placeholder="https://nettiauto.com/audi/801721"
-                        onChange={(e) => setUrl(e.target.value)}
-                      />
-                      <label className="text-black mt-2" htmlFor="title">
-                        Tagline
-                      </label>
-                      <input
-                        type="text"
-                        name="title"
-                        id="title"
-                        className="block w-full rounded-md text-black border-2 mt-1 p-2"
-                        placeholder="My awesome link"
-                        onChange={(e) => setTagline(e.target.value)}
-                      />
-                      <label className="text-black mt-2" htmlFor="title">
-                        Tags
-                      </label>
-                      <input
-                        type="text"
-                        name="tags"
-                        id="title"
-                        className="block w-full rounded-md text-black border-2 mt-1 p-2"
-                        placeholder="My awesome link"
-                        onChange={(e) =>
-                          setTags((current: any) => [
-                            ...current,
-                            e.target.value
-                          ])
-                        }
-                      />
-                      <h3 className="text-black mt-4">
-                        Upload thumbnail for the car
-                      </h3>
-                      <ImageUploading
-                        multiple
-                        value={images}
-                        onChange={onChange}
-                        dataURLKey="data_url"
-                      >
-                        {({
-                          imageList,
-                          onImageUpload,
-                          onImageRemoveAll,
-                          onImageUpdate,
-                          onImageRemove,
-                          isDragging,
-                          dragProps
-                        }) => (
-                          // write your building UI
-                          <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-2 p-4">
-                            <button
-                              style={isDragging ? { color: 'red' } : undefined}
-                              onClick={onImageUpload}
-                              {...dragProps}
-                            >
-                              Click or Drop here
-                            </button>
-                            &nbsp;
-                            <button onClick={onImageRemoveAll}>
-                              Remove all images
-                            </button>
-                            {imageList.map((image, index) => (
-                              <div key={index} className="image-item">
-                                <img
-                                  src={image['data_url']}
-                                  alt=""
-                                  width="100"
-                                />
-                                <div className="image-item__btn-wrapper">
-                                  <button onClick={() => onImageUpdate(index)}>
-                                    Update
-                                  </button>
-                                  <button onClick={() => onImageRemove(index)}>
-                                    Remove
-                                  </button>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </ImageUploading>
+                      </p>
+                      ;
+                      {links.tags?.map((tag, index) => {
+                        <p
+                          className="jsx-902cb4503c8a7a8 text-[10px] text-stone-500 mt-2 flex gap-2"
+                          key={index}
+                        >
+                          <span className="jsx-902cb4503c8a7a8 px-[6px] py-[3px] bg-stone-100 rounded-md flex gap-1 items-center">
+                            {tag[0]}
+                          </span>
+                        </p>;
+                      })}
                       <button
-                        onClick={uploadCarPicture}
-                        type="button"
-                        className="mt-3 mb-5 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                        className="text-black"
+                        onClick={() => {
+                          setLinkId(link.id);
+                          deleteLink();
+                        }}
                       >
-                        Upload car picture
-                      </button>
-                      <button
-                        onClick={addNewLink}
-                        type="button"
-                        className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
-                      >
-                        Create a listing
-                      </button>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex flex-col bg-white p-10 mt-10 mb-10 border-2 rounded-2xl">
-                      <h2 className="text-black font-extrabold text-2xl">
-                        Create a social link
-                      </h2>
-                      <label className="text-black mt-5" htmlFor="title">
-                        Link text
-                      </label>
-                      <input
-                        type="text"
-                        name="title"
-                        id="title"
-                        className="block w-full rounded-md text-black border-2 mt-1 p-2"
-                        placeholder="My awesome link"
-                        onChange={(e) => setSocialTitle(e.target.value)}
-                      />
-                      <label className="text-black mt-2" htmlFor="url">
-                        Link url
-                      </label>
-                      <input
-                        type="text"
-                        name="url"
-                        id="urls"
-                        className="block w-full rounded-md text-black border-2 mt-1 mb-10 p-2"
-                        placeholder="https://nettiauto.com/audi/801721"
-                        onChange={(e) => setSocialUrl(e.target.value)}
-                      />
-                      <label className="text-black mt-2" htmlFor="url">
-                        Link type
-                      </label>
-                      <input
-                        type="text"
-                        name="url"
-                        id="urls"
-                        className="block w-full rounded-md text-black border-2 mt-1 mb-10 p-2"
-                        placeholder="https://nettiauto.com/audi/801721"
-                        onChange={(e) => setSocialType(e.target.value)}
-                      />
-                      <h3 className="text-black mt-4">
-                        Upload thumbnail for the car
-                      </h3>
-                      <ImageUploading
-                        multiple
-                        value={images}
-                        onChange={onChange}
-                        dataURLKey="data_url"
-                      >
-                        {({
-                          imageList,
-                          onImageUpload,
-                          onImageRemoveAll,
-                          onImageUpdate,
-                          onImageRemove,
-                          isDragging,
-                          dragProps
-                        }) => (
-                          // write your building UI
-                          <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-2 p-4">
-                            <button
-                              style={isDragging ? { color: 'red' } : undefined}
-                              onClick={onImageUpload}
-                              {...dragProps}
-                            >
-                              Click or Drop here
-                            </button>
-                            &nbsp;
-                            <button onClick={onImageRemoveAll}>
-                              Remove all images
-                            </button>
-                            {imageList.map((image, index) => (
-                              <div key={index} className="image-item">
-                                <img
-                                  src={image['data_url']}
-                                  alt=""
-                                  width="100"
-                                />
-                                <div className="image-item__btn-wrapper">
-                                  <button onClick={() => onImageUpdate(index)}>
-                                    Update
-                                  </button>
-                                  <button onClick={() => onImageRemove(index)}>
-                                    Remove
-                                  </button>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </ImageUploading>
-                      <button
-                        onClick={uploadSocialPicture}
-                        type="button"
-                        className="mt-3 mb-5 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
-                      >
-                        Upload car picture
-                      </button>
-                      <button
-                        onClick={addNewSocialLink}
-                        type="button"
-                        className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
-                      >
-                        Create a social link
+                        Delete
                       </button>
                     </div>
                   </div>
                 </>
-              )}
+              ))}
+              <div className="sm:flex sm:flex-col sm:align-center">
+                {authenticated && (
+                  <>
+                    <div className="mt-10">
+                      <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
+                        Edit your page
+                      </h1>
+                      <div className="flex flex-col bg-white p-10 mt-10 mb-10 border-2 rounded-2xl">
+                        <h2 className="text-black font-extrabold text-2xl">
+                          Create a listing
+                        </h2>
+                        <label className="text-black mt-5" htmlFor="title">
+                          Link text
+                        </label>
+                        <input
+                          type="text"
+                          name="title"
+                          id="title"
+                          className="block w-full rounded-md text-black border-2 mt-1 p-2"
+                          placeholder="My awesome link"
+                          onChange={(e) => setTitle(e.target.value)}
+                        />
+                        <label className="text-black mt-2" htmlFor="url">
+                          Link url
+                        </label>
+                        <input
+                          type="text"
+                          name="url"
+                          id="urls"
+                          className="block w-full rounded-md text-black border-2 mt-1 mb-10 p-2"
+                          placeholder="https://nettiauto.com/audi/801721"
+                          onChange={(e) => setUrl(e.target.value)}
+                        />
+                        <label className="text-black mt-2" htmlFor="title">
+                          Tagline
+                        </label>
+                        <input
+                          type="text"
+                          name="title"
+                          id="title"
+                          className="block w-full rounded-md text-black border-2 mt-1 p-2"
+                          placeholder="My awesome link"
+                          onChange={(e) => setTagline(e.target.value)}
+                        />
+                        <label className="text-black mt-2" htmlFor="title">
+                          Tags
+                        </label>
+                        <input
+                          type="text"
+                          name="tags"
+                          id="title"
+                          className="block w-full rounded-md text-black border-2 mt-1 p-2"
+                          placeholder="My awesome link"
+                          onChange={(e) =>
+                            setTags((current: any) => [
+                              ...current,
+                              e.target.value
+                            ])
+                          }
+                        />
+                        <h3 className="text-black mt-4">
+                          Upload thumbnail for the car
+                        </h3>
+                        <ImageUploading
+                          multiple
+                          value={images}
+                          onChange={onChange}
+                          dataURLKey="data_url"
+                        >
+                          {({
+                            imageList,
+                            onImageUpload,
+                            onImageRemoveAll,
+                            onImageUpdate,
+                            onImageRemove,
+                            isDragging,
+                            dragProps
+                          }) => (
+                            // write your building UI
+                            <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-2 p-4">
+                              <button
+                                style={
+                                  isDragging ? { color: 'red' } : undefined
+                                }
+                                onClick={onImageUpload}
+                                {...dragProps}
+                              >
+                                Click or Drop here
+                              </button>
+                              &nbsp;
+                              <button onClick={onImageRemoveAll}>
+                                Remove all images
+                              </button>
+                              {imageList.map((image, index) => (
+                                <div key={index} className="image-item">
+                                  <img
+                                    src={image['data_url']}
+                                    alt=""
+                                    width="100"
+                                  />
+                                  <div className="image-item__btn-wrapper">
+                                    <button
+                                      onClick={() => onImageUpdate(index)}
+                                    >
+                                      Update
+                                    </button>
+                                    <button
+                                      onClick={() => onImageRemove(index)}
+                                    >
+                                      Remove
+                                    </button>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </ImageUploading>
+                        <button
+                          onClick={uploadCarPicture}
+                          type="button"
+                          className="mt-3 mb-5 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                        >
+                          Upload car picture
+                        </button>
+                        <button
+                          onClick={addNewLink}
+                          type="button"
+                          className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                        >
+                          Create a listing
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex flex-col bg-white p-10 mt-10 mb-10 border-2 rounded-2xl">
+                        <h2 className="text-black font-extrabold text-2xl">
+                          Create a social link
+                        </h2>
+                        <label className="text-black mt-5" htmlFor="title">
+                          Link text
+                        </label>
+                        <input
+                          type="text"
+                          name="title"
+                          id="title"
+                          className="block w-full rounded-md text-black border-2 mt-1 p-2"
+                          placeholder="My awesome link"
+                          onChange={(e) => setSocialTitle(e.target.value)}
+                        />
+                        <label className="text-black mt-2" htmlFor="url">
+                          Link url
+                        </label>
+                        <input
+                          type="text"
+                          name="url"
+                          id="urls"
+                          className="block w-full rounded-md text-black border-2 mt-1 mb-10 p-2"
+                          placeholder="https://nettiauto.com/audi/801721"
+                          onChange={(e) => setSocialUrl(e.target.value)}
+                        />
+                        <label className="text-black mt-2" htmlFor="url">
+                          Link type
+                        </label>
+                        <input
+                          type="text"
+                          name="url"
+                          id="urls"
+                          className="block w-full rounded-md text-black border-2 mt-1 mb-10 p-2"
+                          placeholder="https://nettiauto.com/audi/801721"
+                          onChange={(e) => setSocialType(e.target.value)}
+                        />
+                        <h3 className="text-black mt-4">
+                          Upload thumbnail for the car
+                        </h3>
+                        <ImageUploading
+                          multiple
+                          value={images}
+                          onChange={onChange}
+                          dataURLKey="data_url"
+                        >
+                          {({
+                            imageList,
+                            onImageUpload,
+                            onImageRemoveAll,
+                            onImageUpdate,
+                            onImageRemove,
+                            isDragging,
+                            dragProps
+                          }) => (
+                            // write your building UI
+                            <div className="upload__image-wrapper text-black text-center bg-slate-400 border-4 m-2 p-4">
+                              <button
+                                style={
+                                  isDragging ? { color: 'red' } : undefined
+                                }
+                                onClick={onImageUpload}
+                                {...dragProps}
+                              >
+                                Click or Drop here
+                              </button>
+                              &nbsp;
+                              <button onClick={onImageRemoveAll}>
+                                Remove all images
+                              </button>
+                              {imageList.map((image, index) => (
+                                <div key={index} className="image-item">
+                                  <img
+                                    src={image['data_url']}
+                                    alt=""
+                                    width="100"
+                                  />
+                                  <div className="image-item__btn-wrapper">
+                                    <button
+                                      onClick={() => onImageUpdate(index)}
+                                    >
+                                      Update
+                                    </button>
+                                    <button
+                                      onClick={() => onImageRemove(index)}
+                                    >
+                                      Remove
+                                    </button>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </ImageUploading>
+                        <button
+                          onClick={uploadSocialPicture}
+                          type="button"
+                          className="mt-3 mb-5 w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                        >
+                          Upload car picture
+                        </button>
+                        <button
+                          onClick={addNewSocialLink}
+                          type="button"
+                          className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                        >
+                          Create a social link
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
-            <ContactBar />
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <ContactBar />
+    </>
   );
 };
 
