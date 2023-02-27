@@ -19,6 +19,7 @@ interface Link {
   thumbnail_url: string;
   tagline: string;
   tags: any;
+  price: string;
 }
 
 interface SocialLink {
@@ -45,6 +46,7 @@ const TreePage = () => {
   const [username, setUsername] = useState<string | any>();
   const [open, setOpen] = useState<number | null>(1);
   const [city, setCity] = useState<string | any>();
+  const [price, setPrice] = useState<string | any>();
   const [country, setCountry] = useState<string | any>();
   const [socialTitle, setSocialTitle] = useState<string | undefined>();
   const [socialType, setSocialType] = useState<string | undefined>();
@@ -77,7 +79,7 @@ const TreePage = () => {
       try {
         const { data, error } = await supabase
           .from('links')
-          .select('title, url, id, thumbnail_url, tagline, tags')
+          .select('title, url, id, thumbnail_url, tagline, tags, price')
           .eq('user_id', userId);
         if (error) throw error;
         if (data) {
@@ -160,7 +162,8 @@ const TreePage = () => {
             url: url,
             user_id: userId,
             tagline: tagline,
-            tags: tags
+            tags: tags,
+            price: price
           })
           .select();
         if (error) throw error;
@@ -370,7 +373,7 @@ const TreePage = () => {
                     <div className="h-[200px] overflow-hidden rounded-t-md relative justify-center">
                       <img src={link.thumbnail_url} alt="" className="" />
                       <span className="absolute py-1 px-2 top-2 left-2 rounded-full bg-stone-800 text-white text-xs z-10">
-                        58 725€
+                        {link.price}
                       </span>
                     </div>
                     <div className="h-full p-2 rounded-b-md bg-white">
@@ -424,7 +427,7 @@ const TreePage = () => {
                           Create a listing
                         </h2>
                         <label className="text-black mt-5" htmlFor="title">
-                          Link text
+                          Listing text
                         </label>
                         <input
                           type="text"
@@ -435,7 +438,7 @@ const TreePage = () => {
                           onChange={(e) => setTitle(e.target.value)}
                         />
                         <label className="text-black mt-2" htmlFor="url">
-                          Link url
+                          Listing url
                         </label>
                         <input
                           type="text"
@@ -444,6 +447,17 @@ const TreePage = () => {
                           className="block w-full rounded-md text-black border-2 mt-1 mb-10 p-2"
                           placeholder="https://nettiauto.com/audi/801721"
                           onChange={(e) => setUrl(e.target.value)}
+                        />
+                        <label className="text-black mt-2" htmlFor="title">
+                          Price
+                        </label>
+                        <input
+                          type="text"
+                          name="url"
+                          id="urls"
+                          className="block w-full rounded-md text-black border-2 mt-1 mb-10 p-2"
+                          placeholder="32 550"
+                          onChange={(e) => setPrice(e.target.value)}
                         />
                         <label className="text-black mt-2" htmlFor="title">
                           Tagline
