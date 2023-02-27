@@ -635,6 +635,18 @@ const TreePage = () => {
                           Create a social link
                         </button>
                       </div>
+                      <div className="flex flex-col bg-white p-10 mt-10 mb-10 border-2 rounded-2xl">
+                        <h2 className="text-black font-extrabold text-2xl">
+                          Toggle contact bar
+                        </h2>
+                        <button
+                          onClick={addNewSocialLink}
+                          type="button"
+                          className="rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                        >
+                          Save changes
+                        </button>
+                      </div>
                     </div>
                   </>
                 )}
