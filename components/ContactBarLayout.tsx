@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import { PageMeta } from '../types';
+import ContactBar from './ContactBar';
 
 interface Props {
   children: ReactNode;
@@ -41,6 +42,7 @@ export default function ContactBarLayout({ children, meta: pageMeta }: Props) {
         <meta name="twitter:image" content={meta.cardImage} />
       </Head>
       <main id="skip">{children}</main>
+      <ContactBar />
     </>
   );
 }

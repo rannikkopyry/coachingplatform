@@ -6,9 +6,9 @@ import Image from 'next/image';
 import { useUser } from 'utils/useUser';
 import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabase-client';
-import SimpleLayout from 'components/SimpleLayout';
 import { string } from 'yup';
 import ContactBar from '@/components/ContactBar';
+import ContactBarLayout from '@/components/ContactBarLayout';
 
 interface Link {
   title: String;
@@ -648,7 +648,7 @@ const TreePage = () => {
 };
 
 TreePage.getLayout = function (page: ReactElement) {
-  return <SimpleLayout>{page}</SimpleLayout>;
+  return <ContactBarLayout>{page}</ContactBarLayout>;
 };
 
 export default TreePage;
