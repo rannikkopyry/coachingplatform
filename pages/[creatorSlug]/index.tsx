@@ -16,7 +16,7 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { arrayMoveImmutable } from 'array-move';
 import SortableList from '../../components/SortableList';
 
-interface Link {
+export interface Link {
   title: String;
   url: string;
   id: string;
@@ -79,9 +79,6 @@ const TreePage = () => {
     'Item 5',
     'Item 6'
   ]);
-
-  console.log(items);
-  console.log(links);
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     setItems((prevItem) => arrayMoveImmutable(prevItem, oldIndex, newIndex));
@@ -311,18 +308,44 @@ const TreePage = () => {
   return (
     <>
       <section className="bg-white min-h-screen">
-        <div className="max-w-xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
-          {authenticated && (
-            <div className="right-0">
-              <button
-                onClick={() => setEditorMode(true)}
-                className="px-2 py-3 flex items-center w-full gap-1 outline-none text-black"
-              >
-                <img className="h-5 mr-2 text-center" src="/edit.svg" alt="" />
-                Edit page
+        <div className="max-w-xl mx-auto sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
+          <div className="flex gap-3 mb-4">
+            {authenticated && (
+              <button className="px-2 py-3 flex items-center gap-1 outline-none text-black border-2 shadow-sm rounded-lg">
+                <a href="/dashboard">Dashboard</a>
               </button>
-            </div>
-          )}
+            )}
+            {authenticated && editorMode === false && (
+              <div className="right-0">
+                <button
+                  onClick={() => setEditorMode(true)}
+                  className="px-2 py-3 flex items-center gap-1 outline-none text-black border-2 shadow-sm rounded-lg"
+                >
+                  <img
+                    className="h-5 mr-2 text-center"
+                    src="/edit.svg"
+                    alt=""
+                  />
+                  Edit page
+                </button>
+              </div>
+            )}
+            {authenticated && editorMode === true && (
+              <div className="right-0">
+                <button
+                  onClick={() => setEditorMode(false)}
+                  className="px-2 py-3 flex items-center gap-1 outline-none text-black border-2 shadow-sm rounded-lg"
+                >
+                  <img
+                    className="h-5 mr-2 text-center"
+                    src="/edit.svg"
+                    alt=""
+                  />
+                  Exit editing mode
+                </button>
+              </div>
+            )}
+          </div>
           <div className="text-center">
             <div className="text-center">
               {profilePictureUrl && (
@@ -432,7 +455,6 @@ const TreePage = () => {
                 </h2>
               )}
               <SortableList items={items} onSortEnd={onSortEnd} />
-
               <div className="sm:flex sm:flex-col sm:align-center">
                 {editorMode === true && (
                   <>
