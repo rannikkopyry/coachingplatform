@@ -24,6 +24,7 @@ export interface Link {
   tagline: string;
   tags: any;
   price: string;
+  type: string;
 }
 
 interface SocialLink {
@@ -450,7 +451,7 @@ const TreePage = () => {
                 </>
               ))}
               {links && (
-                <h2 className="mt-4 text-2xl text-black font-bold mb-4">
+                <h2 className="mt-4 mb-6 text-2xl text-black font-bold">
                   Other cars
                 </h2>
               )}
