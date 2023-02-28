@@ -424,7 +424,7 @@ const TreePage = () => {
                 </>
               ))}
               <div className="sm:flex sm:flex-col sm:align-center">
-                {authenticated && (
+                {editorMode === true && (
                   <>
                     <div className="mt-10">
                       <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
