@@ -42,6 +42,7 @@ const socials = [
 
 const TreePage = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
+  const [editorMode, setEditorMode] = useState<boolean>(false);
   const [title, setTitle] = useState<string | undefined>();
   const [url, setUrl] = useState<string | undefined>();
   const [userId, setUserId] = useState<string | undefined>();
@@ -212,7 +213,7 @@ const TreePage = () => {
             title: socialTitle,
             url: socialUrl,
             user_id: userId,
-            type: socialType
+            type: selected.name
           })
           .select();
         if (error) throw error;
@@ -288,12 +289,22 @@ const TreePage = () => {
     }
   };
 
-  console.log(showContactBar);
+  console.log(editorMode);
 
   return (
     <>
       <section className="bg-white min-h-screen">
         <div className="max-w-xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
+          {authenticated && (
+            <div className="right-0">
+              <button
+                onClick={() => setEditorMode(true)}
+                className="text-black"
+              >
+                Edit page
+              </button>
+            </div>
+          )}
           <div className="text-center">
             <div className="text-center">
               {profilePictureUrl && (
@@ -328,7 +339,7 @@ const TreePage = () => {
                   window.location.href = link.url;
                 }} */
                 >
-                  <div className="h-[50px] mb-4 mt-4 shadow-2xl bg-white">
+                  <div className="h-[50px] mb-4 mt-4 shadow-2xl bg-white rounded-xl">
                     <div className="h-full p-4 rounded-2xl">
                       <p className="text-xl font-bold leading-none text-black">
                         {link.title}
@@ -413,7 +424,7 @@ const TreePage = () => {
                 </>
               ))}
               <div className="sm:flex sm:flex-col sm:align-center">
-                {authenticated && (
+                {editorMode === true && (
                   <>
                     <div className="mt-10">
                       <h1 className="text-4xl font-extrabold text-black sm:text-center sm:text-6xl">
