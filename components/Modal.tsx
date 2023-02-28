@@ -17,7 +17,7 @@ const Modal = ({ isVisible, onClose }: Props) => {
         >
           X
         </button>
-        <div className="w-full max-w-[350px]">
+        <div className="w-full">
           <div className="bg-white rounded-lg shadow-xl mb-2 overflow-hidden">
             <ul className="divide-y divide-stone-100 text-sm">
               <button className="px-4 py-3 flex items-center w-full gap-2 outline-none text-black">
@@ -45,6 +45,17 @@ const Modal = ({ isVisible, onClose }: Props) => {
               <button className="px-4 py-3 flex items-center w-full gap-2 outline-none text-black">
                 <img className="h-5 mr-2 text-center" src="/mail.svg" alt="" />
                 Email
+                <span className="text-stone-500 text-xs ml-auto">
+                  pyry@motorlinks.io
+                </span>
+              </button>
+              <button className="px-4 py-3 flex items-center w-full gap-2 outline-none text-black">
+                <img
+                  className="h-5 mr-2 text-center"
+                  src="/whatsapp.svg"
+                  alt=""
+                />
+                Whatsapp
                 <span className="text-stone-500 text-xs ml-auto">
                   +358 452684828
                 </span>

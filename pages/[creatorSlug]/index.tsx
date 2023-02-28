@@ -42,6 +42,7 @@ const socials = [
 
 const TreePage = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
+  const [editorMode, setEditorMode] = useState<boolean>(false);
   const [title, setTitle] = useState<string | undefined>();
   const [url, setUrl] = useState<string | undefined>();
   const [userId, setUserId] = useState<string | undefined>();
@@ -288,12 +289,22 @@ const TreePage = () => {
     }
   };
 
-  console.log(selected);
+  console.log(editorMode);
 
   return (
     <>
       <section className="bg-white min-h-screen">
         <div className="max-w-xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
+          {authenticated && (
+            <div className="right-0">
+              <button
+                onClick={() => setEditorMode(true)}
+                className="text-black"
+              >
+                Edit page
+              </button>
+            </div>
+          )}
           <div className="text-center">
             <div className="text-center">
               {profilePictureUrl && (
