@@ -328,7 +328,7 @@ const TreePage = () => {
                   window.location.href = link.url;
                 }} */
                 >
-                  <div className="h-[50px] mb-4 mt-4 shadow-2xl bg-white">
+                  <div className="h-[50px] mb-4 mt-4 shadow-2xl bg-white rounded-xl">
                     <div className="h-full p-4 rounded-2xl">
                       <p className="text-xl font-bold leading-none text-black">
                         {link.title}

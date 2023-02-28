@@ -10,16 +10,39 @@ const Modal = ({ isVisible, onClose }: Props) => {
 
   return (
     <div className="w-auto p-4 fixed z-40 right-2 left-2 bottom-[70px] bg-white rounded-xl items-center border border-black text-center shadow-3xl">
-      <div className="w-1/4">
+      <div>
         <button
           onClick={() => onClose()}
           className=" text-black flex flex-row place-self-end"
         >
           X
         </button>
-        <div className=" p-10 text-center">
-          <h1 className="text-3xl mb-5">Subscribe to premium!</h1>
-          <p className="text-black">First month for free</p>
+        <div className="w-full max-w-[350px]">
+          <div className="bg-white rounded-lg shadow-xl mb-2 overflow-hidden">
+            <ul className="divide-y divide-stone-100 text-sm">
+              <button className="px-4 py-3 flex items-center w-full gap-2 outline-none text-black">
+                <img src="" alt="" />
+                Call
+                <span className="text-stone-500 text-xs ml-auto">
+                  +358 452684828
+                </span>
+              </button>
+              <button className="px-4 py-3 flex items-center w-full gap-2 outline-none text-black">
+                <img src="" alt="" />
+                Text
+                <span className="text-stone-500 text-xs ml-auto">
+                  +358 452684828
+                </span>
+              </button>
+              <button className="px-4 py-3 flex items-center w-full gap-2 outline-none text-black">
+                <img src="" alt="" />
+                Email
+                <span className="text-stone-500 text-xs ml-auto">
+                  +358 452684828
+                </span>
+              </button>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
