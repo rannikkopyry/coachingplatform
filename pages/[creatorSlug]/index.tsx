@@ -80,6 +80,9 @@ const TreePage = () => {
     'Item 6'
   ]);
 
+  console.log(items);
+  console.log(links);
+
   const onSortEnd = ({ oldIndex, newIndex }) => {
     setItems((prevItem) => arrayMoveImmutable(prevItem, oldIndex, newIndex));
   };
@@ -345,6 +348,18 @@ const TreePage = () => {
                 </div>
               )}
               {username && <p className="text-black font-bold">{bio}</p>}
+              {socialLinks?.map((link: SocialLink, index: number) => (
+                <div
+                  key={index}
+                  className="bg-white shadow-xl p-4 rounded-lg mt-4"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.location.href = link.url;
+                  }}
+                >
+                  <div className="text-black">{link.title}</div>
+                </div>
+              ))}
               {links && links?.length > 0 ? (
                 <h2 className="mt-4 text-2xl text-black font-bold">
                   Recent listing
@@ -355,17 +370,16 @@ const TreePage = () => {
                   <button>Add your first listing or link.</button>
                 </p>
               )}
-              <SortableList items={items} onSortEnd={onSortEnd} />
               {links?.map((link: Link, index: number) => (
                 <>
                   // @ts-ignore
                   <div
                     className="shadow-2xl"
                     key={index}
-                    /*  onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href = link.url;
-                  }} */
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.location.href = link.url;
+                    }}
                   >
                     <div className="h-[200px] overflow-hidden rounded-t-md relative justify-center">
                       <img src={link.thumbnail_url} alt="" className="" />
@@ -417,80 +431,8 @@ const TreePage = () => {
                   Other cars
                 </h2>
               )}
-              {links?.map((link: Link, index: number) => (
-                <div
-                  className="w-full  border-[1px] border-stone-200 rounded-md py-3 gap-2 bg-white"
-                  key={index}
-                  /* onClick={(e) => {
-                  e.preventDefault();
-                  window.location.href = link.url;
-                }} */
-                >
-                  <div className="flex gap-2 px-2">
-                    <div className="jsx-902cb4503c8a7a8 flex-shrink-0 flex items-start pt-1">
-                      <button className="text-stone-400">
-                        <img
-                          height="20px"
-                          width="20px"
-                          className="text-xl"
-                          src="/draggable.svg"
-                          alt=""
-                        />
-                      </button>
-                    </div>
-                    <div className="flex flex-grow overflow-hidden w-full gap-4 min-h-[80px]">
-                      <div className="w-20 h-20 flex-shrink-0 rounded-md overflow-hidden relative group bg-stone-100 border-stone-200 border">
-                        <img src="/volvo.jpeg" alt="" />
-                      </div>
-                      <div className="flex-grow flex flex-col overflow-hidden">
-                        <p className="px-2 py-1 text-white bg-black rounded-full text-xs flex items-center w-fit gap-1 mb-1">
-                          {link.price}
-                        </p>
-                        <p className="px-2 py-1 text-stone-500 rounded-md text-xs flex items-center w-fit gap-1 bg-stone-100">
-                          <img
-                            height="16px"
-                            width="16px"
-                            src="/car.svg"
-                            alt=""
-                          />
-                          Listing
-                        </p>
-                        <button className="text-black font-medium mt-auto block w-full text-left truncate">
-                          BMW I4 M50
-                        </button>
-                        <button className="text-stone-500 text-sm block w-full text-left overflow-hidden truncate">
-                          450 HP | Alcantara | Bowers & Wilkins
-                        </button>
-                      </div>
-                      <div className="flex-shrink-0 ml-auto pr-1">
-                        <div className="flex flex-col h-full">
-                          <div className="flex gap-2 justify-end items-center">
-                            <div className="jsx-902cb4503c8a7a8 flex items-center">
-                              <label
-                                className="ml-auto inline-flex relative items-center cursor-pointer"
-                                htmlFor=""
-                              ></label>
-                            </div>
-                            <button>
-                              <img
-                                height="16px"
-                                width="16px"
-                                src="/trashcan.svg"
-                                alt=""
-                              />
-                            </button>
-                          </div>
-                          <div className="mt-auto">
-                            <button className="text-stone-500 text-sm hover:text-black">
-                              Edit
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+              <SortableList items={items} onSortEnd={onSortEnd} />
+
               <div className="sm:flex sm:flex-col sm:align-center">
                 {editorMode === true && (
                   <>

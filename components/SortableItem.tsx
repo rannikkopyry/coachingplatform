@@ -22,7 +22,7 @@ const SortableItem = (props: any) => {
           </div>
           <div className="flex-grow flex flex-col overflow-hidden">
             <p className="px-2 py-1 text-white bg-black rounded-full text-xs flex items-center w-fit gap-1 mb-1">
-              55000
+              55 000
             </p>
             <p className="px-2 py-1 text-stone-500 rounded-md text-xs flex items-center w-fit gap-1 bg-stone-100">
               <img height="16px" width="16px" src="/car.svg" alt="" />
