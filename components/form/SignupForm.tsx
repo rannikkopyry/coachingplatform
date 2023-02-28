@@ -59,7 +59,6 @@ const SignUpForm = () => {
               label="Email"
               className="w-full rounded-md border-black border px-5 py-3 placeholder-gray-500 text-black"
             />
-            // @ts-ignore
             {/*             <ErrorMessage name="email" className="text-black" />
              */}{' '}
             <button
