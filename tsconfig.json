@@ -21,7 +21,9 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/utils/*": ["utils/*"],
-      "@/styles/*": ["styles/*"]
+      "@/styles/*": ["styles/*"],
+      "react": [ "./node_modules/@types/react" ]
+
     },
     "incremental": true
   },

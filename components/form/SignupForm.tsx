@@ -11,7 +11,7 @@ interface FormValues {
 }
 
 const SignupSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required(''),
+  email: Yup.string().email('Invalid email').required('')
 });
 
 const SignUpForm = () => {
@@ -25,7 +25,7 @@ const SignUpForm = () => {
     const { email } = values;
     try {
       const payload = {
-        email_address: email,
+        email_address: email
       };
 
       await axios.post('/.netlify/functions/add-email-subscriber', payload);
@@ -42,34 +42,36 @@ const SignUpForm = () => {
 
   return (
     <>
-        <Formik
-          initialValues={{ email: '' }}
-          validationSchema={SignupSchema}
-          onSubmit={submitForm}
-        >
-          {(formik) => (
-            <Form
-              data-netlify-recaptcha="true"
-              data-netlify="true"
-              className="sm:flex max-w-[500px] w-full"
+      <Formik
+        initialValues={{ email: '' }}
+        validationSchema={SignupSchema}
+        onSubmit={submitForm}
+      >
+        {(formik) => (
+          <Form
+            data-netlify-recaptcha="true"
+            data-netlify="true"
+            className="sm:flex max-w-[500px] w-full"
+          >
+            <Field
+              name="email"
+              placeholder="Your email address"
+              label="Email"
+              className="w-full rounded-md border-black border px-5 py-3 placeholder-gray-500 text-black"
+            />
+            // @ts-ignore
+            {/*             <ErrorMessage name="email" className="text-black" />
+             */}{' '}
+            <button
+              disabled={!formik.isValid || !formik.dirty}
+              type="submit"
+              className="mt-3 flex w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
             >
-              <Field
-                name="email"
-                placeholder="Your email address"
-                label="Email"
-                className="w-full rounded-md border-black border px-5 py-3 placeholder-gray-500 text-black"
-              />
-              <ErrorMessage name="email" className="text-black" />
-              <button
-                disabled={!formik.isValid || !formik.dirty}
-                type="submit"
-                className="mt-3 flex w-full min-h-[50px] items-center justify-center rounded-md border border-transparent bg-black px-5 py-3 text-base font-medium text-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
-              >
-                Subscribe
-              </button>
-            </Form>
-          )}
-        </Formik>
+              Subscribe
+            </button>
+          </Form>
+        )}
+      </Formik>
     </>
   );
 };
