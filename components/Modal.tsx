@@ -21,21 +21,29 @@ const Modal = ({ isVisible, onClose }: Props) => {
           <div className="bg-white rounded-lg shadow-xl mb-2 overflow-hidden">
             <ul className="divide-y divide-stone-100 text-sm">
               <button className="px-4 py-3 flex items-center w-full gap-2 outline-none text-black">
-                <img src="" alt="" />
+                <img
+                  className="h-5 mr-2 text-center"
+                  src="/phoneblack.svg"
+                  alt=""
+                />
                 Call
                 <span className="text-stone-500 text-xs ml-auto">
                   +358 452684828
                 </span>
               </button>
               <button className="px-4 py-3 flex items-center w-full gap-2 outline-none text-black">
-                <img src="" alt="" />
+                <img
+                  className="h-5 mr-2 text-center"
+                  src="/message.svg"
+                  alt=""
+                />
                 Text
                 <span className="text-stone-500 text-xs ml-auto">
                   +358 452684828
                 </span>
               </button>
               <button className="px-4 py-3 flex items-center w-full gap-2 outline-none text-black">
-                <img src="" alt="" />
+                <img className="h-5 mr-2 text-center" src="/mail.svg" alt="" />
                 Email
                 <span className="text-stone-500 text-xs ml-auto">
                   +358 452684828
