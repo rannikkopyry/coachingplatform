@@ -13,6 +13,8 @@ import SimpleLayout from '@/components/SimpleLayout';
 import { Switch } from '@headlessui/react';
 import { Combobox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import { arrayMoveImmutable } from 'array-move';
+import SortableList from '../../components/SortableList';
 
 interface Link {
   title: String;
@@ -69,6 +71,18 @@ const TreePage = () => {
 
   const [selected, setSelected] = useState(socials[0]);
   const [query, setQuery] = useState('');
+  const [items, setItems] = useState([
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+    'Item 5',
+    'Item 6'
+  ]);
+
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    setItems((prevItem) => arrayMoveImmutable(prevItem, oldIndex, newIndex));
+  };
 
   const filteredSocials =
     query === ''
@@ -341,6 +355,7 @@ const TreePage = () => {
                   <button>Add your first listing or link.</button>
                 </p>
               )}
+              <SortableList items={items} onSortEnd={onSortEnd} />
               {links?.map((link: Link, index: number) => (
                 <>
                   // @ts-ignore
