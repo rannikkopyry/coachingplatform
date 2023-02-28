@@ -65,7 +65,7 @@ const TreePage = () => {
   const [socialUrl, setSocialUrl] = useState<string | undefined>();
   const [bio, setBio] = useState<string | any>();
   const [enabled, setEnabled] = useState(false);
-  const [showContactBar, setShowContactBar] = useState<boolean>(true);
+  const [showContactBar, setShowContactBar] = useState<boolean | any>(true);
 
   const [selected, setSelected] = useState(socials[0]);
   const [query, setQuery] = useState('');
@@ -299,8 +299,9 @@ const TreePage = () => {
             <div className="right-0">
               <button
                 onClick={() => setEditorMode(true)}
-                className="text-black"
+                className="px-2 py-3 flex items-center w-full gap-1 outline-none text-black"
               >
+                <img className="h-5 mr-2 text-center" src="/edit.svg" alt="" />
                 Edit page
               </button>
             </div>
@@ -357,7 +358,7 @@ const TreePage = () => {
                   </div>
                 </div>
               ))}
-              {links?.length > 0 ? (
+              {links && links?.length > 0 ? (
                 <h2 className="mt-4 text-2xl text-black font-bold">
                   Recent listing:
                 </h2>
@@ -400,7 +401,7 @@ const TreePage = () => {
                         </span>
                       </p>
                       ;
-                      {links.tags?.map((tag, index) => {
+                      {/* {links.tags?.map((tag, index) => {
                         <p
                           className="jsx-902cb4503c8a7a8 text-[10px] text-stone-500 mt-2 flex gap-2"
                           key={index}
@@ -409,7 +410,7 @@ const TreePage = () => {
                             {tag[0]}
                           </span>
                         </p>;
-                      })}
+                      })} */}
                       <button
                         className="text-black"
                         onClick={() => {
@@ -602,7 +603,7 @@ const TreePage = () => {
                             <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
                               <Combobox.Input
                                 className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
-                                displayValue={(person) => person.name}
+                                displayValue={(person: any) => person.name}
                                 onChange={(event) =>
                                   setQuery(event.target.value)
                                 }
@@ -715,11 +716,12 @@ const TreePage = () => {
                     </div>
                   </>
                 )}
+
+                {showContactBar == true && <ContactBar />}
               </div>
             </div>
           </div>
         </div>
-        {showContactBar == true && <ContactBar />}
       </section>
     </>
   );
