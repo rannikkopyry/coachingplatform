@@ -31,6 +31,7 @@ const SignUp = () => {
       });
       if (error) throw error;
       console.log(data);
+      // @ts-ignore
       const userId = data.data.user?.id;
       console.log(userId);
       if (userId) {

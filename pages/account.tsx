@@ -142,13 +142,14 @@ export default function Account({ user }: { user: User }) {
           .from('users')
           .update(
             {
+              // @ts-ignore
               city: updatedCity,
               country: updatedCountry,
               bio: updatedBio
             },
             { upsert: true }
           )
-          .eq('id', userId);
+          .eq('id', user.id);
         if (error) throw error;
         setReady(true);
       }
