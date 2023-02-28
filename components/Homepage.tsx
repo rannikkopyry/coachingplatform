@@ -325,7 +325,7 @@ export default function Homepage() {
               </div>
               <a
                 className="bg-black border-black border text-white mt-8 block w-full py-3 px-6 rounded-md text-center font-medium"
-                href=""
+                href="https://buy.stripe.com/test_5kA7vsbkJ2cJeoo6oo"
               >
                 Coming soon
               </a>

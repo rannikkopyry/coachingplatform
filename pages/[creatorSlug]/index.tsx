@@ -13,8 +13,10 @@ import SimpleLayout from '@/components/SimpleLayout';
 import { Switch } from '@headlessui/react';
 import { Combobox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import { arrayMoveImmutable } from 'array-move';
+import SortableList from '../../components/SortableList';
 
-interface Link {
+export interface Link {
   title: String;
   url: string;
   id: string;
@@ -22,6 +24,7 @@ interface Link {
   tagline: string;
   tags: any;
   price: string;
+  type: string;
 }
 
 interface SocialLink {
@@ -69,6 +72,18 @@ const TreePage = () => {
 
   const [selected, setSelected] = useState(socials[0]);
   const [query, setQuery] = useState('');
+  const [items, setItems] = useState([
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+    'Item 5',
+    'Item 6'
+  ]);
+
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    setItems((prevItem) => arrayMoveImmutable(prevItem, oldIndex, newIndex));
+  };
 
   const filteredSocials =
     query === ''
@@ -294,18 +309,44 @@ const TreePage = () => {
   return (
     <>
       <section className="bg-white min-h-screen">
-        <div className="max-w-xl mx-auto pt-8 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
-          {authenticated && (
-            <div className="right-0">
-              <button
-                onClick={() => setEditorMode(true)}
-                className="px-2 py-3 flex items-center w-full gap-1 outline-none text-black"
-              >
-                <img className="h-5 mr-2 text-center" src="/edit.svg" alt="" />
-                Edit page
+        <div className="max-w-xl mx-auto sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
+          <div className="flex gap-3 mb-4">
+            {authenticated && (
+              <button className="px-2 py-3 flex items-center gap-1 outline-none text-black border-2 shadow-sm rounded-lg">
+                <a href="/dashboard">Dashboard</a>
               </button>
-            </div>
-          )}
+            )}
+            {authenticated && editorMode === false && (
+              <div className="right-0">
+                <button
+                  onClick={() => setEditorMode(true)}
+                  className="px-2 py-3 flex items-center gap-1 outline-none text-black border-2 shadow-sm rounded-lg"
+                >
+                  <img
+                    className="h-5 mr-2 text-center"
+                    src="/edit.svg"
+                    alt=""
+                  />
+                  Edit page
+                </button>
+              </div>
+            )}
+            {authenticated && editorMode === true && (
+              <div className="right-0">
+                <button
+                  onClick={() => setEditorMode(false)}
+                  className="px-2 py-3 flex items-center gap-1 outline-none text-black border-2 shadow-sm rounded-lg"
+                >
+                  <img
+                    className="h-5 mr-2 text-center"
+                    src="/edit.svg"
+                    alt=""
+                  />
+                  Exit editing mode
+                </button>
+              </div>
+            )}
+          </div>
           <div className="text-center">
             <div className="text-center">
               {profilePictureUrl && (
@@ -333,34 +374,19 @@ const TreePage = () => {
               {username && <p className="text-black font-bold">{bio}</p>}
               {socialLinks?.map((link: SocialLink, index: number) => (
                 <div
-                  className=""
                   key={index}
-                  /* onClick={(e) => {
-                  e.preventDefault();
-                  window.location.href = link.url;
-                }} */
+                  className="bg-white shadow-xl p-4 rounded-lg mt-4"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.location.href = link.url;
+                  }}
                 >
-                  <div className="h-[50px] mb-4 mt-4 shadow-2xl bg-white rounded-xl">
-                    <div className="h-full p-4 rounded-2xl">
-                      <p className="text-xl font-bold leading-none text-black">
-                        {link.title}
-                      </p>
-                      <button
-                        className="text-black"
-                        onClick={() => {
-                          setSocialLinkId(link.id);
-                          deleteSocialLink();
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
+                  <div className="text-black">{link.title}</div>
                 </div>
               ))}
               {links && links?.length > 0 ? (
                 <h2 className="mt-4 text-2xl text-black font-bold">
-                  Recent listing:
+                  Recent listing
                 </h2>
               ) : (
                 <p className="text-black">
@@ -374,10 +400,10 @@ const TreePage = () => {
                   <div
                     className="shadow-2xl"
                     key={index}
-                    /*  onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href = link.url;
-                  }} */
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.location.href = link.url;
+                    }}
                   >
                     <div className="h-[200px] overflow-hidden rounded-t-md relative justify-center">
                       <img src={link.thumbnail_url} alt="" className="" />
@@ -424,6 +450,12 @@ const TreePage = () => {
                   </div>
                 </>
               ))}
+              {links && (
+                <h2 className="mt-4 mb-6 text-2xl text-black font-bold">
+                  Other cars
+                </h2>
+              )}
+              <SortableList items={items} onSortEnd={onSortEnd} />
               <div className="sm:flex sm:flex-col sm:align-center">
                 {editorMode === true && (
                   <>
