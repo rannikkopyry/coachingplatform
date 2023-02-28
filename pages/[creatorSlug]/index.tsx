@@ -333,7 +333,7 @@ const TreePage = () => {
               {username && <p className="text-black font-bold">{bio}</p>}
               {links && links?.length > 0 ? (
                 <h2 className="mt-4 text-2xl text-black font-bold">
-                  Recent listing:
+                  Recent listing
                 </h2>
               ) : (
                 <p className="text-black">
@@ -397,6 +397,11 @@ const TreePage = () => {
                   </div>
                 </>
               ))}
+              {links && (
+                <h2 className="mt-4 text-2xl text-black font-bold mb-4">
+                  Other cars
+                </h2>
+              )}
               {links?.map((link: Link, index: number) => (
                 <div
                   className="w-full  border-[1px] border-stone-200 rounded-md py-3 gap-2 bg-white"
@@ -423,11 +428,14 @@ const TreePage = () => {
                         <img src="/volvo.jpeg" alt="" />
                       </div>
                       <div className="flex-grow flex flex-col overflow-hidden">
+                        <p className="px-2 py-1 text-white bg-black rounded-full text-xs flex items-center w-fit gap-1 mb-1">
+                          {link.price}
+                        </p>
                         <p className="px-2 py-1 text-stone-500 rounded-md text-xs flex items-center w-fit gap-1 bg-stone-100">
                           <img
                             height="16px"
                             width="16px"
-                            src="/trashcan.svg"
+                            src="/car.svg"
                             alt=""
                           />
                           Listing
