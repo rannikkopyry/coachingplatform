@@ -4,7 +4,7 @@ import { SortableElement } from 'react-sortable-hoc';
 import { useUser } from 'utils/useUser';
 import { Link } from 'pages/[creatorSlug]';
 
-const SortableItem = (props: any) => {
+const SortableItem = () => {
   const user = useUser();
   const [links, setLinks] = useState<Link[]>();
 
@@ -14,7 +14,7 @@ const SortableItem = (props: any) => {
       try {
         const { data, error } = await supabase
           .from('links')
-          .select('title, url, id, thumbnail_url, tagline, tags, price')
+          .select('title, url, id, thumbnail_url, tagline, tags, price, type')
           .eq('user_id', user?.user?.id);
         if (error) throw error;
         if (data) {
@@ -57,7 +57,7 @@ const SortableItem = (props: any) => {
                 {link.type}
               </p>
               <button className="text-black font-medium mt-auto block w-full text-left truncate">
-                {props.value}
+                {link.title}
               </button>
               <button className="text-stone-500 text-sm block w-full text-left overflow-hidden truncate">
                 {link.tagline}
