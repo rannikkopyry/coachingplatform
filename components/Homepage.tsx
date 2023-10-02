@@ -8,11 +8,11 @@ export default function Homepage() {
       <div className="w-full grid grid-cols-1 md:grid-cols-[2fr_1fr] min-h-[500px] items-center max-w-7xl px-4 m-auto py-[60px] z-10">
         <div className="md: pr-10">
           <h1 className="text-black text-5xl md:text-8xl font-bold font-grotesk_bold">
-            OUR VISION; PERFORMANCE
+            Flexible endurance performance
           </h1>
           <p className="text-black text-2xl mt-8 font-light">
-            Our goal is to make high perfomace coaching avalible for everyone
-            who wants just that; high performance.
+            We bring high performance coaching available to regular people. We
+            make regular people special.
           </p>
           <div className="mt-8">
             <SignupForm />
@@ -21,27 +21,11 @@ export default function Homepage() {
         <div className="flex-shrink-0 w-full items-center justify-center min-h-[615px] flex">
           <div className="min-h-[500px] flex items-center">
             <div>
-              <a
-                className="mt-5 xs:visible"
-                href="https://www.producthunt.com/posts/motorlinks-io?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-motorlinks&#0045;io"
-                target="_blank"
-              >
-                <img
-                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=378986&theme=light"
-                  alt="Motorlinks&#0046;io - Generate&#0032;leads&#0032;through&#0032;your&#0032;social&#0032;bio | Product Hunt"
-                  width="250"
-                  height="54"
-                />
-              </a>
-              <img src="/demo1.png" alt="" />
-              {/* <p className='text-black text-3xl mb-4 font-medium'>More leads</p>
-            <ul className='text-black text-xl'>
-                <li className='flex gap-2 items-center mb-2'>Showcase cars you are selling</li>
-                <li className='flex gap-2 items-center mb-2'>Professional look</li>
-                <li className='flex gap-2 items-center mb-2'>Collect email adresses</li>
-                <li className='flex gap-2 items-center mb-2'>Highly customizable</li>
-                <li className='flex gap-2 items-center mb-2'>Many integration possibilities</li>
-            </ul> */}
+              <img src="/funk.png" alt="" />
+              <p className="text-black text-2xl mt-8 font-light">
+                2023 July training camp in Livigno. Photo with Ironman 70.3 Vice
+                World-Champion Frederik Funk
+              </p>{' '}
             </div>
           </div>
         </div>
@@ -72,13 +56,13 @@ export default function Homepage() {
             <div className="flex items-center">
               <div>
                 <h2 className="text-black text-3xl md:text-6xl font-bold font-grotesk_bold text-center md:text-left">
-                  Made for leads
+                  Tailored for you
                 </h2>
                 <p className="text-black text-2xl mt-8 text-center md:text-left font-light">
-                  While there is other solutions for displaying links in your
-                  bio, motorlinks.io is made for boosting car sales and catching
-                  possible car buyers. Special tools optimized for automotive
-                  professionals and getting leads.
+                  We create training plans for whatever you goals are. Whether
+                  it's a marathon or just a better shape overall we got you
+                  covered. If your plans change and you can't do training we can
+                  change the plan quickly and avoid any problems with overload.
                 </p>
               </div>
             </div>
@@ -144,9 +128,7 @@ export default function Homepage() {
             </div>
             <div className="flex items-center">
               <div>
-                <h2 className="text-black text-3xl md:text-6xl font-bold font-grotesk_bold text-center md:text-left">
-                  No coding required
-                </h2>
+                <h2 className="text-black text-3xl md:text-6xl font-bold font-grotesk_bold text-center md:text-left"></h2>
                 <p className="text-black text-2xl mt-8 text-center md:text-left font-light">
                   A car salesperson has most likely no interest in coding.
                   That's why we handle the technology side and let you focus on
