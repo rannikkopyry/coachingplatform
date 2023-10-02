@@ -27,6 +27,13 @@ export default function Homepage() {
           </div>
         </div>
       </div>
+      <div className="flex overflow-hidden">
+        <img className="max-w-[650px]" src="/kisa1.jpg" alt="" />
+        <img className="max-w-[350px]" src="/pyry.jpg" alt="" />
+        <img className="max-w-[800px]" src="/kisa2.jpg" alt="" />
+        <img className="max-w-[350px]" src="/pyry.jpg" alt="" />
+        <img className="max-w-[350px]" src="/pyry.jpg" alt="" />
+      </div>
       <div id="features">
         <div className="w-full max-w-6xl px-4 md:px-8 m-auto py-[40px] md:py-[60px]">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 min-h-[300px]">
@@ -47,6 +54,10 @@ export default function Homepage() {
               <div className="w-full max-w-[350px] m-auto">
                 <div className="w-full max-w-[350px] mt-8">
                   <img src="/lotto.png" alt="" />
+                  <p className="text-black text-2xl mt-8 font-light">
+                    Training session in Swiss alps with Lotto-Dstny Development
+                    team
+                  </p>{' '}
                 </div>
               </div>
             </div>
@@ -102,6 +113,12 @@ export default function Homepage() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="flex overflow-hidden">
+        <img className="max-w-[400px]" src="/ville.png" alt="" />
+        <img className="max-w-[400px]" src="/csf.png" alt="" />
+        <img className="max-w-[400px]" src="/juoksurata.jpeg" alt="" />
+        <img className="max-w-[800px]" src="/talvi.jpeg" alt="" />
       </div>
       <div id="pricing" className="w-full bg-[rgba(0,0,0,0.05)] mt-20">
         <div className="w-full max-w-6xl px-4 md:px-8 m-auto py-[40px] md:py-[60px]">

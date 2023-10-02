@@ -19,8 +19,7 @@ function Contact() {
             <div>
               <img src="/pyry.JPG" alt="" />
               <p className="text-black text-2xl mt-8 font-light">
-                2023 July training camp in Livigno. Photo with Ironman 70.3 Vice
-                World-Champion Frederik Funk
+                Your head coach Pyry
               </p>{' '}
             </div>
           </div>
