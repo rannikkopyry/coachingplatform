@@ -12,9 +12,8 @@ interface Props {
 export default function ContactBarLayout({ children, meta: pageMeta }: Props) {
   const router = useRouter();
   const meta = {
-    title: 'Motorlinks.io - Best friend of car salesmen.',
-    description:
-      'Generate leads automatically just by pasting a link in your social bio.',
+    title: 'RP-Performance - Endurance coaching',
+    description: 'Train like a professional athlete with our coaching.',
     cardImage: '/og.png',
     ...pageMeta
   };
