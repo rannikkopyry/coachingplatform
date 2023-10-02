@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import s from './Navbar.module.css';
-import Logo from 'components/icons/Logo';
+import Logo2 from 'components/icons/Logo2';
 import { useRouter } from 'next/router';
 import { useUser } from 'utils/useUser';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
@@ -20,7 +20,7 @@ const Navbar = () => {
           <div className="flex flex-1 items-center ">
             <Link href="/">
               <a className={s.logo} aria-label="Logo">
-                <Logo />
+                <Logo2 />
               </a>
             </Link>
             <nav className="space-x-2 ml-6 hidden lg:block">
