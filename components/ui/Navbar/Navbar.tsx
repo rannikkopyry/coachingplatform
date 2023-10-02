@@ -35,7 +35,7 @@ const Navbar = () => {
 
           <div className="hidden md:flex flex-1 justify-end space-x-8">
             <button className="invisible lg:visible md:visible max-h-[50px] mt-6 bg-black text-white text-base font-medium py-3 px-6 rounded-full cursor-pointer">
-              <a href="/dashboard">Leave us a message</a>
+              <a href="/contact">Leave us a message</a>
             </button>
           </div>
         </div>
