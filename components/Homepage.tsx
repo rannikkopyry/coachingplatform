@@ -8,12 +8,11 @@ export default function Homepage() {
       <div className="w-full grid grid-cols-1 md:grid-cols-[2fr_1fr] min-h-[500px] items-center max-w-7xl px-4 m-auto py-[60px] z-10">
         <div className="md: pr-10">
           <h1 className="text-black text-5xl md:text-8xl font-bold font-grotesk_bold">
-            Tool to make your social bio a powerful lead generator
+            OUR VISION; PERFORMANCE
           </h1>
           <p className="text-black text-2xl mt-8 font-light">
-            Motorlinks.io allows car & machinery sales professionals and
-            amateurs generate leads through their Instagram or Twitter bio. Get
-            started for free. No credit card required!
+            Our goal is to make high perfomace coaching avalible for everyone
+            who wants just that; high performance.
           </p>
           <div className="mt-8">
             <SignupForm />
