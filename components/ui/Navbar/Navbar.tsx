@@ -27,31 +27,16 @@ const Navbar = () => {
               <Link href="#pricing">
                 <a className={s.link}>Pricing</a>
               </Link>
-              {/*  <Link href="/account">
-                <a className={s.link}>Account</a>
-              </Link> */}
+              <Link href="/contact">
+                <a className={s.link}>Contact</a>
+              </Link>
             </nav>
           </div>
 
           <div className="hidden md:flex flex-1 justify-end space-x-8">
             <button className="invisible lg:visible md:visible max-h-[50px] mt-6 bg-black text-white text-base font-medium py-3 px-6 rounded-full cursor-pointer">
-              <a href="/dashboard">Your dashboard</a>
+              <a href="/dashboard">Leave us a message</a>
             </button>
-            {user ? (
-              <span
-                className={s.link}
-                onClick={async () => {
-                  await supabaseClient.auth.signOut();
-                  router.push('/signin');
-                }}
-              >
-                Sign out
-              </span>
-            ) : (
-              <Link href="/signin">
-                <a className={s.link}>Sign in</a>
-              </Link>
-            )}
           </div>
         </div>
       </div>
