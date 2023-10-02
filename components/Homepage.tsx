@@ -14,9 +14,6 @@ export default function Homepage() {
             We bring high performance coaching available to regular people. We
             make regular people special.
           </p>
-          <div className="mt-8">
-            <SignupForm />
-          </div>
         </div>
         <div className="flex-shrink-0 w-full items-center justify-center min-h-[615px] flex">
           <div className="min-h-[500px] flex items-center">

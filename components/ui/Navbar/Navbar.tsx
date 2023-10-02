@@ -27,9 +27,9 @@ const Navbar = () => {
               <Link href="#pricing">
                 <a className={s.link}>Pricing</a>
               </Link>
-              {/*  <Link href="/account">
-                <a className={s.link}>Account</a>
-              </Link> */}
+              <Link href="/contact">
+                <a className={s.link}>Contact</a>
+              </Link>
             </nav>
           </div>
 
