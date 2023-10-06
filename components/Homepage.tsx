@@ -76,7 +76,7 @@ export default function Homepage() {
             <div className="flex items-center">
               <div>
                 <h2 className="text-black text-3xl md:text-6xl font-bold font-grotesk_bold text-center md:text-left">
-                  Science backed
+                  Evidence backed
                 </h2>
                 <p className="text-black text-2xl mt-8 text-center md:text-left font-light">
                   With strong understanding and experience of scientific methods
