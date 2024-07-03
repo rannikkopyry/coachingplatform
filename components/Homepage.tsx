@@ -132,7 +132,7 @@ export default function Homepage() {
           <div className="relative flex flex-col rounded-md bg-black p-4 mt-4">
             <div className="flex-1">
               <p className="mt-4 flex items-baseline text-white">
-                <span className="text-5xl font-bold tracking-tight">149€</span>
+                <span className="text-5xl font-bold tracking-tight">79€</span>
                 <span className="ml-1 text-xl font-semibold">/month</span>
               </p>
               <p className="mt-6 text-gray-500">
@@ -186,22 +186,8 @@ export default function Homepage() {
                   />
                   <span>Phone calls by appoinment</span>
                 </li>
-                <li className="flex">
-                  <img
-                    className="h-6 w-6 flex-shrink-0 mr-2"
-                    src="/checkwhite.png"
-                    alt="Checkmark"
-                  />
-                  <span>Train like a professional athlete</span>
-                </li>
               </ul>
             </div>
-            <a
-              className="bg-black border-white border text-white mt-8 block w-full py-3 px-6 rounded-md text-center font-medium"
-              href=""
-            >
-              Contact sales
-            </a>
           </div>
         </div>
       </div>

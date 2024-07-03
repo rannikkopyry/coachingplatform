@@ -15,7 +15,7 @@ export default function Layout({ children, meta: pageMeta }: Props) {
   const router = useRouter();
   const meta = {
     title: 'RP-Performance - Endurance coaching.',
-    description: 'Train like a professional athlete with our coaching..',
+    description: 'Train like a professional athlete with our coaching.',
     cardImage: '/og.png',
     ...pageMeta
   };
