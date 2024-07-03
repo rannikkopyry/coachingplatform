@@ -76,7 +76,7 @@ export default function Homepage() {
             <div className="flex items-center">
               <div>
                 <h2 className="text-black text-3xl md:text-6xl font-bold font-grotesk_bold text-center md:text-left">
-                  Science backed
+                  Evidence backed
                 </h2>
                 <p className="text-black text-2xl mt-8 text-center md:text-left font-light">
                   With strong understanding and experience of scientific methods
@@ -126,13 +126,13 @@ export default function Homepage() {
             Pricing
           </h2>
           <p className="text-stone-500 text-2xl text-center font-light">
-            We have only one price and it includes everything.
+            We have only one price and it includes everything. Also VAT 24%
           </p>
           <div className="mt-8 md:mt-16 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0"></div>
           <div className="relative flex flex-col rounded-md bg-black p-4 mt-4">
             <div className="flex-1">
               <p className="mt-4 flex items-baseline text-white">
-                <span className="text-5xl font-bold tracking-tight">149€</span>
+                <span className="text-5xl font-bold tracking-tight">89€</span>
                 <span className="ml-1 text-xl font-semibold">/month</span>
               </p>
               <p className="mt-6 text-gray-500">
@@ -192,16 +192,10 @@ export default function Homepage() {
                     src="/checkwhite.png"
                     alt="Checkmark"
                   />
-                  <span>Train like a professional athlete</span>
+                  <span>Trainingpeaks account</span>
                 </li>
               </ul>
             </div>
-            <a
-              className="bg-black border-white border text-white mt-8 block w-full py-3 px-6 rounded-md text-center font-medium"
-              href=""
-            >
-              Contact sales
-            </a>
           </div>
         </div>
       </div>
