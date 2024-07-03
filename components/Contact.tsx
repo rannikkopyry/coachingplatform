@@ -12,6 +12,14 @@ function Contact() {
             Get in touch with us and let's discuss our possible partnership in
             training.
           </p>
+          <p className="text-black text-2xl mt-8 font-light">
+            You can send us an email at <></>
+            <strong>pyry.rannikko1@gmail</strong>. We will then send you more
+            details and you can decide if you want to start.
+          </p>
+          <p className="text-black text-2xl mt-8 font-light">
+            Sending a message is not going to make you commit into our coaching.
+          </p>
           <div className="mt-8"></div>
         </div>
         <div className="flex-shrink-0 w-full items-center justify-center min-h-[615px] flex">
@@ -19,7 +27,7 @@ function Contact() {
             <div>
               <img src="/pyry.JPG" alt="" />
               <p className="text-black text-2xl mt-8 font-light">
-                Your head coach Pyry
+                Your coach Pyry
               </p>{' '}
             </div>
           </div>
