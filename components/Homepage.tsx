@@ -126,7 +126,7 @@ export default function Homepage() {
             Pricing
           </h2>
           <p className="text-stone-500 text-2xl text-center font-light">
-            We have only one price and it includes everything. Also VAT 24%
+            We have only one price and it includes everything. Also VAT 25.5%
           </p>
           <div className="mt-8 md:mt-16 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0"></div>
           <div className="relative flex flex-col rounded-md bg-black p-4 mt-4">
@@ -185,14 +185,6 @@ export default function Homepage() {
                     alt="Checkmark"
                   />
                   <span>Phone calls by appoinment</span>
-                </li>
-                <li className="flex">
-                  <img
-                    className="h-6 w-6 flex-shrink-0 mr-2"
-                    src="/checkwhite.png"
-                    alt="Checkmark"
-                  />
-                  <span>Trainingpeaks account</span>
                 </li>
               </ul>
             </div>

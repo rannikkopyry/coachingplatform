@@ -14,7 +14,7 @@ function Contact() {
           </p>
           <p className="text-black text-2xl mt-8 font-light">
             You can send us an email at <></>
-            <strong>pyry.rannikko1@gmail</strong>. We will then send you more
+            <strong>pyry.rannikko1@gmail.com</strong> We will then send you more
             details and you can decide if you want to start.
           </p>
           <p className="text-black text-2xl mt-8 font-light">
