@@ -50,7 +50,7 @@ export default function Homepage() {
               />
               <Image
                 src="/kisa2.jpg"
-                width={1000}
+                width={1180}
                 height={700}
                 alt="Fred Funk"
               />
@@ -74,7 +74,12 @@ export default function Homepage() {
             <div className="flex items-center justify-center md:justify-end">
               <div className="w-full max-w-[350px] m-auto">
                 <div className="w-full max-w-[350px] mt-8">
-                  <img src="/lotto.png" alt="" />
+                <Image
+                src="/lotto.png"
+                width={500}
+                height={700}
+                alt="Lotto dstny"
+              />
                   <p className="text-black text-2xl mt-8 font-light">
                     Training session in Swiss alps with Lotto-Dstny Development
                     team
