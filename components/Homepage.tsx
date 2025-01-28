@@ -1,6 +1,8 @@
 import React from 'react';
 import SignupForm from './form/SignupForm';
 import CookieConsent from './CookieConsent';
+import Image from 'next/image'
+
 
 export default function Homepage() {
   return (
@@ -18,7 +20,12 @@ export default function Homepage() {
         <div className="flex-shrink-0 w-full items-center justify-center min-h-[615px] flex">
           <div className="min-h-[500px] flex items-center">
             <div>
-              <img src="/funk.png" alt="" />
+              <Image
+                src="/funk.png"
+                width={500}
+                height={700}
+                alt="Fred Funk"
+              />
               <p className="text-black text-2xl mt-8 font-light">
                 2023 July training camp in Livigno. Photo with Ironman 70.3 Vice
                 World-Champion Frederik Funk
