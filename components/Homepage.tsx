@@ -35,11 +35,25 @@ export default function Homepage() {
         </div>
       </div>
       <div className="flex overflow-hidden">
-        <img className="max-w-[650px]" src="/kisa1.jpg" alt="" />
-        <img className="max-w-[350px]" src="/pyry.jpg" alt="" />
-        <img className="max-w-[800px]" src="/kisa2.jpg" alt="" />
-        <img className="max-w-[350px]" src="/pyry.jpg" alt="" />
-        <img className="max-w-[350px]" src="/pyry.jpg" alt="" />
+      <Image
+                src="/kisa1.jpg"
+                width={1000}
+                height={700}
+                alt="Kisa"
+                className='max-w-[650px]'
+              />
+        <Image
+                src="/pyry.jpg"
+                width={500}
+                height={700}
+                alt="Fred Funk"
+              />
+              <Image
+                src="/kisa2.jpg"
+                width={1000}
+                height={700}
+                alt="Fred Funk"
+              />
       </div>
       <div id="features">
         <div className="w-full max-w-6xl px-4 md:px-8 m-auto py-[40px] md:py-[60px]">
