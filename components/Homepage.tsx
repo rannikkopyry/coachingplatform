@@ -94,7 +94,12 @@ export default function Homepage() {
             <div className="flex items-center justify-center md:justify-end">
               <div className="w-full max-w-[350px] m-auto">
                 <div className="w-full max-w-[350px] shadow-lg">
-                  <img src="/science.jpg" alt="No coding required" />
+                <Image
+                src="/science.jpg"
+                width={500}
+                height={700}
+                alt="Lotto dstny"
+              />
                 </div>
                 <div className="w-full max-w-[350px] mt-8"></div>
               </div>
@@ -132,7 +137,12 @@ export default function Homepage() {
             <div className="flex items-center justify-center md:justify-end">
               <div className="w-full max-w-[350px] m-auto">
                 <div className="w-full max-w-[350px]">
-                  <img src="/calendar.png" alt="Lightning" />
+                <Image
+                src="/calendar.png"
+                width={500}
+                height={500}
+                alt="Lotto dstny"
+              />
                 </div>
                 <div className="w-full max-w-[350px] mt-8"></div>
               </div>
