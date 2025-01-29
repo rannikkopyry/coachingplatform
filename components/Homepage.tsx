@@ -151,10 +151,30 @@ export default function Homepage() {
         </div>
       </div>
       <div className="flex overflow-hidden">
-        <img className="max-w-[400px]" src="/ville.png" alt="" />
-        <img className="max-w-[400px]" src="/csf.png" alt="" />
-        <img className="max-w-[400px]" src="/juoksurata.jpeg" alt="" />
-        <img className="max-w-[800px]" src="/talvi.jpeg" alt="" />
+      <Image
+                src="/ville.png"
+                width={500}
+                height={700}
+                alt="Lotto dstny"
+              />
+        <Image
+                src="/csf.png"
+                width={500}
+                height={700}
+                alt="Lotto dstny"
+              />
+        <Image
+                src="/juoksurata.jpeg"
+                width={500}
+                height={700}
+                alt="Lotto dstny"
+              />
+        <Image
+                src="/talvi.jpeg"
+                width={1000}
+                height={700}
+                alt="Lotto dstny"
+              />
       </div>
       <div id="pricing" className="w-full bg-[rgba(0,0,0,0.05)] mt-20">
         <div className="w-full max-w-6xl px-4 md:px-8 m-auto py-[40px] md:py-[60px]">
