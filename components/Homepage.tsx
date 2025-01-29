@@ -1,6 +1,8 @@
 import React from 'react';
 import SignupForm from './form/SignupForm';
 import CookieConsent from './CookieConsent';
+import Image from 'next/image'
+
 
 export default function Homepage() {
   return (
@@ -18,7 +20,12 @@ export default function Homepage() {
         <div className="flex-shrink-0 w-full items-center justify-center min-h-[615px] flex">
           <div className="min-h-[500px] flex items-center">
             <div>
-              <img src="/funk.png" alt="" />
+              <Image
+                src="/funk.png"
+                width={500}
+                height={700}
+                alt="Fred Funk"
+              />
               <p className="text-black text-2xl mt-8 font-light">
                 2023 July training camp in Livigno. Photo with Ironman 70.3 Vice
                 World-Champion Frederik Funk
@@ -28,11 +35,25 @@ export default function Homepage() {
         </div>
       </div>
       <div className="flex overflow-hidden">
-        <img className="max-w-[650px]" src="/kisa1.jpg" alt="" />
-        <img className="max-w-[350px]" src="/pyry.jpg" alt="" />
-        <img className="max-w-[800px]" src="/kisa2.jpg" alt="" />
-        <img className="max-w-[350px]" src="/pyry.jpg" alt="" />
-        <img className="max-w-[350px]" src="/pyry.jpg" alt="" />
+      <Image
+                src="/kisa1.jpg"
+                width={1000}
+                height={700}
+                alt="Kisa"
+                className='max-w-[650px]'
+              />
+        <Image
+                src="/pyry.jpg"
+                width={500}
+                height={700}
+                alt="Fred Funk"
+              />
+              <Image
+                src="/kisa2.jpg"
+                width={1180}
+                height={700}
+                alt="Fred Funk"
+              />
       </div>
       <div id="features">
         <div className="w-full max-w-6xl px-4 md:px-8 m-auto py-[40px] md:py-[60px]">
@@ -53,7 +74,12 @@ export default function Homepage() {
             <div className="flex items-center justify-center md:justify-end">
               <div className="w-full max-w-[350px] m-auto">
                 <div className="w-full max-w-[350px] mt-8">
-                  <img src="/lotto.png" alt="" />
+                <Image
+                src="/lotto.png"
+                width={500}
+                height={700}
+                alt="Lotto dstny"
+              />
                   <p className="text-black text-2xl mt-8 font-light">
                     Training session in Swiss alps with Lotto-Dstny Development
                     team
