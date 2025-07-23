@@ -1,4 +1,6 @@
 import React from 'react';
+import Image from 'next/image'
+
 
 function Contact() {
   return (
@@ -25,7 +27,12 @@ function Contact() {
         <div className="flex-shrink-0 w-full items-center justify-center min-h-[615px] flex">
           <div className="min-h-[500px] flex items-center">
             <div>
-              <img src="/pyry.JPG" alt="" />
+            <Image
+                src="/pyry.JPG"
+                width={500}
+                height={700}
+                alt="Lotto dstny"
+              />
               <p className="text-black text-2xl mt-8 font-light">
                 Your coach Pyry
               </p>{' '}

@@ -188,7 +188,7 @@ export default function Homepage() {
           <div className="relative flex flex-col rounded-md bg-black p-4 mt-4">
             <div className="flex-1">
               <p className="mt-4 flex items-baseline text-white">
-                <span className="text-5xl font-bold tracking-tight">89€</span>
+                <span className="text-5xl font-bold tracking-tight">99€</span>
                 <span className="ml-1 text-xl font-semibold">/month</span>
               </p>
               <p className="mt-6 text-gray-500">
